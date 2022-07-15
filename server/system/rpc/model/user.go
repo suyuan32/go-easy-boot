@@ -15,10 +15,10 @@ type User struct {
 	Avatar      string      `json:"Avatar" gorm:"default:https://qmplusimg.henrongyi.top/gva_header.jpg;comment:avatar"`
 	BaseColor   string      `json:"baseColor" gorm:"default:#fff;comment:base color of template"`
 	ActiveColor string      `json:"activeColor" gorm:"default:#1890ff;comment:active color of template"`    // 活跃颜色
-	AuthorityId uint        `json:"authorityId" gorm:"default:1;comment:user's role id for access control"` // 用户角色ID
-	Authority   Authority   `json:"authority" gorm:"foreignKey:AuthorityId;references:AuthorityId;comment:用户角色"`
+	AuthorityId uint32      `json:"authorityId" gorm:"default:1;comment:user's role id for access control"` // 用户角色ID
+	Authority   Authority   `json:"authority.proto" gorm:"foreignKey:AuthorityId;references:AuthorityId;comment:用户角色"`
 	Authorities []Authority `json:"authorities" gorm:"many2many:sys_user_authority;"`
 	Mobile      string      `json:"mobile"  gorm:"comment:用户手机号"`                    // 用户手机号
 	Email       string      `json:"email"  gorm:"comment:用户邮箱"`                      // 用户邮箱
-	Status      int         `json:"status" gorm:"default:1;comment:用户是否被冻结 1正常 2冻结"` //用户是否被冻结 1正常 2冻结
+	Status      int32       `json:"status" gorm:"default:1;comment:用户是否被冻结 1正常 2冻结"` //用户是否被冻结 1正常 2冻结
 }

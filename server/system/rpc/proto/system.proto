@@ -1,0 +1,245 @@
+syntax = "proto3";
+
+package system;
+
+option go_package = "./system";
+
+// base message
+
+message IDReq {
+  uint64 ID = 1;
+}
+
+message BaseResp {
+  uint32 code = 1;
+  string msg = 2;
+}
+
+message PageInfoReq {
+  uint64 page_no = 1;
+  uint64 page_size = 2;
+}
+
+// user message
+
+message LoginReq {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  int64  id = 1;
+  int32  authority_id = 2;
+  int32  status = 3;
+  string username = 4;
+  string access_token = 5;
+  uint64 access_expire = 6;
+}
+
+message RegisterReq {
+  string user_name = 1;
+  string password = 2;
+  string email = 3;
+}
+
+
+message ChangePasswordReq {
+  uint64 user_id = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
+
+message UpdateUserInfoReq {
+  string nick_name = 1;
+  string avatar = 2;
+  uint32 authority_id = 3;
+  string mobile = 4;
+  string email = 5;
+  int32  status = 6;
+}
+
+message UserInfoResp {
+  string nick_name = 1;
+  string avatar = 2;
+  uint32 authority_id = 3;
+  string mobile = 4;
+  string email = 5;
+  int32  status = 6;
+  uint64 user_id = 7;
+  string user_name = 8;
+}
+
+message UserInfoListResp {
+  uint32 total = 1;
+  uint32 code = 2;
+  repeated UserInfoResp data = 3;
+}
+
+// menu messages
+
+message CreateMenuReq {
+  uint32 parent_id = 1;
+  string path = 2;
+  string name = 3;
+  bool hidden = 4;
+  string component = 5;
+  uint32 sort = 6;
+}
+
+message UpdateMenuReq {
+  uint32 parent_id = 1;
+  string path = 2;
+  string name = 3;
+  bool hidden = 4;
+  string component = 5;
+  uint32 sort = 6;
+  uint64 menu_id = 7;
+}
+
+message MenuInfo {
+  uint32 parent_id = 1;
+  string path = 2;
+  string name = 3;
+  bool hidden = 4;
+  string component = 5;
+  uint32 sort = 6;
+  uint64 menu_id = 7;
+  uint64 create_at = 8;
+  uint64 update_at = 9;
+  uint64 delete_at = 10;
+}
+
+message MenuInfoList {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated MenuInfo data = 3;
+}
+
+message CreateMenuAuthorityReq {
+  uint64 menu_id = 1;
+  uint64 authority_id = 2;
+}
+
+message UpdateMenuAuthorityReq {
+  uint64 menu_id = 1;
+  uint64 authority_id = 2;
+  uint64 id = 3;
+}
+
+message MenuAuthorityResp {
+  uint64 menu_id = 1;
+  uint64 authority_id = 2;
+  uint64 id = 3;
+  uint64 create_at = 4;
+  uint64 update_at = 5;
+  uint64 delete_at = 6;
+}
+
+message MenuAuthorityListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated MenuAuthorityResp data = 3;
+}
+
+message CreateMenuParamReq {
+  uint64 menu_id = 1;
+  string type = 2;
+  string key = 3;
+  string value = 4;
+}
+
+message UpdateMenuParamReq {
+  uint64 menu_id = 1;
+  string type = 2;
+  string key = 3;
+  string value = 4;
+  uint64 id = 5;
+}
+
+message MenuParamResp {
+  uint64 id = 5;
+  uint64 menu_id = 1;
+  string type = 2;
+  string key = 3;
+  string value = 4;
+  uint64 create_at = 6;
+  uint64 update_at = 7;
+  uint64 delete_at = 8;
+}
+
+message MenuParamListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated MenuParamResp data = 3;
+}
+
+// authority messages
+
+
+message CreateAuthorityReq {
+  uint64 authority_id = 1;
+  uint64 parent_id = 2;
+  string default_router = 3;
+}
+
+message UpdateAuthorityReq {
+  uint64 id = 1;
+  uint64 authority_id = 2;
+  uint64 parent_id = 3;
+  string default_router = 4;
+}
+
+message AuthorityResp {
+  uint64 id = 1;
+  uint64 authority_id = 2;
+  uint64 parent_id = 3;
+  string default_router = 4;
+  uint64 create_at = 5;
+  uint64 update_at = 6;
+  uint64 delete_at = 7;
+}
+
+message AuthorityListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated AuthorityResp data = 3;
+}
+
+// service
+
+service system {
+  // user service
+  rpc changePassword (ChangePasswordReq) returns (BaseResp);
+  rpc createUser (RegisterReq) returns (BaseResp);
+  rpc updateUser (UpdateUserInfoReq) returns (BaseResp);
+  rpc getUserById (IDReq) returns (UserInfoResp);
+  rpc getUserList (PageInfoReq) returns (UserInfoListResp);
+
+  // menu service
+  //menu management
+  rpc createMenu (CreateMenuReq) returns (BaseResp);
+  rpc updateMenu (UpdateMenuReq) returns (BaseResp);
+  rpc deleteMenu (IDReq) returns (BaseResp);
+  rpc getMenuById (IDReq) returns (MenuInfo);
+  rpc getMenuList (PageInfoReq) returns (MenuInfoList);
+  rpc createMenuParam (CreateMenuParamReq) returns (BaseResp);
+  rpc updateMenuParam (UpdateMenuParamReq) returns (BaseResp);
+  rpc deleteMenuParam (IDReq) returns (BaseResp);
+  rpc getMenuParamById (IDReq) returns (MenuParamResp);
+  rpc geMenuParamListById (IDReq) returns (MenuParamListResp);
+
+
+  //menu authority management
+  rpc createMenuAuthority (CreateMenuAuthorityReq) returns (BaseResp);
+  rpc updateMenuAuthority (UpdateMenuAuthorityReq) returns (BaseResp);
+  rpc deleteMenuAuthority (IDReq) returns (BaseResp);
+  rpc getMenuAuthorityById (IDReq) returns (MenuAuthorityResp);
+  rpc getMenuAuthorityList (PageInfoReq) returns (MenuAuthorityListResp);
+
+  // authority service
+  rpc createAuthority (CreateAuthorityReq) returns (BaseResp);
+  rpc updateAuthority (CreateAuthorityReq) returns (BaseResp);
+  rpc deleteAuthority (IDReq) returns (BaseResp);
+  rpc getAuthorityById (IDReq) returns (AuthorityResp);
+  rpc getAuthorityList (PageInfoReq) returns (AuthorityListResp);
+}

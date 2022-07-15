@@ -27,7 +27,7 @@ function formatter(routes: any, parentPath = ''): string[] {
 
 const testPage = (path: string, page: Page) => async () => {
     await page.evaluate(() => {
-        localStorage.setItem('antd-pro-authority', '["admin"]');
+        localStorage.setItem('antd-pro-authority.proto', '["admin"]');
     });
     await page.goto(`${BASE_URL}${path}`);
     await page.waitForSelector('footer', {

@@ -29,22 +29,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/authority",
+				Path:    "/user/authority.proto",
 				Handler: authority.CreateAuthorityHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,
-				Path:    "/user/authority/:ID",
+				Path:    "/user/authority.proto/:ID",
 				Handler: authority.UpdateAuthorityHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/user/authority/:ID",
+				Path:    "/user/authority.proto/:ID",
 				Handler: authority.DeleteAuthorityHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/authority/copy",
+				Path:    "/user/authority.proto/copy",
 				Handler: authority.CopyAuthorityHandler(serverCtx),
 			},
 		},
@@ -60,7 +60,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/menu/authority",
+				Path:    "/menu/authority.proto",
 				Handler: menu.AddAuthorityMenuHandler(serverCtx),
 			},
 			{
@@ -95,7 +95,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/menu/authority/:ID",
+				Path:    "/menu/authority.proto/:ID",
 				Handler: menu.GetAuthorityMenuHandler(serverCtx),
 			},
 		},

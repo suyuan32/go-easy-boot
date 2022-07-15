@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package authority;
+
+option go_package = "./authority";
+
+// base message
+
+message IDReq {
+  uint64 ID = 1;
+}
+
+message BaseResp {
+  uint32 code = 1;
+  string msg = 2;
+}
+
+message PageInfoReq {
+  uint64 page_no = 1;
+  uint64 page_size = 2;
+}
+
+// custom message
+
+message CreateAuthorityReq {
+  uint64 authority_id = 1;
+  uint64 parent_id = 2;
+  string default_router = 3;
+}
+
+message UpdateAuthorityReq {
+  uint64 id = 1;
+  uint64 authority_id = 2;
+  uint64 parent_id = 3;
+  string default_router = 4;
+}
+
+message AuthorityResp {
+  uint64 id = 1;
+  uint64 authority_id = 2;
+  uint64 parent_id = 3;
+  string default_router = 4;
+  uint64 create_at = 5;
+  uint64 update_at = 6;
+  uint64 delete_at = 7;
+}
+
+message AuthorityListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated AuthorityResp data = 3;
+}
+
+service Authority {
+  rpc createAuthority (CreateAuthorityReq) returns (BaseResp);
+  rpc updateAuthority (CreateAuthorityReq) returns (BaseResp);
+  rpc deleteAuthority (IDReq) returns (BaseResp);
+  rpc getAuthorityById (IDReq) returns (AuthorityResp);
+  rpc getAuthorityList (PageInfoReq) returns (AuthorityListResp);
+}

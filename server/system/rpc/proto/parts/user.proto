@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./user";
+
+// base message
+
+message IDReq {
+  uint64 ID = 1;
+}
+
+message BaseResp {
+  uint32 code = 1;
+  string msg = 2;
+}
+
+message PageInfoReq {
+  uint64 page_no = 1;
+  uint64 page_size = 2;
+}
+
+// custom message
+
+message LoginReq {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  int64  id = 1;
+  int32  authority_id = 2;
+  int32  status = 3;
+  string username = 4;
+  string access_token = 5;
+  uint64 access_expire = 6;
+}
+
+message RegisterReq {
+  string user_name = 1;
+  string password = 2;
+  string email = 3;
+}
+
+
+message ChangePasswordReq {
+  uint64 user_id = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
+
+message UpdateUserInfoReq {
+  string nick_name = 1;
+  string avatar = 2;
+  uint32 authority_id = 3;
+  string mobile = 4;
+  string email = 5;
+  int32  status = 6;
+}
+
+message UserInfoResp {
+  string nick_name = 1;
+  string avatar = 2;
+  uint32 authority_id = 3;
+  string mobile = 4;
+  string email = 5;
+  int32  status = 6;
+  uint64 user_id = 7;
+  string user_name = 8;
+}
+
+message UserInfoListResp {
+  uint32 total = 1;
+  uint32 code = 2;
+  repeated UserInfoResp data = 3;
+}
+
+service User {
+  rpc changePassword (ChangePasswordReq) returns (BaseResp);
+  rpc createUser (RegisterReq) returns (BaseResp);
+  rpc updateUser (UpdateUserInfoReq) returns (BaseResp);
+  rpc getUserById (IDReq) returns (UserInfoResp);
+  rpc getUserList (PageInfoReq) returns (UserInfoListResp);
+}

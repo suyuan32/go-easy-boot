@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+package menu;
+
+option go_package = "./menu";
+
+// base message
+
+message IDReq {
+  uint64 ID = 1;
+}
+
+message BaseResp {
+  uint32 code = 1;
+  string msg = 2;
+}
+
+message PageInfoReq {
+  uint64 page_no = 1;
+  uint64 page_size = 2;
+}
+
+// custom message
+
+message CreateMenuReq {
+  uint32 parent_id = 1;
+  string path = 2;
+  string name = 3;
+  bool hidden = 4;
+  string component = 5;
+  uint32 sort = 6;
+}
+
+message UpdateMenuReq {
+  uint32 parent_id = 1;
+  string path = 2;
+  string name = 3;
+  bool hidden = 4;
+  string component = 5;
+  uint32 sort = 6;
+  uint64 menu_id = 7;
+}
+
+message MenuInfo {
+  uint32 parent_id = 1;
+  string path = 2;
+  string name = 3;
+  bool hidden = 4;
+  string component = 5;
+  uint32 sort = 6;
+  uint64 menu_id = 7;
+  uint64 create_at = 8;
+  uint64 update_at = 9;
+  uint64 delete_at = 10;
+}
+
+message MenuInfoList {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated MenuInfo data = 3;
+}
+
+message CreateMenuAuthorityReq {
+  uint64 menu_id = 1;
+  uint64 authority_id = 2;
+}
+
+message UpdateMenuAuthorityReq {
+  uint64 menu_id = 1;
+  uint64 authority_id = 2;
+  uint64 id = 3;
+}
+
+message MenuAuthorityResp {
+  uint64 menu_id = 1;
+  uint64 authority_id = 2;
+  uint64 id = 3;
+  uint64 create_at = 4;
+  uint64 update_at = 5;
+  uint64 delete_at = 6;
+}
+
+message MenuAuthorityListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated MenuAuthorityResp data = 3;
+}
+
+message CreateMenuParamReq {
+  uint64 menu_id = 1;
+  string type = 2;
+  string key = 3;
+  string value = 4;
+}
+
+message UpdateMenuParamReq {
+  uint64 menu_id = 1;
+  string type = 2;
+  string key = 3;
+  string value = 4;
+  uint64 id = 5;
+}
+
+message MenuParamResp {
+  uint64 id = 5;
+  uint64 menu_id = 1;
+  string type = 2;
+  string key = 3;
+  string value = 4;
+  uint64 create_at = 6;
+  uint64 update_at = 7;
+  uint64 delete_at = 8;
+}
+
+message MenuParamListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated MenuParamResp data = 3;
+}
+
+service Menu {
+  //menu management
+  rpc createMenu (CreateMenuReq) returns (BaseResp);
+  rpc updateMenu (UpdateMenuReq) returns (BaseResp);
+  rpc deleteMenu (IDReq) returns (BaseResp);
+  rpc getMenuById (IDReq) returns (MenuInfo);
+  rpc getMenuList (PageInfoReq) returns (MenuInfoList);
+  rpc createMenuParam (CreateMenuParamReq) returns (BaseResp);
+  rpc updateMenuParam (UpdateMenuParamReq) returns (BaseResp);
+  rpc deleteMenuParam (IDReq) returns (BaseResp);
+  rpc getMenuParamById (IDReq) returns (MenuParamResp);
+  rpc geMenuParamListById (IDReq) returns (MenuParamListResp);
+
+
+  //menu authority management
+  rpc createMenuAuthority (CreateMenuAuthorityReq) returns (BaseResp);
+  rpc updateMenuAuthority (UpdateMenuAuthorityReq) returns (BaseResp);
+  rpc deleteMenuAuthority (IDReq) returns (BaseResp);
+  rpc getMenuAuthorityById (IDReq) returns (MenuAuthorityResp);
+  rpc getMenuAuthorityList (PageInfoReq) returns (MenuAuthorityListResp);
+}

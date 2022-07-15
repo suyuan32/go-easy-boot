@@ -2,10 +2,10 @@ package model
 
 import "gorm.io/gorm"
 
-type BaseMenu struct {
+type Menu struct {
 	gorm.Model
 	MenuLevel    uint        `json:"-"`
-	ParentId     string      `json:"parentId" gorm:"comment:parent menu id"`            // parent menu id
+	ParentId     uint32      `json:"parentId" gorm:"comment:parent menu id"`            // parent menu id
 	Path         string      `json:"path" gorm:"comment:router path"`                   // router path
 	Name         string      `json:"name" gorm:"comment:router name"`                   // router name
 	Hidden       bool        `json:"hidden" gorm:"comment:hide the menu"`               // hide menu
@@ -13,14 +13,13 @@ type BaseMenu struct {
 	Sort         int         `json:"sort" gorm:"comment:numbers for sorting"`           // sorting numbers
 	MetaData     Meta        `json:"metaData" gorm:"embedded;comment:extra parameters"` // extra parameters
 	AuthorityIds []Authority `json:"authorityIds" gorm:"many2many:authority_menus;"`
-	Children     []BaseMenu  `json:"children" gorm:"-"`
+	Children     []Menu      `json:"children" gorm:"-"`
 	Param        []MenuParam `json:"parameters"`
 }
 
 type AuthorityMenu struct {
-	BaseMenu
-	MenuId      string          `json:"menuId" gorm:"comment:menu id"`
-	AuthorityId uint            `json:"-" gorm:"comment:authority id (role id)"`
+	MenuId      uint            `json:"menuId" gorm:"comment:menu id"`
+	AuthorityId uint            `json:"-" gorm:"comment:authority.proto id (role id)"`
 	Children    []AuthorityMenu `json:"children" gorm:"-"`
 	Parameters  []MenuParam     `json:"parameters" gorm:"foreignKey:SysBaseMenuID;references:MenuId"`
 	Btns        map[string]uint `json:"btns" gorm:"-"`

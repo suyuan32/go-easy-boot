@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package base;
+
 option go_package = "./base";
 
 message IDReq {
