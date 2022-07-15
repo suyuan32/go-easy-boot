@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package base;
+option go_package = "./base";
+
+message IDReq {
+  uint64 ID = 1;
+}
+
+message BaseResp {
+  uint32 code = 1;
+  string msg = 2;
+}

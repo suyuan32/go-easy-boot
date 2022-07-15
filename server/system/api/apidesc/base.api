@@ -1,0 +1,41 @@
+syntax = "v1"
+
+info(
+    title: "base api"
+    desc: "base api"
+    author: "ryansu"
+    email: "yuansu.china.work@gmail.com"
+    version: "v1.0"
+)
+
+
+type BaseMsg {
+    Code int32  `json:"code"`
+    Msg  string `json:"msg"`
+    Data string `json:"data"`
+}
+
+type PageInfo {
+    Page     int    `form:"page"`
+    PageSize int    `form:"pageSize"`
+    Keyword  string `form:"keyword"`
+}
+
+type PageList {
+    Code     int32       `json:"code"`
+    Total    int64       `json:"total"`
+    Page     int         `json:"page"`
+    PageSize int         `json:"pageSize"`
+    Data     []string    `json:"list"`
+}
+
+type BaseInfo {
+    ID        uint       `json:"ID"`
+    CreatedAt uint64     `json:"createdAt"`
+    UpdatedAt uint64     `json:"updatedAt"`
+    DeletedAt uint64     `json:"deletedAt"`
+}
+
+type IdReq {
+    ID  uint `json:"ID"`
+}

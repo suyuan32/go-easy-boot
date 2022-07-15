@@ -1,0 +1,6 @@
+Name: system
+Host: 0.0.0.0
+Port: 8888
+Auth:
+  AccessSecret: "12321312"
+  AccessExpire: 100
