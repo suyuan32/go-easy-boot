@@ -4,3 +4,16 @@ Etcd:
   Hosts:
     - 127.0.0.1:2379
   Key: system.rpc
+
+DBConfig:
+  type: "mysql"
+  path: 127.0.0.1
+  port: "3306"
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: go-easy-boot
+  username: root
+  password: "123456"
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false

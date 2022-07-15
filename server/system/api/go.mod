@@ -2,7 +2,10 @@ module api
 
 go 1.18
 
-require github.com/zeromicro/go-zero v1.3.5
+require (
+	github.com/zeromicro/go-zero v1.3.5
+	gorm.io/gorm v1.23.8
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -13,6 +16,8 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
