@@ -14,8 +14,8 @@ type BaseMenu struct {
 	BaseInfo
 	MenuLevel    uint        `json:"-"`
 	ParentId     string      `json:"parentId"`  // parent menu id
-	Path         string      `json:"path"`      // router path
-	Name         string      `json:"name"`      // router name
+	Path         string      `json:"path"`      // index path
+	Name         string      `json:"name"`      // index name
 	Hidden       bool        `json:"hidden"`    // hide menu
 	Component    string      `json:"component"` // the path of vue file
 	Sort         int         `json:"sort"`      // sorting numbers

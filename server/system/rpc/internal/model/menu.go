@@ -6,8 +6,8 @@ type Menu struct {
 	gorm.Model
 	MenuLevel    uint        `json:"-"`
 	ParentId     uint32      `json:"parentId" gorm:"comment:parent menu id"`            // parent menu id
-	Path         string      `json:"path" gorm:"comment:router path"`                   // router path
-	Name         string      `json:"name" gorm:"comment:router name"`                   // router name
+	Path         string      `json:"path" gorm:"comment:index path"`                   // index path
+	Name         string      `json:"name" gorm:"comment:index name"`                   // index name
 	Hidden       bool        `json:"hidden" gorm:"comment:hide the menu"`               // hide menu
 	Component    string      `json:"component" gorm:"comment:the path of vue file"`     // the path of vue file
 	Sort         int         `json:"sort" gorm:"comment:numbers for sorting"`           // sorting numbers
