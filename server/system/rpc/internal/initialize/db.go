@@ -36,8 +36,8 @@ func GormMysql() *gorm.DB {
 		return nil
 	} else {
 		sqlDB, _ := db.DB()
-		sqlDB.SetMaxIdleConns(m.MaxIdleConns)
-		sqlDB.SetMaxOpenConns(m.MaxOpenConns)
+		sqlDB.SetMaxIdleConns(m.MaxIdleConn)
+		sqlDB.SetMaxOpenConns(m.MaxOpenConn)
 		return db
 	}
 }
@@ -55,8 +55,8 @@ func GormPgSql() *gorm.DB {
 		return nil
 	} else {
 		sqlDB, _ := db.DB()
-		sqlDB.SetMaxIdleConns(p.MaxIdleConns)
-		sqlDB.SetMaxOpenConns(p.MaxOpenConns)
+		sqlDB.SetMaxIdleConns(p.MaxIdleConn)
+		sqlDB.SetMaxOpenConns(p.MaxOpenConn)
 		return db
 	}
 }
