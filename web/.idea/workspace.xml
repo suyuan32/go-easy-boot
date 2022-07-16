@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="665eb602-8085-477d-b7ba-e5797a0fb68b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../customUse" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/api/internal/global/global.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/api/internal/initialize/redis.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/api/internal/util/captcha.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/entry.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/etc/system.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/etc/system.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/etc/system.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/etc/system.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/global/global.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/global/global.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/initialize/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/initialize/entry.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/initialize/entry.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/model/authority.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/authority.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/model/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/model/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/model/operation.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/operation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/system.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/system.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/defaultSettings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/oneapi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/proxy.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mock/listTableList.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mock/notices.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mock/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mock/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/playwright.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/CNAME" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icons/icon-128x128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icons/icon-192x192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icons/icon-512x512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pro_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/EmptyRoute.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/history.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/plugin.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/pluginConfig.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/polyfill.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/route.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/core/terminal.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/exports.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-access/context.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-access/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-access/runtime.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-initialState/@@initialState.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-initialState/Provider.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-initialState/runtime.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/Exception.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/Layout.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/Layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/Logo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/icons.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/rightRender.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/runtime.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-layout/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-locale/SelectLang.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-locale/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-locale/locale.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-locale/localeExports.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-locale/runtime.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-model/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-model/model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-model/runtime.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-openapi/openapi.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-request/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-request/request.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/plugin-request/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/typings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.umi/umi.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/access.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderDropdown/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderDropdown/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderSearch/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderSearch/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoticeIcon/NoticeIcon.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoticeIcon/NoticeList.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoticeIcon/NoticeList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoticeIcon/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NoticeIcon/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RightContent/AvatarDropdown.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RightContent/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RightContent/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/index.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/e2e/baseLayout.e2e.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/global.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/bn-BD/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/en-US/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/fa-IR/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/id-ID/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/ja-JP/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/pt-BR/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-CN/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW/component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW/globalHeader.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW/menu.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW/pwa.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW/settingDrawer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locales/zh-TW/settings.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/404.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Admin.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TableList/components/UpdateForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TableList/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/Login/index.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/User/Login/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Welcome.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Welcome.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/document.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service-worker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ant-design-pro/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ant-design-pro/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ant-design-pro/login.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ant-design-pro/typings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/swagger/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/swagger/pet.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/swagger/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/swagger/typings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/swagger/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typings.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/run-tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2C0ejdfs92ou4n2ch2UYVFZ8l67" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/node_modules/prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="run start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts />
+      <arguments value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="665eb602-8085-477d-b7ba-e5797a0fb68b" name="Changes" comment="" />
+      <created>1657944066684</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1657944066684</updated>
+      <workItem from="1657944070895" duration="1610000" />
+      <workItem from="1657946755256" duration="142000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

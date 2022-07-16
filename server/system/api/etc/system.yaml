@@ -4,3 +4,18 @@ Port: 8500
 Auth:
   AccessSecret: "jS6VKDtsJf3z1n2a"
   AccessExpire: 100
+LogConf:
+  ServiceName: "SystemLogger"
+  Mode: "console"
+  Path: "logs"
+  Level: "error"
+  Compress: false
+  KeepDays: 7
+  StackCooldownMillis: 100
+ClusterConf:
+  -
+    Host: "127.0.0.1:2379"
+    Type: "node"
+RedisConf:
+  Host: "127.0.0.1:2379"
+  Type: "node"

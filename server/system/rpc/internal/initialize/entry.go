@@ -2,7 +2,7 @@ package initialize
 
 import (
 	"github.com/zeromicro/go-zero/core/logx"
-	"rpc/global"
+	"rpc/internal/global"
 )
 
 func InitAll() {

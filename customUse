@@ -1,0 +1,1 @@
+goctl rpc protoc system.proto --proto_path=~/GolandProjects/go-easy-boot/server/system/rpc/proto --go_out=../types --go-grpc_out=../types --zrpc_out=../

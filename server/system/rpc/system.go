@@ -23,6 +23,8 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	//fmt.Printf("%+v", c)
+	c.MustSetUp()
 
 	ctx := svc.NewServiceContext(c)
 	svr := server.NewSystemServer(ctx)
