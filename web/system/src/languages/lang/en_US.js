@@ -22,6 +22,7 @@ const enUS = {
     message: {
         input_pass: 'Please input your password',
         input_username: 'Please input your username',
+        input_captcha: 'Please input the captcha',
     }
 }
 

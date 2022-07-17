@@ -12,7 +12,7 @@
             </template>
             <a-row>
               <a-form
-                  :model="formState"
+                  :model="loginForm"
                   name="normal_login"
                   class="login-form"
                   @finish="onFinish"
@@ -23,7 +23,7 @@
                     name="username"
                     :rules="[{ required: true, message:  $t('message.input_username') }]"
                 >
-                  <a-input v-model:value="formState.username">
+                  <a-input v-model:value="loginForm.username">
                     <template #prefix>
                       <UserOutlined class="site-form-item-icon" />
                     </template>
@@ -35,16 +35,31 @@
                     name="password"
                     :rules="[{ required: true, message: $t('message.input_pass') }]"
                 >
-                  <a-input-password v-model:value="formState.password">
+                  <a-input-password v-model:value="loginForm.password">
                     <template #prefix>
                       <LockOutlined class="site-form-item-icon" />
                     </template>
                   </a-input-password>
                 </a-form-item>
 
+                <a-form-item
+                    :label="$t('noun.captcha')"
+                    name="captcha"
+                    :rules="[{ required: true, message: $t('message.input_captcha') }]"
+                >
+                    <a-row>
+                      <a-col :span="10">
+                        <img :src="imgPath" />
+                      </a-col>
+                      <a-col :span="14">
+                        <a-input v-model:value="loginForm.captcha" />
+                      </a-col>
+                    </a-row>
+                </a-form-item>
+
                 <div class="login-form-wrap">
                   <a-form-item name="remember" no-style>
-                    <a-checkbox v-model:checked="formState.remember">{{$t('operation.remember_me')}}</a-checkbox>
+                    <a-checkbox v-model:checked="isRemember">{{$t('operation.remember_me')}}</a-checkbox>
                   </a-form-item>
                   <a class="login-form-forgot" href="">{{$t('operation.forgot_pass')}}</a>
                 </div>
@@ -66,8 +81,8 @@
 
 <script>
 import { Row, Card, Col } from 'ant-design-vue';
-import { reactive, computed } from 'vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+import { getCaptcha } from '@/apis/captcha';
 
 
 export default {
@@ -82,6 +97,14 @@ export default {
   data(){
     return {
       locale: "en-US",
+      imgPath: "",
+      loginForm: {
+        username: "",
+        password: "",
+        captcha: "",
+        captchaId: ""
+      },
+      isRemember: false
     }
   },
   methods: {
@@ -93,35 +116,18 @@ export default {
   },
   emits: ['switchLocale'],
   setup() {
-    const formState = reactive({
-      username: '',
-      password: '',
-      remember: true,
-    });
-
-    const onFinish = values => {
-      console.log('Success:', values);
-    };
-
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo);
-    };
-
-    const disabled = computed(() => {
-      return !(formState.username && formState.password);
-    });
-
-    return {
-      formState,
-      onFinish,
-      onFinishFailed,
-      disabled,
-    };
+    
   },
   mounted(){
     // initialize languages
     this.locale = localStorage.getItem('lang')
     this.$i18n.locale = this.locale
+
+    getCaptcha().then((data) => {
+      console.log(data);
+      this.loginForm.captchaId = data.data.captchaId;
+      this.imgPath = data.data.imgPath;
+    })
   },
 };
 </script>

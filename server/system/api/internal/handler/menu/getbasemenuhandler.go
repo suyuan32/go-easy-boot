@@ -6,7 +6,6 @@ import (
 	"api/internal/logic/menu"
 	"api/internal/svc"
 	"api/internal/types"
-	"github.com/zeromicro/go-zero/rest/httpx"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

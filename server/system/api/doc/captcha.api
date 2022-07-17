@@ -10,9 +10,13 @@ info(
 
 import "base.api"
 
-type CaptchaInfo {
+type CaptchaInfoResp {
 	BaseMsg
-	CaptchaId uint64 `json:"captchaId"`
+	Data CaptchaInfo `json:"data"`
+}
+
+type CaptchaInfo {
+	CaptchaId string `json:"captchaId"`
 	ImgPath   string `json:"imgPath"`
 }
 

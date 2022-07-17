@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type Config struct {
@@ -13,7 +14,9 @@ type Config struct {
 	}
 	LogConf     LogConf `json:"LogConf" yaml:"LogConf"`
 	ClusterConf []NodeConf
-	RedisConf   redis.RedisConf
+	RedisConf   redis.RedisConf    `json:"RedisConf" yaml:"RedisConf"`
+	SystemRpc   zrpc.RpcClientConf `json:"SystemRpc" yaml:"SystemRpc"`
+	Captcha     Captcha            `json:"Captcha" yaml:"Captcha"`
 }
 
 type LogConf struct {
@@ -29,4 +32,10 @@ type LogConf struct {
 type NodeConf struct {
 	redis.RedisConf
 	Weight int `json:",default=100"` // weight , default is 100
+}
+
+type Captcha struct {
+	KeyLong   int `json:"KeyLong" yaml:"KeyLong"`     // captcha length
+	ImgWidth  int `json:"ImgWidth" yaml:"ImgWidth"`   // captcha width
+	ImgHeight int `json:"ImgHeight" yaml:"ImgHeight"` // captcha height
 }

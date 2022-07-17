@@ -181,3 +181,13 @@ type UserInfoListResp struct {
 	PageList
 	Data []UserInfoResp `json:"data"`
 }
+
+type CaptchaInfoResp struct {
+	BaseMsg
+	Data CaptchaInfo `json:"data"`
+}
+
+type CaptchaInfo struct {
+	CaptchaId string `json:"captchaId"`
+	ImgPath   string `json:"imgPath"`
+}

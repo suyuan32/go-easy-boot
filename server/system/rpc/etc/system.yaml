@@ -1,5 +1,5 @@
 Name: system.rpc
-ListenOn: 127.0.0.1:8080
+ListenOn: 127.0.0.1:8501
 Etcd:
   Hosts:
     - 127.0.0.1:2379
@@ -18,8 +18,8 @@ DBConfig:
   LogZap: false
 LogConf:
   ServiceName: "SystemLogger"
-  Mode: "console"
-  Path: "logs"
+  Mode: "file"
+  Path: "~/GolandProjects/go-easy-boot/server/system/api/logs"
   Level: "error"
   Compress: false
   KeepDays: 7

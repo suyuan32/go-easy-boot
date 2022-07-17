@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	authority "api/internal/handler/authority"
+	captcha "api/internal/handler/captcha"
 	menu "api/internal/handler/menu"
 	system "api/internal/handler/system"
 	user "api/internal/handler/user"
@@ -29,22 +30,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/authority.proto",
+				Path:    "/user/authority",
 				Handler: authority.CreateAuthorityHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,
-				Path:    "/user/authority.proto/:ID",
+				Path:    "/user/authority/:ID",
 				Handler: authority.UpdateAuthorityHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/user/authority.proto/:ID",
+				Path:    "/user/authority/:ID",
 				Handler: authority.DeleteAuthorityHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/authority.proto/copy",
+				Path:    "/user/authority/copy",
 				Handler: authority.CopyAuthorityHandler(serverCtx),
 			},
 		},
@@ -60,7 +61,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/menu/authority.proto",
+				Path:    "/menu/authority",
 				Handler: menu.AddAuthorityMenuHandler(serverCtx),
 			},
 			{
@@ -95,7 +96,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/menu/authority.proto/:ID",
+				Path:    "/menu/authority/:ID",
 				Handler: menu.GetAuthorityMenuHandler(serverCtx),
 			},
 		},
@@ -146,5 +147,15 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/captcha",
+				Handler: captcha.GetCaptchaHandler(serverCtx),
+			},
+		},
 	)
 }

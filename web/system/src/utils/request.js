@@ -8,10 +8,10 @@ switch(process.env.NODE_ENV){
     service.defaults.baseURL='http://api.xxx.com'
     break
   case 'dev':
-    service.defaults.baseURL='http://127..0.0.1:8500'
+    service.defaults.baseURL='http://localhost:8500'
     break
   default:
-    service.defaults.baseURL='http://127..0.0.1:8500'
+    service.defaults.baseURL='http://localhost:8500'
 }
 /**
  *  set timeout and cross domain credential
@@ -19,7 +19,7 @@ switch(process.env.NODE_ENV){
 service.defaults.timeout=10000          // ten seconds
 service.defaults.withCredentials=true   // for example: session and cookie
 
-service.defaults.headers['Content-Type']='application/json' 
+service.defaults.headers['Content-Type']='application/json; charset=utf-8' 
 // service.defaults.transformRequest=data=>qs.stringify(data)  //if content-type is x-www-form-urlencoded, use qs to convert
 /**
  * set interceptors for requests
