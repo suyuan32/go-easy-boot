@@ -22,6 +22,7 @@ type CaptchaInfo {
 
 @server(
 	group: captcha
+	middleware: Cros
 )
 
 service system {

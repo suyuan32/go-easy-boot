@@ -12,12 +12,25 @@
             </template>
             <a-row>
               <a-form
-                  :model="loginForm"
+                  :model="signupFrom"
                   name="normal_login"
                   class="login-form"
-                  @finish="onFinish"
-                  @finishFailed="onFinishFailed"
+                  :onsubmit="signUp"
               >
+                <a-form-item
+                    :label="$t('noun.mail')"
+                    name="email"
+                    :labelCol="labelCol"
+                    label-align="left"
+                    :rules="[{ required: true, message:  $t('message.input_mail') }]"
+                >
+                  <a-input v-model:value="signupFrom.mail">
+                    <template #prefix>
+                      <mail-outlined class="site-form-item-icon" />
+                    </template>
+                  </a-input>
+                </a-form-item>
+
                 <a-form-item
                     :label="$t('noun.username')"
                     name="username"
@@ -25,7 +38,7 @@
                     label-align="left"
                     :rules="[{ required: true, message:  $t('message.input_username') }]"
                 >
-                  <a-input v-model:value="loginForm.username">
+                  <a-input v-model:value="signupFrom.username">
                     <template #prefix>
                       <UserOutlined class="site-form-item-icon" />
                     </template>
@@ -39,7 +52,21 @@
                     label-align="left"
                     :rules="[{ required: true, message: $t('message.input_pass') }]"
                 >
-                  <a-input-password v-model:value="loginForm.password" >
+                  <a-input-password v-model:value="signupFrom.password" >
+                    <template #prefix>
+                      <LockOutlined class="site-form-item-icon" />
+                    </template>
+                  </a-input-password>
+                </a-form-item>
+
+                <a-form-item
+                    :label="$t('common.confirm')"
+                    name="confirm"
+                    :labelCol="labelCol"
+                    label-align="left"
+                    :rules="[{ required: true, message: $t('message.input_pass') }]"
+                >
+                  <a-input-password v-model:value="signupFrom.confirm" >
                     <template #prefix>
                       <LockOutlined class="site-form-item-icon" />
                     </template>
@@ -56,32 +83,18 @@
                         <img :src="imgPath" style="width: 90%"/>
                       </a-col>
                       <a-col :span="10">
-                        <a-input v-model:value="loginForm.captcha" :placeholder="$t('noun.captcha')"/>
+                        <a-input v-model:value="signupFrom.captcha" :placeholder="$t('noun.captcha')"/>
                       </a-col>
                     </a-row>
                 </a-form-item>
 
-                <a-form-item
-                    v-show="false"
-                    name="captchaId"
-                >
-                  <a-input v-model:value="loginForm.captchaId" />
-                </a-form-item>
-
-                <div class="login-form-wrap">
-                  <a-form-item name="remember" no-style>
-                    <a-checkbox v-model:checked="loginForm.isRemember">{{$t('operation.remember_me')}}</a-checkbox>
-                  </a-form-item>
-                  <a class="login-form-forgot" href="">{{$t('operation.forgot_pass')}}?</a>
-                </div>
-
                 <a-form-item>
-                  <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
-                    {{$t('operation.login')}}
+                  <a-button type="primary" class="signup-button" html-type="submit">
+                    {{$t('operation.signup')}}
                   </a-button>
                   <a-divider>{{$t('common.or')}}</a-divider>
-                  <a-button type="primary" class="signup-button" @click="redirectToSignUp">
-                    {{$t('operation.signup')}}
+                  <a-button type="primary" class="login-form-button" @click="redirectToLogin">
+                    {{$t('operation.login')}}
                   </a-button>
                 </a-form-item>
               </a-form>
@@ -89,20 +102,21 @@
           </a-card>
         </a-col>
     </a-row>
+    <a-alert message="$t('message.signup_success')" v-show="isSignupSuccess" type="success" />
   </div>
 </template>
 
 <script>
-import { Row, Card, Col, RadioButton } from 'ant-design-vue';
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+import { Row, Card, Col, RadioButton, notification } from 'ant-design-vue';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue';
 import { getCaptcha } from '@/apis/captcha';
-import { login } from "@/apis/user";
-import { reactive, computed } from 'vue';
-import router from '@/router/index'
+import { signup } from "@/apis/user";
+import { reactive } from 'vue';
+import router from "@/router";
 
 
 export default {
-  name: "log-in",
+  name: "sign-up",
   components: {
     ARow: Row,
     ACard: Card,
@@ -110,15 +124,16 @@ export default {
     ARadioButton: RadioButton,
     UserOutlined,
     LockOutlined,
+    MailOutlined
   },
   data(){
     return {
       locale: "en-US",
-      captchaId: "",
       imgPath: "",
       labelCol: {
         span: 8
       },
+      isSignupSuccess: false
     }
   },
   methods: {
@@ -126,47 +141,48 @@ export default {
       localStorage.setItem('lang', val);
       this.$emit('switchLocale', val);
     },
-    redirectToSignUp(){
-      router.push('/user/signup')
-    }
+    redirectToLogin(){
+      router.push('/user/login')
+    },
+    signUp(){
+      if (this.signupFrom.password !== this.signupFrom.confirm) {
+        this.openNotification('danger', this.$t('noun.error'), this.$t('message.pass_diff'))
+        return
+      }
+      let signUpData = {
+        username: this.signupFrom.username,
+        password: this.signupFrom.password,
+        captcha: this.signupFrom.captcha,
+        captchaId: this.signupFrom.captchaId
+      }
+      signup(signUpData).then(data => {
+        if (data.code === 200) {
+          this.openNotification('success', this.$t('operation.signup'), this.$t('message.signup_success'))
+        }
+      })
+    },
   },
   emits: ['switchLocale'],
   setup() {
-     const loginForm = reactive({
+     const signupFrom = reactive({
       username: "",
       password: "",
       captcha: "",
       captchaId: "",
-      isRemember: true,
+      confirm: "",
+      mail: "",
     });
 
-    const onFinish = data => {
-      console.log(data)
-      let loginData = {
-        username: data.username,
-        password: data.password,
-        captcha: data.captcha,
-        captchaId: data.captchaId
-      }
-
-      login(loginData).then(data => {
-        console.log(data)
-      })
+    const openNotification = (type, title, content) => {
+      notification[type]({
+        message:title,
+        description: content,
+      });
     };
-
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo);
-    };
-
-    const disabled = computed(() => {
-      return !(loginForm.username && loginForm.password);
-    });
 
     return {
-      loginForm,
-      onFinish,
-      onFinishFailed,
-      disabled,
+      signupFrom,
+      openNotification
     };
   },
   mounted(){
@@ -175,8 +191,7 @@ export default {
     this.$i18n.locale = this.locale
 
     getCaptcha().then((data) => {
-      console.log(data)
-      this.loginForm.captchaId = data.data.captchaId;
+      this.signupFrom.captchaId = data.data.captchaId;
       this.imgPath = data.data.imgPath;
     })
   },
@@ -206,7 +221,7 @@ export default {
 
 
 .login-card {
-  margin-top: 30vh;
+  margin-top: 20vh;
 }
 
 .login-form {

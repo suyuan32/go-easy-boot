@@ -17,6 +17,7 @@ import "captcha.api"
 @server(
 	jwt: Auth
 	group: system
+	middleware: Cros
 )
 
 service system{

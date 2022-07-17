@@ -14,7 +14,7 @@ type (
     LoginReq {
         Username   string `form:"username"`
         Password   string `form:"password"`
-        CaptchaId  int32  `form:"captchaId"`
+        CaptchaId  string `form:"captchaId"`
         Captcha    string `form:"captcha"`
     }
 
@@ -94,6 +94,7 @@ type (
 
 @server(
     group: user
+    middleware: Cros
 )
 
 service system {
@@ -107,6 +108,7 @@ service system {
 @server(
     group : user
     jwt : Auth
+    middleware: Cros
 )
 
 service system {

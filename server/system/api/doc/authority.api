@@ -14,6 +14,7 @@ import "base.api"
 @server(
     jwt: Auth
     group: authority
+    middleware: Cros
 )
 
 service system {

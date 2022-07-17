@@ -16,146 +16,164 @@ import (
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/system/health",
-				Handler: system.HealthCheckHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/system/health",
+					Handler: system.HealthCheckHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/authority",
-				Handler: authority.CreateAuthorityHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPut,
-				Path:    "/user/authority/:ID",
-				Handler: authority.UpdateAuthorityHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/user/authority/:ID",
-				Handler: authority.DeleteAuthorityHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/authority/copy",
-				Handler: authority.CopyAuthorityHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/authority",
+					Handler: authority.CreateAuthorityHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPut,
+					Path:    "/user/authority/:ID",
+					Handler: authority.UpdateAuthorityHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/user/authority/:ID",
+					Handler: authority.DeleteAuthorityHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/authority/copy",
+					Handler: authority.CopyAuthorityHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/menu/base",
-				Handler: menu.CreateBaseMenuHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/menu/authority",
-				Handler: menu.AddAuthorityMenuHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/menu/base/:id",
-				Handler: menu.DeleteBaseMenuHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPut,
-				Path:    "/menu/base/:id",
-				Handler: menu.UpdateBaseMenuHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/menu",
-				Handler: menu.GetMenuHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/menu/list",
-				Handler: menu.GetMenuListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/menu/base/:ID",
-				Handler: menu.GetBaseMenuHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/menu/base/tree",
-				Handler: menu.GetBaseMenuTreeHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/menu/authority/:ID",
-				Handler: menu.GetAuthorityMenuHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/menu/base",
+					Handler: menu.CreateBaseMenuHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/menu/authority",
+					Handler: menu.AddAuthorityMenuHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/menu/base/:id",
+					Handler: menu.DeleteBaseMenuHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPut,
+					Path:    "/menu/base/:id",
+					Handler: menu.UpdateBaseMenuHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/menu",
+					Handler: menu.GetMenuHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/menu/list",
+					Handler: menu.GetMenuListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/menu/base/:ID",
+					Handler: menu.GetBaseMenuHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/menu/base/tree",
+					Handler: menu.GetBaseMenuTreeHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/menu/authority/:ID",
+					Handler: menu.GetAuthorityMenuHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/login",
-				Handler: user.LoginHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/register",
-				Handler: user.RegisterHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/login",
+					Handler: user.LoginHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/register",
+					Handler: user.RegisterHandler(serverCtx),
+				},
+			}...,
+		),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/change-password",
-				Handler: user.ChangePasswordHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/user/info",
-				Handler: user.GetUserInfoHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/list",
-				Handler: user.GetUserInfoListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/modify",
-				Handler: user.ModifyInfoHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/user/:id",
-				Handler: user.DeleteUserInfoHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/change-password",
+					Handler: user.ChangePasswordHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/user/info",
+					Handler: user.GetUserInfoHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/list",
+					Handler: user.GetUserInfoListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/modify",
+					Handler: user.ModifyInfoHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/user/:id",
+					Handler: user.DeleteUserInfoHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/captcha",
-				Handler: captcha.GetCaptchaHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/captcha",
+					Handler: captcha.GetCaptchaHandler(serverCtx),
+				},
+			}...,
+		),
 	)
 }

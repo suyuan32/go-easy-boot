@@ -1,4 +1,4 @@
-Name: system
+Name: system.api
 Host: 0.0.0.0
 Port: 8500
 Auth:

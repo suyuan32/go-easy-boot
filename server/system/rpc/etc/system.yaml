@@ -5,22 +5,22 @@ Etcd:
     - 127.0.0.1:2379
   Key: system.rpc
 DBConfig:
-  Type: "mysql"
-  Path: "127.0.0.1"
-  Port: "3306"
-  Config: "charset=utf8mb4&parseTime=True&loc=Local"
-  DBName: "go-easy-boot"
+  Type: mysql
+  Path: 127.0.0.1
+  Port: 3306
+  Config: charset=utf8mb4&parseTime=True&loc=Local
+  DBName: go-easy-boot
   Username: root
-  Password: "123456"
+  Password: 123456
   MaxIdleConn: 10
   MaxOpenConn: 100
   LogMode: error
   LogZap: false
 LogConf:
-  ServiceName: "SystemLogger"
-  Mode: "file"
-  Path: "~/GolandProjects/go-easy-boot/server/system/api/logs"
-  Level: "error"
+  ServiceName: SystemLogger
+  Mode: file
+  Path: ~/GolandProjects/go-easy-boot/server/system/api/logs
+  Level: error
   Compress: false
   KeepDays: 7
   StackCooldownMillis: 100

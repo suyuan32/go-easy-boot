@@ -105,7 +105,7 @@ type IdReq struct {
 type LoginReq struct {
 	Username  string `form:"username"`
 	Password  string `form:"password"`
-	CaptchaId int32  `form:"captchaId"`
+	CaptchaId string `form:"captchaId"`
 	Captcha   string `form:"captcha"`
 }
 

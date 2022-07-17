@@ -1,13 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 export const constantRoutes = [
     {
-        path: '/login',
+        path: '/user/login',
+        name: 'login',
         component: ()=> import('@/views/login'),
         hidden: false,
     },
     {
+        path: '/user/signup',
+        name: 'signup',
+        component: ()=> import('@/views/signup'),
+    },
+    {
         path: '/',
-        redirect: "/login"
+        redirect: "/user/login"
     }
 ]
 
