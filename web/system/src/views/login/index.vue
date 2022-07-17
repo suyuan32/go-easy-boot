@@ -3,13 +3,13 @@
     <a-row>
         <a-col :xs="0" :md="0" :sm="12" :lg="14" :xl="16"></a-col>
         <a-col :xs="24" :sm="24" :md="12" :lg="10" :xl="6">
-          <a-card title="Log in" :bordered="false" class="login-card">
-            <a-row>
+          <a-card :title="$t('operation.login')" :bordered="false" class="login-card">
+            <template #extra>
               <a-radio-group v-model:value="locale">
-                <a-radio-button value="zh_CN">中文</a-radio-button>
-                <a-radio-button value="en_US">English</a-radio-button>
+                <a-radio-button @click="changeLanguage('zh_CN')" value="zh_CN">{{$t('lang.cn')}}</a-radio-button>
+                <a-radio-button @click="changeLanguage('en_US')" value="en_US">{{$t('lang.en')}}</a-radio-button>
               </a-radio-group>
-            </a-row>
+            </template>
             <a-row>
               <a-form
                   :model="formState"
@@ -19,9 +19,9 @@
                   @finishFailed="onFinishFailed"
               >
                 <a-form-item
-                    label="Username"
+                    :label="$t('noun.username')"
                     name="username"
-                    :rules="[{ required: true, message: 'Please input your username!' }]"
+                    :rules="[{ required: true, message:  $t('message.input_username') }]"
                 >
                   <a-input v-model:value="formState.username">
                     <template #prefix>
@@ -31,9 +31,9 @@
                 </a-form-item>
 
                 <a-form-item
-                    label="Password"
+                    :label="$t('noun.password')"
                     name="password"
-                    :rules="[{ required: true, message: 'Please input your password!' }]"
+                    :rules="[{ required: true, message: $t('message.input_pass') }]"
                 >
                   <a-input-password v-model:value="formState.password">
                     <template #prefix>
@@ -44,17 +44,17 @@
 
                 <div class="login-form-wrap">
                   <a-form-item name="remember" no-style>
-                    <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
+                    <a-checkbox v-model:checked="formState.remember">{{$t('operation.remember_me')}}</a-checkbox>
                   </a-form-item>
-                  <a class="login-form-forgot" href="">Forgot password</a>
+                  <a class="login-form-forgot" href="">{{$t('operation.forgot_pass')}}</a>
                 </div>
 
                 <a-form-item>
                   <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
-                    Log in
+                    {{$t('operation.login')}}
                   </a-button>
                   Or
-                  <a href="">register now!</a>
+                  <a href="">{{$t('operation.signup')}}</a>
                 </a-form-item>
               </a-form>
             </a-row>
@@ -84,6 +84,14 @@ export default {
       locale: "en-US",
     }
   },
+  methods: {
+    changeLanguage(val){
+      localStorage.setItem('lang', val);
+      console.log(this.locale);
+      this.$emit('switchLocale', val);
+    }
+  },
+  emits: ['switchLocale'],
   setup() {
     const formState = reactive({
       username: '',
@@ -102,12 +110,18 @@ export default {
     const disabled = computed(() => {
       return !(formState.username && formState.password);
     });
+
     return {
       formState,
       onFinish,
       onFinishFailed,
       disabled,
     };
+  },
+  mounted(){
+    // initialize languages
+    this.locale = localStorage.getItem('lang')
+    this.$i18n.locale = this.locale
   },
 };
 </script>

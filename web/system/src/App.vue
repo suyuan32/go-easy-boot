@@ -41,6 +41,7 @@ export default {
           this.$i18n.locale = 'en_US';
           break;
       }
+
       // refresh page
       this.isRouterAlive = false; 
       this.$nextTick(function() {
@@ -48,7 +49,7 @@ export default {
       });
     }
   },
-  created: function() {
+  mounted() {
     localStorage.setItem('lang', 'en_US');
     this.$i18n.locale = 'en_US';
   },
