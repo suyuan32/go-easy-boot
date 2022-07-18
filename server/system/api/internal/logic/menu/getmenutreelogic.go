@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type GetBaseMenuLogic struct {
+type GetMenuTreeLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewGetBaseMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetBaseMenuLogic {
-	return &GetBaseMenuLogic{
+func NewGetMenuTreeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetMenuTreeLogic {
+	return &GetMenuTreeLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *GetBaseMenuLogic) GetBaseMenu(req *types.IdReq) (resp *types.BaseMenuResp, err error) {
+func (l *GetMenuTreeLogic) GetMenuTree() (resp *types.MenuListResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

@@ -3,7 +3,6 @@ package menu
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"system/api/internal/logic/menu"
 	"system/api/internal/svc"
 	"system/api/internal/types"

@@ -8,10 +8,10 @@ import (
 	"system/api/internal/svc"
 )
 
-func GetBaseMenuTreeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func GetMenuTreeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := menu.NewGetBaseMenuTreeLogic(r.Context(), svcCtx)
-		resp, err := l.GetBaseMenuTree()
+		l := menu.NewGetMenuTreeLogic(r.Context(), svcCtx)
+		resp, err := l.GetMenuTree()
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

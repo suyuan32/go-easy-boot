@@ -8,7 +8,7 @@ import (
 
 func TestInit(t *testing.T) {
 	db := GormMysql()
-	err := db.AutoMigrate(&Menu{})
+	err := db.AutoMigrate(&User{})
 	if err != nil {
 		return
 	}
@@ -16,6 +16,36 @@ func TestInit(t *testing.T) {
 	//if err != nil {
 	//	return
 	//}
+	//var a Authority
+	//db.Where()
+	//db.Create(&User{
+	//	Username: "ad",
+	//	Password: util.BcryptEncrypt("123"),
+	//	Email:    "123456@qq.com",
+	//	Authority: Authority{
+	//		Model: gorm.Model{ID: 1},
+	//	},
+	//})
+
+	//db.Create(&Authority{
+	//	Model:         gorm.Model{},
+	//	AuthorityId:   1,
+	//	Name:          "Admin",
+	//	ParentId:      0,
+	//	Children:      nil,
+	//	Menu:          nil,
+	//	DefaultRouter: "dashboard",
+	//})
+
+	//db.Create(&Authority{
+	//	Model:         gorm.Model{},
+	//	AuthorityId:   2,
+	//	Name:          "Stuff",
+	//	ParentId:      0,
+	//	Children:      nil,
+	//	Menu:          nil,
+	//	DefaultRouter: "dashboard",
+	//})
 }
 
 func GormMysql() *gorm.DB {

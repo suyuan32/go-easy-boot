@@ -15,6 +15,7 @@
                   :model="loginForm"
                   name="normal_login"
                   class="login-form"
+                  @submit="loginSubmit"
                   @finish="onFinish"
                   @finishFailed="onFinishFailed"
               >
@@ -93,7 +94,7 @@
 </template>
 
 <script>
-import { Row, Card, Col, RadioButton } from 'ant-design-vue';
+import {Row, Card, Col, RadioButton, notification} from 'ant-design-vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { getCaptcha } from '@/apis/captcha';
 import { login } from "@/apis/user";
@@ -114,7 +115,6 @@ export default {
   data(){
     return {
       locale: "en-US",
-      captchaId: "",
       imgPath: "",
       labelCol: {
         span: 8
@@ -128,6 +128,38 @@ export default {
     },
     redirectToSignUp(){
       router.push('/user/signup')
+    },
+    refreshCaptcha(){
+      getCaptcha().then((data) => {
+        this.loginForm.captchaId = data.data.captchaId;
+        this.imgPath = data.data.imgPath;
+      })
+    },
+    loginSubmit(){
+      let loginData = {
+        username: this.loginForm.username,
+        password: this.loginForm.password,
+        captcha: this.loginForm.captcha,
+        captchaId: this.loginForm.captchaId
+      }
+
+      login(loginData).then(data => {
+        if (data['code'] === 200) {
+          this.openNotification('success', this.$t('operation.login'), this.$t('message.login_success'))
+          let d = data['data']
+          localStorage.setItem('userId', d['userId'])
+          localStorage.setItem('avatar', d['avatar'])
+          localStorage.setItem('username', d['username'])
+          localStorage.setItem('accessExpire', d['accessExpire'])
+          localStorage.setItem('token', data['data']['accessToken'])
+          setTimeout(() => {
+            router.push('/dashboard')
+          }, 3000)
+        } else if (data['code'] === 400) {
+          this.openNotification('error', this.$t('operation.signup'), this.$t('message.wrong_captcha'))
+          this.refreshCaptcha()
+        }
+      })
     }
   },
   emits: ['switchLocale'],
@@ -141,16 +173,7 @@ export default {
     });
 
     const onFinish = data => {
-      let loginData = {
-        username: data.username,
-        password: data.password,
-        captcha: data.captcha,
-        captchaId: data.captchaId
-      }
-
-      login(loginData).then(data => {
-        console.log(data)
-      })
+      console.log(data)
     };
 
     const onFinishFailed = errorInfo => {
@@ -161,11 +184,19 @@ export default {
       return !(loginForm.username && loginForm.password);
     });
 
+    const openNotification = (type, title, content) => {
+      notification[type]({
+        message:title,
+        description: content,
+      });
+    };
+
     return {
       loginForm,
       onFinish,
       onFinishFailed,
       disabled,
+      openNotification
     };
   },
   mounted(){
@@ -173,11 +204,7 @@ export default {
     this.locale = localStorage.getItem('lang')
     this.$i18n.locale = this.locale
 
-    getCaptcha().then((data) => {
-      console.log(data)
-      this.loginForm.captchaId = data.data.captchaId;
-      this.imgPath = data.data.imgPath;
-    })
+    this.refreshCaptcha()
   },
 };
 </script>

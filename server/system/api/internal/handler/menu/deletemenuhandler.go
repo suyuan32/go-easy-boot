@@ -7,20 +7,18 @@ import (
 	"system/api/internal/logic/menu"
 	"system/api/internal/svc"
 	"system/api/internal/types"
-
-	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CreateBaseMenuHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteMenuHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.BaseMenu
+		var req types.IdReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := menu.NewCreateBaseMenuLogic(r.Context(), svcCtx)
-		resp, err := l.CreateBaseMenu(&req)
+		l := menu.NewDeleteMenuLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteMenu(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

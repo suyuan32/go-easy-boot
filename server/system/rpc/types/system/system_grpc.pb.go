@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SystemClient interface {
 	// user service
+	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	ChangePassword(ctx context.Context, in *ChangePasswordReq, opts ...grpc.CallOption) (*BaseResp, error)
 	CreateUser(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*BaseResp, error)
 	UpdateUser(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*BaseResp, error)
@@ -52,6 +53,11 @@ type SystemClient interface {
 	DeleteAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 	GetAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*AuthorityResp, error)
 	GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error)
+	// casbin service
+	UpdatePolicy(ctx context.Context, in *UpdatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
+	CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
+	DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
+	GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
 }
 
 type systemClient struct {
@@ -60,6 +66,15 @@ type systemClient struct {
 
 func NewSystemClient(cc grpc.ClientConnInterface) SystemClient {
 	return &systemClient{cc}
+}
+
+func (c *systemClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+	out := new(LoginResp)
+	err := c.cc.Invoke(ctx, "/system.system/login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *systemClient) ChangePassword(ctx context.Context, in *ChangePasswordReq, opts ...grpc.CallOption) (*BaseResp, error) {
@@ -287,11 +302,48 @@ func (c *systemClient) GetAuthorityList(ctx context.Context, in *PageInfoReq, op
 	return out, nil
 }
 
+func (c *systemClient) UpdatePolicy(ctx context.Context, in *UpdatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	out := new(BaseResp)
+	err := c.cc.Invoke(ctx, "/system.system/updatePolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	out := new(BaseResp)
+	err := c.cc.Invoke(ctx, "/system.system/createPolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	out := new(BaseResp)
+	err := c.cc.Invoke(ctx, "/system.system/deletePolicy", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
+	out := new(UpdatePolicyReq)
+	err := c.cc.Invoke(ctx, "/system.system/getPolicyByAuthorityId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility
 type SystemServer interface {
 	// user service
+	Login(context.Context, *LoginReq) (*LoginResp, error)
 	ChangePassword(context.Context, *ChangePasswordReq) (*BaseResp, error)
 	CreateUser(context.Context, *RegisterReq) (*BaseResp, error)
 	UpdateUser(context.Context, *UpdateUserInfoReq) (*BaseResp, error)
@@ -321,6 +373,11 @@ type SystemServer interface {
 	DeleteAuthority(context.Context, *IDReq) (*BaseResp, error)
 	GetAuthorityById(context.Context, *IDReq) (*AuthorityResp, error)
 	GetAuthorityList(context.Context, *PageInfoReq) (*AuthorityListResp, error)
+	// casbin service
+	UpdatePolicy(context.Context, *UpdatePolicyReq) (*BaseResp, error)
+	CreatePolicy(context.Context, *CreatePolicyReq) (*BaseResp, error)
+	DeletePolicy(context.Context, *IDReq) (*BaseResp, error)
+	GetPolicyByAuthorityId(context.Context, *IDReq) (*UpdatePolicyReq, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -328,6 +385,9 @@ type SystemServer interface {
 type UnimplementedSystemServer struct {
 }
 
+func (UnimplementedSystemServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
 func (UnimplementedSystemServer) ChangePassword(context.Context, *ChangePasswordReq) (*BaseResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangePassword not implemented")
 }
@@ -403,6 +463,18 @@ func (UnimplementedSystemServer) GetAuthorityById(context.Context, *IDReq) (*Aut
 func (UnimplementedSystemServer) GetAuthorityList(context.Context, *PageInfoReq) (*AuthorityListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorityList not implemented")
 }
+func (UnimplementedSystemServer) UpdatePolicy(context.Context, *UpdatePolicyReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePolicy not implemented")
+}
+func (UnimplementedSystemServer) CreatePolicy(context.Context, *CreatePolicyReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePolicy not implemented")
+}
+func (UnimplementedSystemServer) DeletePolicy(context.Context, *IDReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePolicy not implemented")
+}
+func (UnimplementedSystemServer) GetPolicyByAuthorityId(context.Context, *IDReq) (*UpdatePolicyReq, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPolicyByAuthorityId not implemented")
+}
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 
 // UnsafeSystemServer may be embedded to opt out of forward compatibility for this service.
@@ -414,6 +486,24 @@ type UnsafeSystemServer interface {
 
 func RegisterSystemServer(s grpc.ServiceRegistrar, srv SystemServer) {
 	s.RegisterService(&System_ServiceDesc, srv)
+}
+
+func _System_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.system/login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).Login(ctx, req.(*LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _System_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -866,6 +956,78 @@ func _System_GetAuthorityList_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_UpdatePolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePolicyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).UpdatePolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.system/updatePolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).UpdatePolicy(ctx, req.(*UpdatePolicyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_CreatePolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePolicyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).CreatePolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.system/createPolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).CreatePolicy(ctx, req.(*CreatePolicyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_DeletePolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IDReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).DeletePolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.system/deletePolicy",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).DeletePolicy(ctx, req.(*IDReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_GetPolicyByAuthorityId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IDReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).GetPolicyByAuthorityId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.system/getPolicyByAuthorityId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).GetPolicyByAuthorityId(ctx, req.(*IDReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -873,6 +1035,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "system.system",
 	HandlerType: (*SystemServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "login",
+			Handler:    _System_Login_Handler,
+		},
 		{
 			MethodName: "changePassword",
 			Handler:    _System_ChangePassword_Handler,
@@ -972,6 +1138,22 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getAuthorityList",
 			Handler:    _System_GetAuthorityList_Handler,
+		},
+		{
+			MethodName: "updatePolicy",
+			Handler:    _System_UpdatePolicy_Handler,
+		},
+		{
+			MethodName: "createPolicy",
+			Handler:    _System_CreatePolicy_Handler,
+		},
+		{
+			MethodName: "deletePolicy",
+			Handler:    _System_DeletePolicy_Handler,
+		},
+		{
+			MethodName: "getPolicyByAuthorityId",
+			Handler:    _System_GetPolicyByAuthorityId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2,7 +2,7 @@
 package types
 
 type AuthorityMenu struct {
-	BaseMenu
+	Menu
 	MenuId      string          `json:"menuId"`
 	AuthorityId uint            `json:"-"`
 	Children    []AuthorityMenu `json:"children"`
@@ -10,19 +10,19 @@ type AuthorityMenu struct {
 	Btns        map[string]uint `json:"btns"`
 }
 
-type BaseMenu struct {
+type Menu struct {
 	BaseInfo
-	MenuLevel    uint        `json:"-"`
-	ParentId     string      `json:"parentId"`  // parent menu id
-	Path         string      `json:"path"`      // index path
-	Name         string      `json:"name"`      // index name
-	Hidden       bool        `json:"hidden"`    // hide menu
-	Component    string      `json:"component"` // the path of vue file
-	Sort         int         `json:"sort"`      // sorting numbers
-	MetaData     Meta        `json:"metaData"`  // extra parameters
-	AuthorityIds []Authority `json:"authorityIds"`
-	Children     []BaseMenu  `json:"children"`
-	Param        []MenuParam `json:"parameters"`
+	MenuLevel   uint        `json:"-"`
+	ParentId    string      `json:"parentId"`  // parent menu id
+	Path        string      `json:"path"`      // index path
+	Name        string      `json:"name"`      // index name
+	Hidden      bool        `json:"hidden"`    // hide menu
+	Component   string      `json:"component"` // the path of vue file
+	Sort        int         `json:"sort"`      // sorting numbers
+	MetaData    Meta        `json:"metaData"`  // extra parameters
+	Authorities []Authority `json:"authorities"`
+	Children    []Menu      `json:"children"`
+	Param       []MenuParam `json:"parameters"`
 }
 
 type Meta struct {
@@ -56,19 +56,19 @@ type AuthorityMenuResp struct {
 	Data AuthorityMenu `json:"data"`
 }
 
-type MenuListResp struct {
+type AuthorityMenuListResp struct {
 	PageList
 	Data []AuthorityMenu `json:"data"`
 }
 
-type BaseMenuListResp struct {
+type MenuListResp struct {
 	PageList
-	Data []BaseMenu `json:"data"`
+	Data []Menu `json:"data"`
 }
 
-type BaseMenuResp struct {
+type MenuResp struct {
 	BaseInfo
-	Data BaseMenu `json:"data"`
+	Data Menu `json:"data"`
 }
 
 type BaseMsg struct {
@@ -115,7 +115,7 @@ type LoginResp struct {
 }
 
 type LoginRespData struct {
-	UserId       int64  `json:"userId"`
+	UserId       uint64 `json:"userId"`
 	Username     string `json:"username"`
 	Avatar       string `json:"avatar"`
 	RoleId       int32  `json:"roleId"`

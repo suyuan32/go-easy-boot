@@ -33,17 +33,18 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 	if ok := store.Verify(req.CaptchaId, req.Captcha, true); ok {
 		user, err := l.svcCtx.SystemRpc.CreateUser(context.Background(),
 			&system.RegisterReq{
-				UserName: req.Username,
+				Username: req.Username,
 				Password: req.Password,
 				Email:    req.Email,
 			})
 		if err != nil {
+			l.Logger.Error("register logic: create user err: ", err.Error())
 			return nil, err
 		}
 		if user.Code == uint32(codes.OK) {
 			resp = &types.RegisterResp{
 				BaseMsg: types.BaseMsg{Code: http.StatusOK, Msg: "ok"},
-				Data:    types.RegisterRespData{Status: "successful"},
+				Data:    types.RegisterRespData{Status: "ok"},
 			}
 			return resp, nil
 		} else if user.Code == uint32(codes.AlreadyExists) {
@@ -59,6 +60,12 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 			}
 			return resp, nil
 		}
+	} else {
+		resp = &types.RegisterResp{
+			BaseMsg: types.BaseMsg{Code: http.StatusBadRequest, Msg: "wrong captcha"},
+			Data:    types.RegisterRespData{Status: "fail"},
+		}
+		return resp, nil
 	}
 	return nil, err
 }

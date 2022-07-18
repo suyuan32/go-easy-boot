@@ -64,8 +64,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/menu/base",
-					Handler: menu.CreateBaseMenuHandler(serverCtx),
+					Path:    "/menu",
+					Handler: menu.CreateMenuHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
@@ -74,13 +74,13 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodDelete,
-					Path:    "/menu/base/:id",
-					Handler: menu.DeleteBaseMenuHandler(serverCtx),
+					Path:    "/menu/:id",
+					Handler: menu.DeleteMenuHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPut,
-					Path:    "/menu/base/:id",
-					Handler: menu.UpdateBaseMenuHandler(serverCtx),
+					Path:    "/menu/:id",
+					Handler: menu.UpdateMenuHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
@@ -94,13 +94,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/menu/base/:ID",
-					Handler: menu.GetBaseMenuHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/menu/base/tree",
-					Handler: menu.GetBaseMenuTreeHandler(serverCtx),
+					Path:    "/menu/tree",
+					Handler: menu.GetMenuTreeHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,

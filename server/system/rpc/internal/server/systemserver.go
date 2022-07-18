@@ -23,6 +23,11 @@ func NewSystemServer(svcCtx *svc.ServiceContext) *SystemServer {
 }
 
 //  user service
+func (s *SystemServer) Login(ctx context.Context, in *system.LoginReq) (*system.LoginResp, error) {
+	l := logic.NewLoginLogic(ctx, s.svcCtx)
+	return l.Login(in)
+}
+
 func (s *SystemServer) ChangePassword(ctx context.Context, in *system.ChangePasswordReq) (*system.BaseResp, error) {
 	l := logic.NewChangePasswordLogic(ctx, s.svcCtx)
 	return l.ChangePassword(in)
@@ -149,4 +154,25 @@ func (s *SystemServer) GetAuthorityById(ctx context.Context, in *system.IDReq) (
 func (s *SystemServer) GetAuthorityList(ctx context.Context, in *system.PageInfoReq) (*system.AuthorityListResp, error) {
 	l := logic.NewGetAuthorityListLogic(ctx, s.svcCtx)
 	return l.GetAuthorityList(in)
+}
+
+//  casbin service
+func (s *SystemServer) UpdatePolicy(ctx context.Context, in *system.UpdatePolicyReq) (*system.BaseResp, error) {
+	l := logic.NewUpdatePolicyLogic(ctx, s.svcCtx)
+	return l.UpdatePolicy(in)
+}
+
+func (s *SystemServer) CreatePolicy(ctx context.Context, in *system.CreatePolicyReq) (*system.BaseResp, error) {
+	l := logic.NewCreatePolicyLogic(ctx, s.svcCtx)
+	return l.CreatePolicy(in)
+}
+
+func (s *SystemServer) DeletePolicy(ctx context.Context, in *system.IDReq) (*system.BaseResp, error) {
+	l := logic.NewDeletePolicyLogic(ctx, s.svcCtx)
+	return l.DeletePolicy(in)
+}
+
+func (s *SystemServer) GetPolicyByAuthorityId(ctx context.Context, in *system.IDReq) (*system.UpdatePolicyReq, error) {
+	l := logic.NewGetPolicyByAuthorityIdLogic(ctx, s.svcCtx)
+	return l.GetPolicyByAuthorityId(in)
 }

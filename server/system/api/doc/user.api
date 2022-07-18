@@ -24,7 +24,7 @@ type (
     }
     
     LoginRespData {
-        UserId       int64  `json:"userId"`
+        UserId       uint64  `json:"userId"`
         Username     string `json:"username"`
         Avatar       string `json:"avatar"`
         RoleId       int32  `json:"roleId"`

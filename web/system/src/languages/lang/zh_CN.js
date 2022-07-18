@@ -30,6 +30,7 @@ const zhCN = {
         input_mail: '请输入邮箱',
         signup_success: '注册成功!',
         pass_diff: '两次输入密码不一致',
+        wrong_captcha: '验证码错误 '
     }
 }
 

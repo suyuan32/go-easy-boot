@@ -2,8 +2,9 @@ package logic
 
 import (
 	"context"
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
-	"system/rpc/internal/global"
+	"gorm.io/gorm"
 	"system/rpc/internal/model"
 	"system/rpc/internal/util"
 
@@ -28,10 +29,15 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 }
 
 func (l *CreateUserLogic) CreateUser(in *system.RegisterReq) (*system.BaseResp, error) {
-	result := global.GVA_DB.Create(&model.User{
-		Username: in.UserName,
+	result := l.svcCtx.DB.Omit("Authority").Create(&model.User{
+		UUID:     uuid.New(),
+		Username: in.Username,
+		Nickname: in.Username,
 		Password: util.BcryptEncrypt(in.Password),
 		Email:    in.Email,
+		Authority: model.Authority{
+			Model: gorm.Model{ID: 2},
+		},
 	})
 
 	if result.Error != nil {

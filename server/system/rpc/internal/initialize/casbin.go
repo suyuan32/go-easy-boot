@@ -1,13 +1,12 @@
 package initialize
 
 import (
-	"github.com/zeromicro/go-zero/core/logx"
-	"sync"
-
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
-	"system/rpc/internal/global"
+	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+	"sync"
 )
 
 var (
@@ -15,9 +14,9 @@ var (
 	initCasbinModel sync.Once
 )
 
-func InitCasbin() *casbin.SyncedEnforcer {
+func InitCasbin(db *gorm.DB) *casbin.SyncedEnforcer {
 	initCasbinModel.Do(func() {
-		a, _ := gormadapter.NewAdapterByDB(global.GVA_DB)
+		a, _ := gormadapter.NewAdapterByDB(db)
 		text := `
 		[request_definition]
 		r = sub, obj, act
@@ -36,7 +35,7 @@ func InitCasbin() *casbin.SyncedEnforcer {
 		`
 		m, err := model.NewModelFromString(text)
 		if err != nil {
-			logx.Error("initCasbin: import model fail!", err)
+			logx.Error("InitCasbin: import model fail!", err)
 			return
 		}
 		syncedEnforcer, _ = casbin.NewSyncedEnforcer(m, a)

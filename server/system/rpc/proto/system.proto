@@ -28,16 +28,16 @@ message LoginReq {
 }
 
 message LoginResp {
-  uint64  id = 1;
-  int32  authority_id = 2;
-  int32  status = 3;
-  string username = 4;
-  string access_token = 5;
-  uint64 access_expire = 6;
+  uint32 code = 1;
+  uint64  id = 2;
+  int32  authority_id = 3;
+  int32  status = 4;
+  string username = 5;
+  string avatar = 6;
 }
 
 message RegisterReq {
-  string user_name = 1;
+  string username = 1;
   string password = 2;
   string email = 3;
 }
@@ -50,7 +50,7 @@ message ChangePasswordReq {
 }
 
 message UpdateUserInfoReq {
-  string nick_name = 1;
+  string nickname = 1;
   string avatar = 2;
   uint32 authority_id = 3;
   string mobile = 4;
@@ -59,14 +59,14 @@ message UpdateUserInfoReq {
 }
 
 message UserInfoResp {
-  string nick_name = 1;
+  string nickname = 1;
   string avatar = 2;
   uint32 authority_id = 3;
   string mobile = 4;
   string email = 5;
   int32  status = 6;
   uint64 user_id = 7;
-  string user_name = 8;
+  string username = 8;
 }
 
 message UserInfoListResp {
@@ -74,6 +74,7 @@ message UserInfoListResp {
   uint32 code = 2;
   repeated UserInfoResp data = 3;
 }
+
 
 // menu messages
 
@@ -225,6 +226,7 @@ message CreatePolicyReq {
 
 service system {
   // user service
+  rpc login(LoginReq) returns (LoginResp);
   rpc changePassword (ChangePasswordReq) returns (BaseResp);
   rpc createUser (RegisterReq) returns (BaseResp);
   rpc updateUser (UpdateUserInfoReq) returns (BaseResp);

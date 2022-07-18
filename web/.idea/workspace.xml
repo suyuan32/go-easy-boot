@@ -5,9 +5,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="665eb602-8085-477d-b7ba-e5797a0fb68b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../server/system/api/internal/middleware/crosmiddleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/createpolicylogic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/deletepolicylogic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/getpolicybyauthorityidlogic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/loginlogic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/updatepolicylogic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/src/views/dashboard/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/doc/menu.api" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/doc/menu.api" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/doc/user.api" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/doc/user.api" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/copyauthorityhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/copyauthorityhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/createauthorityhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/createauthorityhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/deleteauthorityhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/deleteauthorityhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/updateauthorityhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/authority/updateauthorityhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/addauthoritymenuhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/addauthoritymenuhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/createbasemenuhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/updatemenuhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/deletebasemenuhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/createmenuhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/getauthoritymenuhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/getauthoritymenuhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/getbasemenuhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/deletemenuhandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/getbasemenutreehandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/getmenutreehandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/menu/updatebasemenuhandler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/handler/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/createbasemenulogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/updatemenulogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/deletebasemenulogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/getmenutreelogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/getbasemenulogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/createmenulogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/getbasemenutreelogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/deletemenulogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/getmenulogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/getmenulogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/menu/updatebasemenulogic.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/user/loginlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/user/loginlogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/user/registerlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/user/registerlogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/global/global.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/casbin.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/casbin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/initialize/entry.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/logic/createuserlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/createuserlogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/model/authority.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/authority.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/model/init_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/init_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/model/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/server/systemserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/server/systemserver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/svc/servicecontext.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/svc/servicecontext.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/parts/user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/proto/parts/user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/system.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/proto/system.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/system/system.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/system/system.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/types/system/system.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/types/system/system.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/types/system/system_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/types/system/system_grpc.pb.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/languages/lang/en_US.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/languages/lang/en_US.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/languages/lang/zh_CN.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/languages/lang/zh_CN.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/views/login/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/views/signup/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/views/signup/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +64,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -36,24 +83,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/system/src/views/signin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/node_modules/prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/ryan/GolandProjects/go-easy-boot/web/system/src/views/signin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/home/ryan/GolandProjects/go-easy-boot/web/node_modules/prettier",
+    "ts.external.directory.path": "/home/ryan/software/WebStorm-221.5921.27/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/system/src/views/signin" />
@@ -82,7 +129,7 @@
       <workItem from="1657944070895" duration="1610000" />
       <workItem from="1657946755256" duration="142000" />
       <workItem from="1658046878990" duration="13473000" />
-      <workItem from="1658103092210" duration="1029000" />
+      <workItem from="1658103092210" duration="5923000" />
     </task>
     <servers />
   </component>

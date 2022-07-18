@@ -12,6 +12,11 @@ export const constantRoutes = [
         component: ()=> import('@/views/signup'),
     },
     {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: ()=> import('@/views/dashboard'),
+    },
+    {
         path: '/',
         redirect: "/user/login"
     }

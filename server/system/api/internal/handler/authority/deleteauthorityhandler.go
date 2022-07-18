@@ -3,7 +3,6 @@ package authority
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"system/api/internal/logic/authority"
 	"system/api/internal/svc"
 	"system/api/internal/types"

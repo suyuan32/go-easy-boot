@@ -21,6 +21,7 @@ type (
 	CreateMenuAuthorityReq = system.CreateMenuAuthorityReq
 	CreateMenuParamReq     = system.CreateMenuParamReq
 	CreateMenuReq          = system.CreateMenuReq
+	CreatePolicyReq        = system.CreatePolicyReq
 	IDReq                  = system.IDReq
 	LoginReq               = system.LoginReq
 	LoginResp              = system.LoginResp
@@ -31,17 +32,20 @@ type (
 	MenuParamListResp      = system.MenuParamListResp
 	MenuParamResp          = system.MenuParamResp
 	PageInfoReq            = system.PageInfoReq
+	PolicyPartInfo         = system.PolicyPartInfo
 	RegisterReq            = system.RegisterReq
 	UpdateAuthorityReq     = system.UpdateAuthorityReq
 	UpdateMenuAuthorityReq = system.UpdateMenuAuthorityReq
 	UpdateMenuParamReq     = system.UpdateMenuParamReq
 	UpdateMenuReq          = system.UpdateMenuReq
+	UpdatePolicyReq        = system.UpdatePolicyReq
 	UpdateUserInfoReq      = system.UpdateUserInfoReq
 	UserInfoListResp       = system.UserInfoListResp
 	UserInfoResp           = system.UserInfoResp
 
 	System interface {
 		//  user service
+		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 		ChangePassword(ctx context.Context, in *ChangePasswordReq, opts ...grpc.CallOption) (*BaseResp, error)
 		CreateUser(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*BaseResp, error)
 		UpdateUser(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*BaseResp, error)
@@ -70,6 +74,11 @@ type (
 		DeleteAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 		GetAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*AuthorityResp, error)
 		GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error)
+		//  casbin service
+		UpdatePolicy(ctx context.Context, in *UpdatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
+		CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
+		DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
+		GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
 	}
 
 	defaultSystem struct {
@@ -84,6 +93,11 @@ func NewSystem(cli zrpc.Client) System {
 }
 
 //  user service
+func (m *defaultSystem) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+	client := system.NewSystemClient(m.cli.Conn())
+	return client.Login(ctx, in, opts...)
+}
+
 func (m *defaultSystem) ChangePassword(ctx context.Context, in *ChangePasswordReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
 	return client.ChangePassword(ctx, in, opts...)
@@ -210,4 +224,25 @@ func (m *defaultSystem) GetAuthorityById(ctx context.Context, in *IDReq, opts ..
 func (m *defaultSystem) GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
 	return client.GetAuthorityList(ctx, in, opts...)
+}
+
+//  casbin service
+func (m *defaultSystem) UpdatePolicy(ctx context.Context, in *UpdatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := system.NewSystemClient(m.cli.Conn())
+	return client.UpdatePolicy(ctx, in, opts...)
+}
+
+func (m *defaultSystem) CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := system.NewSystemClient(m.cli.Conn())
+	return client.CreatePolicy(ctx, in, opts...)
+}
+
+func (m *defaultSystem) DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := system.NewSystemClient(m.cli.Conn())
+	return client.DeletePolicy(ctx, in, opts...)
+}
+
+func (m *defaultSystem) GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
+	client := system.NewSystemClient(m.cli.Conn())
+	return client.GetPolicyByAuthorityId(ctx, in, opts...)
 }

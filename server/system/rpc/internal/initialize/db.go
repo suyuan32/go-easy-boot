@@ -1,26 +1,26 @@
 package initialize
 
 import (
-	"system/rpc/internal/global"
+	"system/rpc/internal/config"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-func InitGORM() *gorm.DB {
-	switch global.GVA_CONFIG.DB.Type {
+func InitGORM(c config.Config) *gorm.DB {
+	switch c.DB.Type {
 	case "mysql":
-		return GormMysql()
+		return GormMysql(c)
 	case "pgsql":
-		return GormPgSql()
+		return GormPgSql(c)
 	default:
-		return GormMysql()
+		return GormMysql(c)
 	}
 }
 
-func GormMysql() *gorm.DB {
-	m := global.GVA_CONFIG.DB
+func GormMysql(c config.Config) *gorm.DB {
+	m := c.DB
 	if m.Dbname == "" {
 		return nil
 	}
@@ -42,8 +42,8 @@ func GormMysql() *gorm.DB {
 	}
 }
 
-func GormPgSql() *gorm.DB {
-	p := global.GVA_CONFIG.DB
+func GormPgSql(c config.Config) *gorm.DB {
+	p := c.DB
 	if p.Dbname == "" {
 		return nil
 	}

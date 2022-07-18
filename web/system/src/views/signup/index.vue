@@ -3,7 +3,7 @@
     <a-row>
         <a-col :xs="0" :md="0" :sm="12" :lg="14" :xl="16"></a-col>
         <a-col :xs="24" :sm="24" :md="12" :lg="10" :xl="6">
-          <a-card :title="$t('operation.login')" :bordered="false" class="login-card">
+          <a-card :title="$t('operation.signup')" :bordered="false" class="login-card">
             <template #extra>
               <a-radio-group v-model:value="locale">
                 <a-radio-button @click="changeLanguage('zh_CN')" value="zh_CN">{{$t('lang.cn')}}</a-radio-button>
@@ -15,7 +15,8 @@
                   :model="signupFrom"
                   name="normal_login"
                   class="login-form"
-                  :onsubmit="signUp"
+                  @submit="signupSubmit"
+                  @finish="onFinish"
               >
                 <a-form-item
                     :label="$t('noun.mail')"
@@ -24,7 +25,7 @@
                     label-align="left"
                     :rules="[{ required: true, message:  $t('message.input_mail') }]"
                 >
-                  <a-input v-model:value="signupFrom.mail">
+                  <a-input v-model:value="signupFrom.email">
                     <template #prefix>
                       <mail-outlined class="site-form-item-icon" />
                     </template>
@@ -88,6 +89,13 @@
                     </a-row>
                 </a-form-item>
 
+                <a-form-item
+                    v-show="false"
+                    name="captchaId"
+                >
+                  <a-input v-model:value="signupFrom.captchaId" />
+                </a-form-item>
+
                 <a-form-item>
                   <a-button type="primary" class="signup-button" html-type="submit">
                     {{$t('operation.signup')}}
@@ -144,23 +152,36 @@ export default {
     redirectToLogin(){
       router.push('/user/login')
     },
-    signUp(){
+    signupSubmit(){
       if (this.signupFrom.password !== this.signupFrom.confirm) {
         this.openNotification('danger', this.$t('noun.error'), this.$t('message.pass_diff'))
         return
       }
       let signUpData = {
+        email: this.signupFrom.email,
         username: this.signupFrom.username,
         password: this.signupFrom.password,
         captcha: this.signupFrom.captcha,
         captchaId: this.signupFrom.captchaId
       }
       signup(signUpData).then(data => {
-        if (data.code === 200) {
+        if (data['code'] === 200) {
           this.openNotification('success', this.$t('operation.signup'), this.$t('message.signup_success'))
+          setTimeout(() => {
+            router.push('/user/login')
+          }, 3000)
+        } else if (data['code'] === 400) {
+          this.openNotification('error', this.$t('operation.signup'), this.$t('message.wrong_captcha'))
+          this.refreshCaptcha()
         }
       })
     },
+    refreshCaptcha(){
+      getCaptcha().then((data) => {
+        this.signupFrom.captchaId = data.data.captchaId;
+        this.imgPath = data.data.imgPath;
+      })
+    }
   },
   emits: ['switchLocale'],
   setup() {
@@ -170,7 +191,7 @@ export default {
       captcha: "",
       captchaId: "",
       confirm: "",
-      mail: "",
+      email: "",
     });
 
     const openNotification = (type, title, content) => {
@@ -180,9 +201,29 @@ export default {
       });
     };
 
+    const onFinish = data => {
+      if (this.signupFrom.password !== this.signupFrom.confirm) {
+        this.openNotification('error', this.$t('noun.error'), this.$t('message.pass_diff'))
+        return
+      }
+
+      let signupData = {
+        email:   data.email,
+        username: data.username,
+        password: data.password,
+        captcha: data.captcha,
+        captchaId: data.captchaId
+      }
+
+      signup(signupData).then(data => {
+        console.log(data)
+      })
+    };
+
     return {
       signupFrom,
-      openNotification
+      openNotification,
+      onFinish
     };
   },
   mounted(){
@@ -190,10 +231,7 @@ export default {
     this.locale = localStorage.getItem('lang')
     this.$i18n.locale = this.locale
 
-    getCaptcha().then((data) => {
-      this.signupFrom.captchaId = data.data.captchaId;
-      this.imgPath = data.data.imgPath;
-    })
+    this.refreshCaptcha()
   },
 };
 </script>

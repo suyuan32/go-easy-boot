@@ -12,7 +12,7 @@ import "base.api"
 
 type (
     AuthorityMenu {
-        BaseMenu
+        Menu
         MenuId      string                 `json:"menuId"`
         AuthorityId uint                   `json:"-"`
         Children    []AuthorityMenu        `json:"children"`
@@ -20,7 +20,7 @@ type (
         Btns        map[string]uint        `json:"btns"`
     }
 
-    BaseMenu {
+    Menu {
         BaseInfo
         MenuLevel    uint        `json:"-"`
         ParentId     string      `json:"parentId"`        // parent menu id
@@ -30,8 +30,8 @@ type (
         Component    string      `json:"component"`       // the path of vue file
         Sort         int         `json:"sort"`            // sorting numbers
         MetaData     Meta        `json:"metaData"`        // extra parameters
-        AuthorityIds []Authority `json:"authorityIds"`
-        Children     []BaseMenu  `json:"children"`
+        Authorities  []Authority `json:"authorities"`
+        Children     []Menu      `json:"children"`
         Param        []MenuParam `json:"parameters"`
     }
 
@@ -66,19 +66,19 @@ type (
         Data AuthorityMenu `json:"data"`
     }
 
-    MenuListResp {
+    AuthorityMenuListResp {
         PageList
         Data []AuthorityMenu `json:"data"`
     }
 
-    BaseMenuListResp {
+    MenuListResp {
         PageList
-        Data []BaseMenu `json:"data"`
+        Data []Menu `json:"data"`
     }
 
-    BaseMenuResp {
+    MenuResp {
         BaseInfo
-        Data BaseMenu `json:"data"`
+        Data Menu `json:"data"`
     }
 
 )
@@ -90,29 +90,26 @@ type (
 )
 
 service system {
-    @handler createBaseMenuHandler
-    post /menu/base (BaseMenu) returns (BaseMsg)
+    @handler createMenuHandler
+    post /menu (Menu) returns (BaseMsg)
 
     @handler addAuthorityMenuHandler
     post /menu/authority (AuthorityMenu) returns (BaseMsg)
 
-    @handler deleteBaseMenuHandler
-    delete /menu/base/:id (IdReq) returns (BaseMsg)
+    @handler deleteMenuHandler
+    delete /menu/:id (IdReq) returns (BaseMsg)
 
-    @handler updateBaseMenuHandler
-    put /menu/base/:id (BaseMenu) returns (BaseMsg)
+    @handler updateMenuHandler
+    put /menu/:id (Menu) returns (BaseMsg)
 
     @handler getMenuHandler
-    get /menu returns (MenuListResp)
+    get /menu returns (MenuResp)
 
     @handler getMenuListHandler
     post /menu/list returns (MenuListResp)
 
-    @handler getBaseMenuHandler
-    get /menu/base/:ID (IdReq) returns (BaseMenuResp)
-
-    @handler  getBaseMenuTreeHandler
-    get /menu/base/tree returns (BaseMenuListResp)
+    @handler  getMenuTreeHandler
+    get /menu/tree returns (MenuListResp)
 
     @handler getAuthorityMenuHandler
     get /menu/authority/:ID (IdReq) returns (AuthorityMenuResp)

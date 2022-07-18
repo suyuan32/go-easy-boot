@@ -30,6 +30,7 @@ const enUS = {
         input_mail: 'Please input the email address',
         signup_success: 'Successfully sing up!',
         pass_diff: 'Different password',
+        wrong_captcha: 'Wrong captcha '
     }
 }
 
