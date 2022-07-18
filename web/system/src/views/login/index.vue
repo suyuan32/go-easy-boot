@@ -9,7 +9,7 @@
                 <a-radio-button @click="changeLanguage('zh_CN')" value="zh_CN">{{$t('lang.cn')}}</a-radio-button>
                 <a-radio-button @click="changeLanguage('en_US')" value="en_US">{{$t('lang.en')}}</a-radio-button>
               </a-radio-group>
-            </template>
+            </template> 
             <a-row>
               <a-form
                   :model="loginForm"
