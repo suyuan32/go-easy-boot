@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
@@ -13,7 +14,7 @@ type Config struct {
 type DBConfig struct {
 	Type        string `json:"Type" yaml:"Type"`               // type of database: mysql, postpres
 	Path        string `json:"Path" yaml:"Path"`               // address
-	Port        string `json:"Port" yaml:"Port"`               // port
+	Port        int    `json:"Port" yaml:"Port"`               // port
 	Config      string `json:"Config" yaml:"Config"`           // extra config such as charset=utf8mb4&parseTime=True
 	Dbname      string `json:"DBName" yaml:"DBName"`           // database name
 	Username    string `json:"Username" yaml:"Username"`       // username
@@ -25,11 +26,12 @@ type DBConfig struct {
 }
 
 func (d *DBConfig) MysqlDSN() string {
-	return d.Username + ":" + d.Password + "@tcp(" + d.Path + ":" + d.Port + ")/" + d.Dbname + "?" + d.Config
+	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?%s", d.Username, d.Password, d.Path, d.Port, d.Dbname, d.Config)
 }
 
 func (d *DBConfig) PostgresDSN() string {
-	return "host=" + d.Path + " user=" + d.Username + " password=" + d.Password + " dbname=" + d.Dbname + " port=" + d.Port + " " + d.Config
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d %s", d.Path, d.Username, d.Password,
+		d.Dbname, d.Port, d.Config)
 }
 
 type LogConf struct {

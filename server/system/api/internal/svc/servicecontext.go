@@ -9,6 +9,7 @@ import (
 type ServiceContext struct {
 	Config config.Config
 	Cros   rest.Middleware
+	//SystemRpc system.System
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {

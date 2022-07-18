@@ -11,7 +11,7 @@ DBConfig:
   Config: charset=utf8mb4&parseTime=True&loc=Local
   DBName: go-easy-boot
   Username: root
-  Password: 123456
+  Password: "123456"
   MaxIdleConn: 10
   MaxOpenConn: 100
   LogMode: error

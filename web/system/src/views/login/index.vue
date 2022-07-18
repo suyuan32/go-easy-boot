@@ -141,7 +141,6 @@ export default {
     });
 
     const onFinish = data => {
-      console.log(data)
       let loginData = {
         username: data.username,
         password: data.password,

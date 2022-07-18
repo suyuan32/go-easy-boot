@@ -25,6 +25,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
+
 	resp = &types.LoginResp{
 		BaseMsg: types.BaseMsg{
 			Code: http.StatusOK,
