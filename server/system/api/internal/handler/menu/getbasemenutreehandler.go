@@ -3,10 +3,9 @@ package menu
 import (
 	"net/http"
 
-	"api/internal/logic/menu"
-	"api/internal/svc"
-
 	"github.com/zeromicro/go-zero/rest/httpx"
+	"system/api/internal/logic/menu"
+	"system/api/internal/svc"
 )
 
 func GetBaseMenuTreeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

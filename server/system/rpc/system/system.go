@@ -6,7 +6,7 @@ package system
 import (
 	"context"
 
-	"rpc/types/system"
+	"system/rpc/types/system"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -3,8 +3,8 @@ package captcha
 import (
 	"net/http"
 
-	"api/internal/logic/captcha"
-	"api/internal/svc"
+	"system/api/internal/logic/captcha"
+	"system/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )

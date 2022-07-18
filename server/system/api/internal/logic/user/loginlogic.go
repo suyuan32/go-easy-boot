@@ -2,10 +2,9 @@ package user
 
 import (
 	"context"
-	"net/http"
 
-	"api/internal/svc"
-	"api/internal/types"
+	"system/api/internal/svc"
+	"system/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,22 +24,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
+	// todo: add your logic here and delete this line
 
-	resp = &types.LoginResp{
-		BaseMsg: types.BaseMsg{
-			Code: http.StatusOK,
-			Msg:  "ok",
-			Data: "",
-		},
-		Data: types.LoginRespData{
-			UserId:       1,
-			Username:     "jack",
-			Avatar:       "/haha",
-			RoleId:       1,
-			AccessToken:  "dsafasdfasfasdfasdf",
-			AccessExpire: 100000,
-		},
-	}
-
-	return resp, nil
+	return
 }

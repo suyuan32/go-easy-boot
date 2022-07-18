@@ -1,14 +1,14 @@
 package main
 
 import (
-	"api/internal/config"
-	"api/internal/global"
-	"api/internal/initialize"
 	"flag"
 	"fmt"
 
-	"api/internal/handler"
-	"api/internal/svc"
+	"system/api/internal/config"
+	"system/api/internal/global"
+	"system/api/internal/handler"
+	"system/api/internal/initialize"
+	"system/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -21,7 +21,7 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	//fmt.Printf("%+v", c)
+
 	global.GVA_CONFIG = &c
 	initialize.InitAll()
 

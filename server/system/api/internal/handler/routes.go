@@ -4,12 +4,12 @@ package handler
 import (
 	"net/http"
 
-	authority "api/internal/handler/authority"
-	captcha "api/internal/handler/captcha"
-	menu "api/internal/handler/menu"
-	system "api/internal/handler/system"
-	user "api/internal/handler/user"
-	"api/internal/svc"
+	authority "system/api/internal/handler/authority"
+	captcha "system/api/internal/handler/captcha"
+	menu "system/api/internal/handler/menu"
+	system "system/api/internal/handler/system"
+	user "system/api/internal/handler/user"
+	"system/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

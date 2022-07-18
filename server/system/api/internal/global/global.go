@@ -1,7 +1,8 @@
 package global
 
 import (
-	"api/internal/config"
+	"system/api/internal/config"
+
 	"github.com/zeromicro/go-zero/core/stores/redis"
 )
 

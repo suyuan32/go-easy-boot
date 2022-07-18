@@ -3,7 +3,8 @@ package system
 import (
 	"context"
 
-	"api/internal/svc"
+	"system/api/internal/svc"
+
 	"github.com/zeromicro/go-zero/core/logx"
 )
 

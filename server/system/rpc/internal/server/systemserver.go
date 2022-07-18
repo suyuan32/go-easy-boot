@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"rpc/internal/logic"
-	"rpc/internal/svc"
-	"rpc/types/system"
+	"system/rpc/internal/logic"
+	"system/rpc/internal/svc"
+	"system/rpc/types/system"
 )
 
 type SystemServer struct {

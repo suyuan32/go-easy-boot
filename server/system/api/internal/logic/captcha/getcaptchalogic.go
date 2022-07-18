@@ -1,13 +1,13 @@
 package captcha
 
 import (
-	"api/internal/util"
 	"context"
 	"net/http"
 
-	"api/internal/global"
-	"api/internal/svc"
-	"api/internal/types"
+	"system/api/internal/global"
+	"system/api/internal/svc"
+	"system/api/internal/types"
+	"system/api/internal/util"
 
 	"github.com/mojocn/base64Captcha"
 	"github.com/zeromicro/go-zero/core/logx"

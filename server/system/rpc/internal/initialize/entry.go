@@ -2,7 +2,7 @@ package initialize
 
 import (
 	"github.com/zeromicro/go-zero/core/logx"
-	"rpc/internal/global"
+	"system/rpc/internal/global"
 )
 
 func InitAll() {
@@ -12,4 +12,6 @@ func InitAll() {
 		logx.Error("fail to initialize database")
 	}
 
+	// initialize role access control
+	InitCasbin()
 }

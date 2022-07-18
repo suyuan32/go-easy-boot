@@ -3,8 +3,9 @@ package system
 import (
 	"net/http"
 
-	"api/internal/logic/system"
-	"api/internal/svc"
+	"system/api/internal/logic/system"
+	"system/api/internal/svc"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

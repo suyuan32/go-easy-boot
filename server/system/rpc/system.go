@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"rpc/internal/config"
-	"rpc/internal/server"
-	"rpc/internal/svc"
-	"rpc/types/system"
+	"system/rpc/internal/config"
+	"system/rpc/internal/server"
+	"system/rpc/internal/svc"
+	"system/rpc/types/system"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -23,9 +23,6 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	//fmt.Printf("%+v", c)
-	c.MustSetUp()
-
 	ctx := svc.NewServiceContext(c)
 	svr := server.NewSystemServer(ctx)
 

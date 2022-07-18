@@ -1,9 +1,10 @@
 package global
 
 import (
+	"system/rpc/internal/config"
+
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
-	"rpc/internal/config"
 )
 
 var (

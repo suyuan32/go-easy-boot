@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+message IDReq {
+  uint64 ID = 1;
+}
+
+message BaseResp {
+  uint32 code = 1;
+  string msg = 2;
+}
+
+message PageInfoReq {
+  uint64 page_no = 1;
+  uint64 page_size = 2;
+}
+
+
+message UpdatePolicyReq {
+  uint64 authority_id = 1;
+  repeated PolicyPartInfo rules = 2;
+}
+
+message PolicyPartInfo {
+  string path = 1;
+  string method = 2;
+}
+
+message CreatePolicyReq {
+  uint64 authority_id = 1;
+  PolicyPartInfo info = 2;
+}
+
+service system {
+  rpc updatePolicy(UpdatePolicyReq) returns (BaseResp);
+  rpc createPolicy(CreatePolicyReq) returns (BaseResp);
+  rpc deletePolicy(IDReq) returns (BaseResp);
+  rpc getPolicyByAuthorityId(IDReq) returns (UpdatePolicyReq);
+}

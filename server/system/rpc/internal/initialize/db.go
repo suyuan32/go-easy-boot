@@ -1,7 +1,7 @@
 package initialize
 
 import (
-	"rpc/internal/global"
+	"system/rpc/internal/global"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"

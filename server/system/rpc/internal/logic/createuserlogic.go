@@ -2,9 +2,13 @@ package logic
 
 import (
 	"context"
+	"google.golang.org/grpc/codes"
+	"system/rpc/internal/global"
+	"system/rpc/internal/model"
+	"system/rpc/internal/util"
 
-	"rpc/internal/svc"
-	"rpc/types/system"
+	"system/rpc/internal/svc"
+	"system/rpc/types/system"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +28,21 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 }
 
 func (l *CreateUserLogic) CreateUser(in *system.RegisterReq) (*system.BaseResp, error) {
-	// todo: add your logic here and delete this line
+	result := global.GVA_DB.Create(&model.User{
+		Username: in.UserName,
+		Password: util.BcryptEncrypt(in.Password),
+		Email:    in.Email,
+	})
 
-	return &system.BaseResp{}, nil
+	if result.Error != nil {
+		return &system.BaseResp{
+			Code: uint32(codes.Internal),
+			Msg:  result.Error.Error(),
+		}, result.Error
+	}
+
+	return &system.BaseResp{
+		Code: uint32(codes.OK),
+		Msg:  "successful",
+	}, nil
 }
