@@ -26,6 +26,19 @@
     </FormItem>
 
     <ARow class="enter-x">
+      <FormItem name="captcha" class="enter-x">
+        <Input size="large" v-model:value="formData.captcha" :placeholder="t('sys.login.captcha')">
+          <template #suffix>
+            <img :src="formData.imgPath" class="absolute right-0 h-full cursor-pointer" />
+          </template>
+        </Input>
+      </FormItem>
+      <FormItem name="captchaId" class="enter-x" v-show="false">
+        <Input :value="formData.captchaId" />
+      </FormItem>
+    </ARow>
+
+    <ARow class="enter-x">
       <ACol :span="12">
         <FormItem>
           <!-- No logic, you need to deal with it yourself -->
@@ -100,6 +113,9 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { getCaptcha } from '/@/api/sys/user';
+
+  import console from 'console';
   //import { onKeyStroke } from '@vueuse/core';
 
   const ACol = Col;
@@ -119,8 +135,11 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    account: 'vben',
-    password: '123456',
+    account: '',
+    password: '',
+    captcha: '',
+    captchaId: '',
+    imgPath: '',
   });
 
   const { validForm } = useFormValid(formRef);
@@ -137,8 +156,11 @@
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,
+        captcha: data.captcha,
+        captchaId: data.captchaId,
         mode: 'none', //不要默认的错误提示
       });
+      console.log(userInfo);
       if (userInfo) {
         notification.success({
           message: t('sys.login.loginSuccessTitle'),
@@ -156,4 +178,19 @@
       loading.value = false;
     }
   }
+
+  // get captcha
+  async function getCaptchaData() {
+    const captcha = await getCaptcha('none').then();
+    formData.captchaId = captcha.captchaId;
+    formData.imgPath = captcha.imgPath;
+  }
+
+  getCaptchaData();
 </script>
+
+<style scoped>
+  .captcha .ant-input {
+    width: '10px';
+  }
+</style>

@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="665eb602-8085-477d-b7ba-e5797a0fb68b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/.env" beforeDir="false" afterPath="$PROJECT_DIR$/system/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/locales/lang/en/sys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/locales/lang/en/sys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/locales/lang/zh-CN/sys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/locales/lang/zh-CN/sys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/settings/projectSetting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/settings/projectSetting.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/src/views/sys/login/LoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/views/sys/login/LoginForm.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +49,15 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/home/ryan/GolandProjects/gin-vue-admin/web",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "/home/ryan/GolandProjects/go-easy-boot/web/system/node_modules/stylelint",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/home/ryan/GolandProjects/go-easy-boot/web/node_modules/prettier",
-    "ts.external.directory.path": "/home/ryan/software/WebStorm-221.5921.27/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/ryan/GolandProjects/go-easy-boot/web/system/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -58,11 +67,11 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="run start" type="js.build_tools.npm" nameIsGenerated="true">
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/system/package.json" />
       <command value="run" />
       <scripts>
-        <script value="serve" />
+        <script value="dev" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -81,6 +90,9 @@
       <workItem from="1657946755256" duration="142000" />
       <workItem from="1658046878990" duration="13473000" />
       <workItem from="1658103092210" duration="7913000" />
+      <workItem from="1658156514846" duration="3295000" />
+      <workItem from="1658192152179" duration="1436000" />
+      <workItem from="1658195829815" duration="4979000" />
     </task>
     <servers />
   </component>

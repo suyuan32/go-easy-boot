@@ -24,12 +24,15 @@ type (
     }
     
     LoginRespData {
-        UserId       uint64  `json:"userId"`
-        Username     string `json:"username"`
-        Avatar       string `json:"avatar"`
-        RoleId       int32  `json:"roleId"`
-        AccessToken  string `json:"accessToken"`
-        AccessExpire int64  `json:"accessExpire"`
+        UserId       uint64    `json:"userId"`
+        Role         RoleInfo  `json:"role"`
+        Token        string    `json:"token"`
+        Expire       int64     `json:"expire"`
+    }
+
+    RoleInfo {
+        RoleName   uint32 `json:"roleId"`
+        Value      uint32 `json:"value"`
     }
 
     RegisterReq {

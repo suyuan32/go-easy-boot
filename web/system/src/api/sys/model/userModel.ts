@@ -4,6 +4,8 @@
 export interface LoginParams {
   username: string;
   password: string;
+  captcha: string;
+  captchaId: string;
 }
 
 export interface RoleInfo {
@@ -35,4 +37,9 @@ export interface GetUserInfoModel {
   avatar: string;
   // 介绍
   desc?: string;
+}
+
+export interface GetCaptchaResult {
+  captchaId: string;
+  imgPath: string;
 }

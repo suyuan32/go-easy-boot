@@ -94,5 +94,6 @@ export default {
     email: '邮箱',
     smsCode: '短信验证码',
     mobile: '手机号码',
+    captcha: '验证码',
   },
 };

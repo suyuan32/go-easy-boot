@@ -1,14 +1,20 @@
 import { defHttp } from '/@/utils/http/axios';
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel';
+import {
+  LoginParams,
+  LoginResultModel,
+  GetUserInfoModel,
+  GetCaptchaResult,
+} from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
 
 enum Api {
-  Login = '/login',
+  Login = '/user/login',
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
   TestRetry = '/testRetry',
+  GetCaptcha = '/captcha',
 }
 
 /**
@@ -19,6 +25,20 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
     {
       url: Api.Login,
       params,
+    },
+    {
+      errorMessageMode: mode,
+    },
+  );
+}
+
+/**
+ * @description: get captcha api
+ */
+export function getCaptcha(mode: ErrorMessageMode = 'modal') {
+  return defHttp.get<GetCaptchaResult>(
+    {
+      url: Api.GetCaptcha,
     },
     {
       errorMessageMode: mode,

@@ -100,5 +100,6 @@ export default {
     email: 'Email',
     smsCode: 'SMS code',
     mobile: 'Mobile',
+    captcha: 'Captcha',
   },
 };
