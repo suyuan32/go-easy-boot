@@ -1,15 +1,20 @@
-export interface BasicPageParams {
+export interface BasePageReq {
   page: number;
   pageSize: number;
 }
 
-export interface BasicFetchResult<T> {
+export interface BaseListResp<T> {
   items: T[];
   total: number;
 }
 
-export interface BasicResult<T> {
+export interface BaseInfoResp<T> {
   code: number;
   msg: string;
   data: T;
+}
+
+export interface BaseResp {
+  code: number;
+  msg: string;
 }

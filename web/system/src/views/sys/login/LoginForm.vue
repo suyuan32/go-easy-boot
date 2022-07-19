@@ -61,9 +61,6 @@
       <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
         {{ t('sys.login.loginButton') }}
       </Button>
-      <!-- <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
-        {{ t('sys.login.registerButton') }}
-      </Button> -->
     </FormItem>
     <ARow class="enter-x">
       <ACol :md="8" :xs="24">
@@ -158,9 +155,8 @@
         username: data.account,
         captcha: data.captcha,
         captchaId: data.captchaId,
-        mode: 'none', //不要默认的错误提示
+        mode: 'none',
       });
-      console.log(userInfo);
       if (userInfo) {
         notification.success({
           message: t('sys.login.loginSuccessTitle'),

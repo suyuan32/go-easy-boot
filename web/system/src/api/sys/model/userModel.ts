@@ -1,9 +1,20 @@
 /**
  * @description: Login interface parameters
  */
-export interface LoginParams {
+export interface LoginReq {
   username: string;
   password: string;
+  captcha: string;
+  captchaId: string;
+}
+
+/**
+ * @description: Register interface parameters
+ */
+export interface RegisterReq {
+  username: string;
+  password: string;
+  email: string;
   captcha: string;
   captchaId: string;
 }
@@ -16,7 +27,7 @@ export interface RoleInfo {
 /**
  * @description: Login interface return value
  */
-export interface LoginResultModel {
+export interface LoginResp {
   userId: string | number;
   token: string;
   role: RoleInfo;
@@ -39,7 +50,7 @@ export interface GetUserInfoModel {
   desc?: string;
 }
 
-export interface GetCaptchaResult {
+export interface CaptchaResp {
   captchaId: string;
   imgPath: string;
 }

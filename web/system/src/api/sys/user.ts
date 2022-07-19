@@ -1,15 +1,12 @@
 import { defHttp } from '/@/utils/http/axios';
-import {
-  LoginParams,
-  LoginResultModel,
-  GetUserInfoModel,
-  GetCaptchaResult,
-} from './model/userModel';
+import { LoginReq, LoginResp, GetUserInfoModel, CaptchaResp, RegisterReq } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
+import { BaseResp } from '../model/baseModel';
 
 enum Api {
   Login = '/user/login',
+  Register = '/user/register',
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
@@ -20,10 +17,25 @@ enum Api {
 /**
  * @description: user login api
  */
-export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
-  return defHttp.post<LoginResultModel>(
+export function login(params: LoginReq, mode: ErrorMessageMode = 'modal') {
+  return defHttp.post<LoginResp>(
     {
       url: Api.Login,
+      params,
+    },
+    {
+      errorMessageMode: mode,
+    },
+  );
+}
+
+/**
+ * @description: user register api
+ */
+export function register(params: RegisterReq, mode: ErrorMessageMode = 'modal') {
+  return defHttp.post<BaseResp>(
+    {
+      url: Api.Register,
       params,
     },
     {
@@ -36,7 +48,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: get captcha api
  */
 export function getCaptcha(mode: ErrorMessageMode = 'modal') {
-  return defHttp.get<GetCaptchaResult>(
+  return defHttp.get<CaptchaResp>(
     {
       url: Api.GetCaptcha,
     },
