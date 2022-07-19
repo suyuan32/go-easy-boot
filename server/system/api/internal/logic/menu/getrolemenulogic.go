@@ -1,4 +1,4 @@
-package authority
+package menu
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type CreateAuthorityLogic struct {
+type GetRoleMenuLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCreateAuthorityLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateAuthorityLogic {
-	return &CreateAuthorityLogic{
+func NewGetRoleMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetRoleMenuLogic {
+	return &GetRoleMenuLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *CreateAuthorityLogic) CreateAuthority(req *types.Authority) (resp *types.BaseMsg, err error) {
+func (l *GetRoleMenuLogic) GetRoleMenu(req *types.IdReq) (resp *types.RoleMenuResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return

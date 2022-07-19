@@ -2,10 +2,11 @@ package user
 
 import (
 	"context"
-	"github.com/golang-jwt/jwt/v4"
-	"google.golang.org/grpc/codes"
 	"net/http"
 	"system/rpc/types/system"
+
+	"github.com/golang-jwt/jwt/v4"
+	"google.golang.org/grpc/codes"
 
 	"system/api/internal/svc"
 	"system/api/internal/types"
@@ -46,14 +47,7 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 			}
 			resp = &types.LoginResp{
 				BaseMsg: types.BaseMsg{Code: http.StatusOK, Msg: "login successfully"},
-				Data: types.LoginRespData{
-					UserId:       user.Id,
-					Username:     user.Username,
-					Avatar:       user.Avatar,
-					RoleId:       user.AuthorityId,
-					AccessToken:  token,
-					AccessExpire: l.svcCtx.Config.Auth.AccessExpire,
-				},
+				Data:    types.LoginRespData{},
 			}
 			return resp, nil
 		} else if user.Code == uint32(codes.NotFound) {

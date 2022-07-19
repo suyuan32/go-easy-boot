@@ -9,22 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type GetAuthorityByIdLogic struct {
+type GetMenuRoleListLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewGetAuthorityByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetAuthorityByIdLogic {
-	return &GetAuthorityByIdLogic{
+func NewGetMenuRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetMenuRoleListLogic {
+	return &GetMenuRoleListLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *GetAuthorityByIdLogic) GetAuthorityById(in *system.IDReq) (*system.AuthorityResp, error) {
+func (l *GetMenuRoleListLogic) GetMenuRoleList(in *system.PageInfoReq) (*system.MenuRoleListResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &system.AuthorityResp{}, nil
+	return &system.MenuRoleListResp{}, nil
 }

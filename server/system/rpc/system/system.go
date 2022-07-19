@@ -13,35 +13,35 @@ import (
 )
 
 type (
-	AuthorityListResp      = system.AuthorityListResp
-	AuthorityResp          = system.AuthorityResp
-	BaseResp               = system.BaseResp
-	ChangePasswordReq      = system.ChangePasswordReq
-	CreateAuthorityReq     = system.CreateAuthorityReq
-	CreateMenuAuthorityReq = system.CreateMenuAuthorityReq
-	CreateMenuParamReq     = system.CreateMenuParamReq
-	CreateMenuReq          = system.CreateMenuReq
-	CreatePolicyReq        = system.CreatePolicyReq
-	IDReq                  = system.IDReq
-	LoginReq               = system.LoginReq
-	LoginResp              = system.LoginResp
-	MenuAuthorityListResp  = system.MenuAuthorityListResp
-	MenuAuthorityResp      = system.MenuAuthorityResp
-	MenuInfo               = system.MenuInfo
-	MenuInfoList           = system.MenuInfoList
-	MenuParamListResp      = system.MenuParamListResp
-	MenuParamResp          = system.MenuParamResp
-	PageInfoReq            = system.PageInfoReq
-	PolicyPartInfo         = system.PolicyPartInfo
-	RegisterReq            = system.RegisterReq
-	UpdateAuthorityReq     = system.UpdateAuthorityReq
-	UpdateMenuAuthorityReq = system.UpdateMenuAuthorityReq
-	UpdateMenuParamReq     = system.UpdateMenuParamReq
-	UpdateMenuReq          = system.UpdateMenuReq
-	UpdatePolicyReq        = system.UpdatePolicyReq
-	UpdateUserInfoReq      = system.UpdateUserInfoReq
-	UserInfoListResp       = system.UserInfoListResp
-	UserInfoResp           = system.UserInfoResp
+	BaseResp           = system.BaseResp
+	ChangePasswordReq  = system.ChangePasswordReq
+	CreateMenuParamReq = system.CreateMenuParamReq
+	CreateMenuReq      = system.CreateMenuReq
+	CreateMenuRoleReq  = system.CreateMenuRoleReq
+	CreatePolicyReq    = system.CreatePolicyReq
+	CreateRoleReq      = system.CreateRoleReq
+	IDReq              = system.IDReq
+	LoginReq           = system.LoginReq
+	LoginResp          = system.LoginResp
+	MenuInfo           = system.MenuInfo
+	MenuInfoList       = system.MenuInfoList
+	MenuParamListResp  = system.MenuParamListResp
+	MenuParamResp      = system.MenuParamResp
+	MenuRoleListResp   = system.MenuRoleListResp
+	MenuRoleResp       = system.MenuRoleResp
+	PageInfoReq        = system.PageInfoReq
+	PolicyPartInfo     = system.PolicyPartInfo
+	RegisterReq        = system.RegisterReq
+	RoleListResp       = system.RoleListResp
+	RoleResp           = system.RoleResp
+	UpdateMenuParamReq = system.UpdateMenuParamReq
+	UpdateMenuReq      = system.UpdateMenuReq
+	UpdateMenuRoleReq  = system.UpdateMenuRoleReq
+	UpdatePolicyReq    = system.UpdatePolicyReq
+	UpdateRoleReq      = system.UpdateRoleReq
+	UpdateUserInfoReq  = system.UpdateUserInfoReq
+	UserInfoListResp   = system.UserInfoListResp
+	UserInfoResp       = system.UserInfoResp
 
 	System interface {
 		//  user service
@@ -62,23 +62,23 @@ type (
 		DeleteMenuParam(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 		GetMenuParamById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuParamResp, error)
 		GeMenuParamListById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuParamListResp, error)
-		// menu authority management
-		CreateMenuAuthority(ctx context.Context, in *CreateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-		UpdateMenuAuthority(ctx context.Context, in *UpdateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-		DeleteMenuAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
-		GetMenuAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuAuthorityResp, error)
-		GetMenuAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuAuthorityListResp, error)
-		//  authority service
-		CreateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-		UpdateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-		DeleteAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
-		GetAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*AuthorityResp, error)
-		GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error)
+		// menu role management
+		CreateMenuRole(ctx context.Context, in *CreateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+		UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+		DeleteMenuRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
+		GetMenuRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
+		GetMenuRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuRoleListResp, error)
+		//  role service
+		CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+		UpdateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+		DeleteRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
+		GetRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*RoleResp, error)
+		GetRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*RoleListResp, error)
 		//  casbin service
 		UpdatePolicy(ctx context.Context, in *UpdatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
 		CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
 		DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
-		GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
+		GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
 	}
 
 	defaultSystem struct {
@@ -174,56 +174,56 @@ func (m *defaultSystem) GeMenuParamListById(ctx context.Context, in *IDReq, opts
 	return client.GeMenuParamListById(ctx, in, opts...)
 }
 
-// menu authority management
-func (m *defaultSystem) CreateMenuAuthority(ctx context.Context, in *CreateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+// menu role management
+func (m *defaultSystem) CreateMenuRole(ctx context.Context, in *CreateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.CreateMenuAuthority(ctx, in, opts...)
+	return client.CreateMenuRole(ctx, in, opts...)
 }
 
-func (m *defaultSystem) UpdateMenuAuthority(ctx context.Context, in *UpdateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultSystem) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.UpdateMenuAuthority(ctx, in, opts...)
+	return client.UpdateMenuRole(ctx, in, opts...)
 }
 
-func (m *defaultSystem) DeleteMenuAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultSystem) DeleteMenuRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.DeleteMenuAuthority(ctx, in, opts...)
+	return client.DeleteMenuRole(ctx, in, opts...)
 }
 
-func (m *defaultSystem) GetMenuAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuAuthorityResp, error) {
+func (m *defaultSystem) GetMenuRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuRoleResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.GetMenuAuthorityById(ctx, in, opts...)
+	return client.GetMenuRoleById(ctx, in, opts...)
 }
 
-func (m *defaultSystem) GetMenuAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuAuthorityListResp, error) {
+func (m *defaultSystem) GetMenuRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuRoleListResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.GetMenuAuthorityList(ctx, in, opts...)
+	return client.GetMenuRoleList(ctx, in, opts...)
 }
 
-//  authority service
-func (m *defaultSystem) CreateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+//  role service
+func (m *defaultSystem) CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.CreateAuthority(ctx, in, opts...)
+	return client.CreateRole(ctx, in, opts...)
 }
 
-func (m *defaultSystem) UpdateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultSystem) UpdateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.UpdateAuthority(ctx, in, opts...)
+	return client.UpdateRole(ctx, in, opts...)
 }
 
-func (m *defaultSystem) DeleteAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (m *defaultSystem) DeleteRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.DeleteAuthority(ctx, in, opts...)
+	return client.DeleteRole(ctx, in, opts...)
 }
 
-func (m *defaultSystem) GetAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*AuthorityResp, error) {
+func (m *defaultSystem) GetRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*RoleResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.GetAuthorityById(ctx, in, opts...)
+	return client.GetRoleById(ctx, in, opts...)
 }
 
-func (m *defaultSystem) GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error) {
+func (m *defaultSystem) GetRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*RoleListResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.GetAuthorityList(ctx, in, opts...)
+	return client.GetRoleList(ctx, in, opts...)
 }
 
 //  casbin service
@@ -242,7 +242,7 @@ func (m *defaultSystem) DeletePolicy(ctx context.Context, in *IDReq, opts ...grp
 	return client.DeletePolicy(ctx, in, opts...)
 }
 
-func (m *defaultSystem) GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
+func (m *defaultSystem) GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
 	client := system.NewSystemClient(m.cli.Conn())
-	return client.GetPolicyByAuthorityId(ctx, in, opts...)
+	return client.GetPolicyByRoleId(ctx, in, opts...)
 }

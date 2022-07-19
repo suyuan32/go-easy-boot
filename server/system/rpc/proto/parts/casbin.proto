@@ -16,7 +16,7 @@ message PageInfoReq {
 
 
 message UpdatePolicyReq {
-  uint64 authority_id = 1;
+  uint64 role_id = 1;
   repeated PolicyPartInfo rules = 2;
 }
 
@@ -26,7 +26,7 @@ message PolicyPartInfo {
 }
 
 message CreatePolicyReq {
-  uint64 authority_id = 1;
+  uint64 role_id = 1;
   PolicyPartInfo info = 2;
 }
 
@@ -34,5 +34,5 @@ service system {
   rpc updatePolicy(UpdatePolicyReq) returns (BaseResp);
   rpc createPolicy(CreatePolicyReq) returns (BaseResp);
   rpc deletePolicy(IDReq) returns (BaseResp);
-  rpc getPolicyByAuthorityId(IDReq) returns (UpdatePolicyReq);
+  rpc getPolicyByRoleId(IDReq) returns (UpdatePolicyReq);
 }

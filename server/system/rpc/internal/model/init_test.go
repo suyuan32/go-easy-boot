@@ -1,9 +1,10 @@
 package model
 
 import (
+	"testing"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"testing"
 )
 
 func TestInit(t *testing.T) {
@@ -16,20 +17,20 @@ func TestInit(t *testing.T) {
 	//if err != nil {
 	//	return
 	//}
-	//var a Authority
+	//var a Role
 	//db.Where()
 	//db.Create(&User{
 	//	Username: "ad",
 	//	Password: util.BcryptEncrypt("123"),
 	//	Email:    "123456@qq.com",
-	//	Authority: Authority{
+	//	Role: Role{
 	//		Model: gorm.Model{ID: 1},
 	//	},
 	//})
 
-	//db.Create(&Authority{
+	//db.Create(&Role{
 	//	Model:         gorm.Model{},
-	//	AuthorityId:   1,
+	//	RoleId:   1,
 	//	Name:          "Admin",
 	//	ParentId:      0,
 	//	Children:      nil,
@@ -37,9 +38,9 @@ func TestInit(t *testing.T) {
 	//	DefaultRouter: "dashboard",
 	//})
 
-	//db.Create(&Authority{
+	//db.Create(&Role{
 	//	Model:         gorm.Model{},
-	//	AuthorityId:   2,
+	//	RoleId:   2,
 	//	Name:          "Stuff",
 	//	ParentId:      0,
 	//	Children:      nil,

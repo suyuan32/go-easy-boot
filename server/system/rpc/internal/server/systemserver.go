@@ -104,56 +104,56 @@ func (s *SystemServer) GeMenuParamListById(ctx context.Context, in *system.IDReq
 	return l.GeMenuParamListById(in)
 }
 
-// menu authority management
-func (s *SystemServer) CreateMenuAuthority(ctx context.Context, in *system.CreateMenuAuthorityReq) (*system.BaseResp, error) {
-	l := logic.NewCreateMenuAuthorityLogic(ctx, s.svcCtx)
-	return l.CreateMenuAuthority(in)
+// menu role management
+func (s *SystemServer) CreateMenuRole(ctx context.Context, in *system.CreateMenuRoleReq) (*system.BaseResp, error) {
+	l := logic.NewCreateMenuRoleLogic(ctx, s.svcCtx)
+	return l.CreateMenuRole(in)
 }
 
-func (s *SystemServer) UpdateMenuAuthority(ctx context.Context, in *system.UpdateMenuAuthorityReq) (*system.BaseResp, error) {
-	l := logic.NewUpdateMenuAuthorityLogic(ctx, s.svcCtx)
-	return l.UpdateMenuAuthority(in)
+func (s *SystemServer) UpdateMenuRole(ctx context.Context, in *system.UpdateMenuRoleReq) (*system.BaseResp, error) {
+	l := logic.NewUpdateMenuRoleLogic(ctx, s.svcCtx)
+	return l.UpdateMenuRole(in)
 }
 
-func (s *SystemServer) DeleteMenuAuthority(ctx context.Context, in *system.IDReq) (*system.BaseResp, error) {
-	l := logic.NewDeleteMenuAuthorityLogic(ctx, s.svcCtx)
-	return l.DeleteMenuAuthority(in)
+func (s *SystemServer) DeleteMenuRole(ctx context.Context, in *system.IDReq) (*system.BaseResp, error) {
+	l := logic.NewDeleteMenuRoleLogic(ctx, s.svcCtx)
+	return l.DeleteMenuRole(in)
 }
 
-func (s *SystemServer) GetMenuAuthorityById(ctx context.Context, in *system.IDReq) (*system.MenuAuthorityResp, error) {
-	l := logic.NewGetMenuAuthorityByIdLogic(ctx, s.svcCtx)
-	return l.GetMenuAuthorityById(in)
+func (s *SystemServer) GetMenuRoleById(ctx context.Context, in *system.IDReq) (*system.MenuRoleResp, error) {
+	l := logic.NewGetMenuRoleByIdLogic(ctx, s.svcCtx)
+	return l.GetMenuRoleById(in)
 }
 
-func (s *SystemServer) GetMenuAuthorityList(ctx context.Context, in *system.PageInfoReq) (*system.MenuAuthorityListResp, error) {
-	l := logic.NewGetMenuAuthorityListLogic(ctx, s.svcCtx)
-	return l.GetMenuAuthorityList(in)
+func (s *SystemServer) GetMenuRoleList(ctx context.Context, in *system.PageInfoReq) (*system.MenuRoleListResp, error) {
+	l := logic.NewGetMenuRoleListLogic(ctx, s.svcCtx)
+	return l.GetMenuRoleList(in)
 }
 
-//  authority service
-func (s *SystemServer) CreateAuthority(ctx context.Context, in *system.CreateAuthorityReq) (*system.BaseResp, error) {
-	l := logic.NewCreateAuthorityLogic(ctx, s.svcCtx)
-	return l.CreateAuthority(in)
+//  role service
+func (s *SystemServer) CreateRole(ctx context.Context, in *system.CreateRoleReq) (*system.BaseResp, error) {
+	l := logic.NewCreateRoleLogic(ctx, s.svcCtx)
+	return l.CreateRole(in)
 }
 
-func (s *SystemServer) UpdateAuthority(ctx context.Context, in *system.CreateAuthorityReq) (*system.BaseResp, error) {
-	l := logic.NewUpdateAuthorityLogic(ctx, s.svcCtx)
-	return l.UpdateAuthority(in)
+func (s *SystemServer) UpdateRole(ctx context.Context, in *system.CreateRoleReq) (*system.BaseResp, error) {
+	l := logic.NewUpdateRoleLogic(ctx, s.svcCtx)
+	return l.UpdateRole(in)
 }
 
-func (s *SystemServer) DeleteAuthority(ctx context.Context, in *system.IDReq) (*system.BaseResp, error) {
-	l := logic.NewDeleteAuthorityLogic(ctx, s.svcCtx)
-	return l.DeleteAuthority(in)
+func (s *SystemServer) DeleteRole(ctx context.Context, in *system.IDReq) (*system.BaseResp, error) {
+	l := logic.NewDeleteRoleLogic(ctx, s.svcCtx)
+	return l.DeleteRole(in)
 }
 
-func (s *SystemServer) GetAuthorityById(ctx context.Context, in *system.IDReq) (*system.AuthorityResp, error) {
-	l := logic.NewGetAuthorityByIdLogic(ctx, s.svcCtx)
-	return l.GetAuthorityById(in)
+func (s *SystemServer) GetRoleById(ctx context.Context, in *system.IDReq) (*system.RoleResp, error) {
+	l := logic.NewGetRoleByIdLogic(ctx, s.svcCtx)
+	return l.GetRoleById(in)
 }
 
-func (s *SystemServer) GetAuthorityList(ctx context.Context, in *system.PageInfoReq) (*system.AuthorityListResp, error) {
-	l := logic.NewGetAuthorityListLogic(ctx, s.svcCtx)
-	return l.GetAuthorityList(in)
+func (s *SystemServer) GetRoleList(ctx context.Context, in *system.PageInfoReq) (*system.RoleListResp, error) {
+	l := logic.NewGetRoleListLogic(ctx, s.svcCtx)
+	return l.GetRoleList(in)
 }
 
 //  casbin service
@@ -172,7 +172,7 @@ func (s *SystemServer) DeletePolicy(ctx context.Context, in *system.IDReq) (*sys
 	return l.DeletePolicy(in)
 }
 
-func (s *SystemServer) GetPolicyByAuthorityId(ctx context.Context, in *system.IDReq) (*system.UpdatePolicyReq, error) {
-	l := logic.NewGetPolicyByAuthorityIdLogic(ctx, s.svcCtx)
-	return l.GetPolicyByAuthorityId(in)
+func (s *SystemServer) GetPolicyByRoleId(ctx context.Context, in *system.IDReq) (*system.UpdatePolicyReq, error) {
+	l := logic.NewGetPolicyByRoleIdLogic(ctx, s.svcCtx)
+	return l.GetPolicyByRoleId(in)
 }

@@ -9,21 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type DeleteMenuAuthorityLogic struct {
+type CreateRoleLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewDeleteMenuAuthorityLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteMenuAuthorityLogic {
-	return &DeleteMenuAuthorityLogic{
+func NewCreateRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateRoleLogic {
+	return &CreateRoleLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *DeleteMenuAuthorityLogic) DeleteMenuAuthority(in *system.IDReq) (*system.BaseResp, error) {
+//  role service
+func (l *CreateRoleLogic) CreateRole(in *system.CreateRoleReq) (*system.BaseResp, error) {
 	// todo: add your logic here and delete this line
 
 	return &system.BaseResp{}, nil

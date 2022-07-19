@@ -9,22 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type ChangePasswordLogic struct {
+type GetMenuRoleByIdLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewChangePasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ChangePasswordLogic {
-	return &ChangePasswordLogic{
+func NewGetMenuRoleByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetMenuRoleByIdLogic {
+	return &GetMenuRoleByIdLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *ChangePasswordLogic) ChangePassword(in *system.ChangePasswordReq) (*system.BaseResp, error) {
+func (l *GetMenuRoleByIdLogic) GetMenuRoleById(in *system.IDReq) (*system.MenuRoleResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &system.BaseResp{}, nil
+	return &system.MenuRoleResp{}, nil
 }

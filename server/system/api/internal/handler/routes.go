@@ -4,9 +4,9 @@ package handler
 import (
 	"net/http"
 
-	authority "system/api/internal/handler/authority"
 	captcha "system/api/internal/handler/captcha"
 	menu "system/api/internal/handler/menu"
+	role "system/api/internal/handler/role"
 	system "system/api/internal/handler/system"
 	user "system/api/internal/handler/user"
 	"system/api/internal/svc"
@@ -35,23 +35,23 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/user/authority",
-					Handler: authority.CreateAuthorityHandler(serverCtx),
+					Path:    "/user/role",
+					Handler: role.CreateRoleHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPut,
-					Path:    "/user/authority/:ID",
-					Handler: authority.UpdateAuthorityHandler(serverCtx),
+					Path:    "/user/role/:ID",
+					Handler: role.UpdateRoleHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodDelete,
-					Path:    "/user/authority/:ID",
-					Handler: authority.DeleteAuthorityHandler(serverCtx),
+					Path:    "/user/role/:ID",
+					Handler: role.DeleteRoleHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/user/authority/copy",
-					Handler: authority.CopyAuthorityHandler(serverCtx),
+					Path:    "/user/role/copy",
+					Handler: role.CopyRoleHandler(serverCtx),
 				},
 			}...,
 		),
@@ -69,8 +69,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/menu/authority",
-					Handler: menu.AddAuthorityMenuHandler(serverCtx),
+					Path:    "/menu/role",
+					Handler: menu.AddRoleMenuHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodDelete,
@@ -99,8 +99,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/menu/authority/:ID",
-					Handler: menu.GetAuthorityMenuHandler(serverCtx),
+					Path:    "/menu/role/:ID",
+					Handler: menu.GetRoleMenuHandler(serverCtx),
 				},
 			}...,
 		),

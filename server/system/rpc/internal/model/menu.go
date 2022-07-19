@@ -12,7 +12,7 @@ type Menu struct {
 	Component   string      `json:"component" gorm:"comment:the path of vue file"`     // the path of vue file
 	Sort        int         `json:"sort" gorm:"comment:numbers for sorting"`           // sorting numbers
 	MetaData    Meta        `json:"metaData" gorm:"embedded;comment:extra parameters"` // extra parameters
-	Authorities []Authority `json:"authorities" gorm:"many2many:authority_menus;"`
+	Authorities []Role      `json:"authorities" gorm:"many2many:authority_menus;"`
 	Children    []Menu      `json:"children" gorm:"-"`
 	Param       []MenuParam `json:"parameters"`
 }

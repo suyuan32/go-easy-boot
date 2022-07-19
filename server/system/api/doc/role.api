@@ -1,0 +1,32 @@
+syntax = "v1"
+
+info(
+    title: "role control"
+    desc: "role control including role management, role access control"
+    author: "ryansu"
+    email: "yuansu.china.work@gmail.com"
+    version: "v1.0"
+)
+
+import "menu.api"
+import "base.api"
+
+@server(
+    jwt: Auth
+    group: role
+    middleware: Cros
+)
+
+service system {
+    @handler createRoleHandler
+    post /user/role (Role) returns (BaseMsg)
+
+    @handler updateRoleHandler
+    put /user/role/:ID (Role) returns (BaseMsg)
+
+    @handler deleteRoleHandler
+    delete /user/role/:ID (IdReq) returns (BaseMsg)
+
+    @handler copyRoleHandler
+    post /user/role/copy (IdReq) returns (BaseMsg)
+}

@@ -2,11 +2,12 @@ package logic
 
 import (
 	"context"
+	"system/rpc/internal/model"
+	"system/rpc/internal/util"
+
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"gorm.io/gorm"
-	"system/rpc/internal/model"
-	"system/rpc/internal/util"
 
 	"system/rpc/internal/svc"
 	"system/rpc/types/system"
@@ -29,13 +30,13 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 }
 
 func (l *CreateUserLogic) CreateUser(in *system.RegisterReq) (*system.BaseResp, error) {
-	result := l.svcCtx.DB.Omit("Authority").Create(&model.User{
+	result := l.svcCtx.DB.Omit("Role").Create(&model.User{
 		UUID:     uuid.New(),
 		Username: in.Username,
 		Nickname: in.Username,
 		Password: util.BcryptEncrypt(in.Password),
 		Email:    in.Email,
-		Authority: model.Authority{
+		Role: model.Role{
 			Model: gorm.Model{ID: 2},
 		},
 	})

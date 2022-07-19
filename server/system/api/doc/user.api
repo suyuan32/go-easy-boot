@@ -66,7 +66,7 @@ type (
         UserId       int64        `form:"userId"`
         Nickname     string       `form:"nickname"`
         Mobile       string       `form:"mobile"`
-        AuthorityIds string       `form:"authorityIds"`
+        RoleId       string       `form:"roleId"`
         Email        string       `form:"email"`
         Avatar       string       `form:"avatar"`
         SideMode     string       `form:"sideMode"`
@@ -79,7 +79,7 @@ type (
         Username     int64        `json:"username"`
         Nickname     string       `json:"nickname"`
         Mobile       string       `json:"mobile"`
-        AuthorityIds string       `json:"authorityIds"`
+        RoleId       string       `json:"roleId"`
         Email        string       `json:"email"`
         Avatar       string       `json:"avatar"`
         SideMode     string       `json:"sideMode"`

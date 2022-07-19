@@ -41,23 +41,23 @@ type SystemClient interface {
 	DeleteMenuParam(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 	GetMenuParamById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuParamResp, error)
 	GeMenuParamListById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuParamListResp, error)
-	//menu authority management
-	CreateMenuAuthority(ctx context.Context, in *CreateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-	UpdateMenuAuthority(ctx context.Context, in *UpdateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-	DeleteMenuAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
-	GetMenuAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuAuthorityResp, error)
-	GetMenuAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuAuthorityListResp, error)
-	// authority service
-	CreateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-	UpdateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error)
-	DeleteAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
-	GetAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*AuthorityResp, error)
-	GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error)
+	//menu role management
+	CreateMenuRole(ctx context.Context, in *CreateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+	UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+	DeleteMenuRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
+	GetMenuRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuRoleResp, error)
+	GetMenuRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuRoleListResp, error)
+	// role service
+	CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+	UpdateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error)
+	DeleteRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
+	GetRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*RoleResp, error)
+	GetRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*RoleListResp, error)
 	// casbin service
 	UpdatePolicy(ctx context.Context, in *UpdatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
 	CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
 	DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
-	GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
+	GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
 }
 
 type systemClient struct {
@@ -212,90 +212,90 @@ func (c *systemClient) GeMenuParamListById(ctx context.Context, in *IDReq, opts 
 	return out, nil
 }
 
-func (c *systemClient) CreateMenuAuthority(ctx context.Context, in *CreateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (c *systemClient) CreateMenuRole(ctx context.Context, in *CreateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	out := new(BaseResp)
-	err := c.cc.Invoke(ctx, "/system.system/createMenuAuthority", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/createMenuRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) UpdateMenuAuthority(ctx context.Context, in *UpdateMenuAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (c *systemClient) UpdateMenuRole(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	out := new(BaseResp)
-	err := c.cc.Invoke(ctx, "/system.system/updateMenuAuthority", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/updateMenuRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) DeleteMenuAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (c *systemClient) DeleteMenuRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	out := new(BaseResp)
-	err := c.cc.Invoke(ctx, "/system.system/deleteMenuAuthority", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/deleteMenuRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) GetMenuAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuAuthorityResp, error) {
-	out := new(MenuAuthorityResp)
-	err := c.cc.Invoke(ctx, "/system.system/getMenuAuthorityById", in, out, opts...)
+func (c *systemClient) GetMenuRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*MenuRoleResp, error) {
+	out := new(MenuRoleResp)
+	err := c.cc.Invoke(ctx, "/system.system/getMenuRoleById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) GetMenuAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuAuthorityListResp, error) {
-	out := new(MenuAuthorityListResp)
-	err := c.cc.Invoke(ctx, "/system.system/getMenuAuthorityList", in, out, opts...)
+func (c *systemClient) GetMenuRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*MenuRoleListResp, error) {
+	out := new(MenuRoleListResp)
+	err := c.cc.Invoke(ctx, "/system.system/getMenuRoleList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) CreateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (c *systemClient) CreateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	out := new(BaseResp)
-	err := c.cc.Invoke(ctx, "/system.system/createAuthority", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/createRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) UpdateAuthority(ctx context.Context, in *CreateAuthorityReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (c *systemClient) UpdateRole(ctx context.Context, in *CreateRoleReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	out := new(BaseResp)
-	err := c.cc.Invoke(ctx, "/system.system/updateAuthority", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/updateRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) DeleteAuthority(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+func (c *systemClient) DeleteRole(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
 	out := new(BaseResp)
-	err := c.cc.Invoke(ctx, "/system.system/deleteAuthority", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/deleteRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) GetAuthorityById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*AuthorityResp, error) {
-	out := new(AuthorityResp)
-	err := c.cc.Invoke(ctx, "/system.system/getAuthorityById", in, out, opts...)
+func (c *systemClient) GetRoleById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*RoleResp, error) {
+	out := new(RoleResp)
+	err := c.cc.Invoke(ctx, "/system.system/getRoleById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) GetAuthorityList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*AuthorityListResp, error) {
-	out := new(AuthorityListResp)
-	err := c.cc.Invoke(ctx, "/system.system/getAuthorityList", in, out, opts...)
+func (c *systemClient) GetRoleList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*RoleListResp, error) {
+	out := new(RoleListResp)
+	err := c.cc.Invoke(ctx, "/system.system/getRoleList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -329,9 +329,9 @@ func (c *systemClient) DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc
 	return out, nil
 }
 
-func (c *systemClient) GetPolicyByAuthorityId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
+func (c *systemClient) GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
 	out := new(UpdatePolicyReq)
-	err := c.cc.Invoke(ctx, "/system.system/getPolicyByAuthorityId", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/system.system/getPolicyByRoleId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -361,23 +361,23 @@ type SystemServer interface {
 	DeleteMenuParam(context.Context, *IDReq) (*BaseResp, error)
 	GetMenuParamById(context.Context, *IDReq) (*MenuParamResp, error)
 	GeMenuParamListById(context.Context, *IDReq) (*MenuParamListResp, error)
-	//menu authority management
-	CreateMenuAuthority(context.Context, *CreateMenuAuthorityReq) (*BaseResp, error)
-	UpdateMenuAuthority(context.Context, *UpdateMenuAuthorityReq) (*BaseResp, error)
-	DeleteMenuAuthority(context.Context, *IDReq) (*BaseResp, error)
-	GetMenuAuthorityById(context.Context, *IDReq) (*MenuAuthorityResp, error)
-	GetMenuAuthorityList(context.Context, *PageInfoReq) (*MenuAuthorityListResp, error)
-	// authority service
-	CreateAuthority(context.Context, *CreateAuthorityReq) (*BaseResp, error)
-	UpdateAuthority(context.Context, *CreateAuthorityReq) (*BaseResp, error)
-	DeleteAuthority(context.Context, *IDReq) (*BaseResp, error)
-	GetAuthorityById(context.Context, *IDReq) (*AuthorityResp, error)
-	GetAuthorityList(context.Context, *PageInfoReq) (*AuthorityListResp, error)
+	//menu role management
+	CreateMenuRole(context.Context, *CreateMenuRoleReq) (*BaseResp, error)
+	UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*BaseResp, error)
+	DeleteMenuRole(context.Context, *IDReq) (*BaseResp, error)
+	GetMenuRoleById(context.Context, *IDReq) (*MenuRoleResp, error)
+	GetMenuRoleList(context.Context, *PageInfoReq) (*MenuRoleListResp, error)
+	// role service
+	CreateRole(context.Context, *CreateRoleReq) (*BaseResp, error)
+	UpdateRole(context.Context, *CreateRoleReq) (*BaseResp, error)
+	DeleteRole(context.Context, *IDReq) (*BaseResp, error)
+	GetRoleById(context.Context, *IDReq) (*RoleResp, error)
+	GetRoleList(context.Context, *PageInfoReq) (*RoleListResp, error)
 	// casbin service
 	UpdatePolicy(context.Context, *UpdatePolicyReq) (*BaseResp, error)
 	CreatePolicy(context.Context, *CreatePolicyReq) (*BaseResp, error)
 	DeletePolicy(context.Context, *IDReq) (*BaseResp, error)
-	GetPolicyByAuthorityId(context.Context, *IDReq) (*UpdatePolicyReq, error)
+	GetPolicyByRoleId(context.Context, *IDReq) (*UpdatePolicyReq, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -433,35 +433,35 @@ func (UnimplementedSystemServer) GetMenuParamById(context.Context, *IDReq) (*Men
 func (UnimplementedSystemServer) GeMenuParamListById(context.Context, *IDReq) (*MenuParamListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GeMenuParamListById not implemented")
 }
-func (UnimplementedSystemServer) CreateMenuAuthority(context.Context, *CreateMenuAuthorityReq) (*BaseResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMenuAuthority not implemented")
+func (UnimplementedSystemServer) CreateMenuRole(context.Context, *CreateMenuRoleReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMenuRole not implemented")
 }
-func (UnimplementedSystemServer) UpdateMenuAuthority(context.Context, *UpdateMenuAuthorityReq) (*BaseResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuAuthority not implemented")
+func (UnimplementedSystemServer) UpdateMenuRole(context.Context, *UpdateMenuRoleReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRole not implemented")
 }
-func (UnimplementedSystemServer) DeleteMenuAuthority(context.Context, *IDReq) (*BaseResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMenuAuthority not implemented")
+func (UnimplementedSystemServer) DeleteMenuRole(context.Context, *IDReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMenuRole not implemented")
 }
-func (UnimplementedSystemServer) GetMenuAuthorityById(context.Context, *IDReq) (*MenuAuthorityResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMenuAuthorityById not implemented")
+func (UnimplementedSystemServer) GetMenuRoleById(context.Context, *IDReq) (*MenuRoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMenuRoleById not implemented")
 }
-func (UnimplementedSystemServer) GetMenuAuthorityList(context.Context, *PageInfoReq) (*MenuAuthorityListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMenuAuthorityList not implemented")
+func (UnimplementedSystemServer) GetMenuRoleList(context.Context, *PageInfoReq) (*MenuRoleListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMenuRoleList not implemented")
 }
-func (UnimplementedSystemServer) CreateAuthority(context.Context, *CreateAuthorityReq) (*BaseResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAuthority not implemented")
+func (UnimplementedSystemServer) CreateRole(context.Context, *CreateRoleReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
 }
-func (UnimplementedSystemServer) UpdateAuthority(context.Context, *CreateAuthorityReq) (*BaseResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAuthority not implemented")
+func (UnimplementedSystemServer) UpdateRole(context.Context, *CreateRoleReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
 }
-func (UnimplementedSystemServer) DeleteAuthority(context.Context, *IDReq) (*BaseResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAuthority not implemented")
+func (UnimplementedSystemServer) DeleteRole(context.Context, *IDReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
 }
-func (UnimplementedSystemServer) GetAuthorityById(context.Context, *IDReq) (*AuthorityResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorityById not implemented")
+func (UnimplementedSystemServer) GetRoleById(context.Context, *IDReq) (*RoleResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRoleById not implemented")
 }
-func (UnimplementedSystemServer) GetAuthorityList(context.Context, *PageInfoReq) (*AuthorityListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorityList not implemented")
+func (UnimplementedSystemServer) GetRoleList(context.Context, *PageInfoReq) (*RoleListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRoleList not implemented")
 }
 func (UnimplementedSystemServer) UpdatePolicy(context.Context, *UpdatePolicyReq) (*BaseResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePolicy not implemented")
@@ -472,8 +472,8 @@ func (UnimplementedSystemServer) CreatePolicy(context.Context, *CreatePolicyReq)
 func (UnimplementedSystemServer) DeletePolicy(context.Context, *IDReq) (*BaseResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePolicy not implemented")
 }
-func (UnimplementedSystemServer) GetPolicyByAuthorityId(context.Context, *IDReq) (*UpdatePolicyReq, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPolicyByAuthorityId not implemented")
+func (UnimplementedSystemServer) GetPolicyByRoleId(context.Context, *IDReq) (*UpdatePolicyReq, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPolicyByRoleId not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 
@@ -776,182 +776,182 @@ func _System_GeMenuParamListById_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_CreateMenuAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMenuAuthorityReq)
+func _System_CreateMenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMenuRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).CreateMenuAuthority(ctx, in)
+		return srv.(SystemServer).CreateMenuRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/createMenuAuthority",
+		FullMethod: "/system.system/createMenuRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).CreateMenuAuthority(ctx, req.(*CreateMenuAuthorityReq))
+		return srv.(SystemServer).CreateMenuRole(ctx, req.(*CreateMenuRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_UpdateMenuAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMenuAuthorityReq)
+func _System_UpdateMenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMenuRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).UpdateMenuAuthority(ctx, in)
+		return srv.(SystemServer).UpdateMenuRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/updateMenuAuthority",
+		FullMethod: "/system.system/updateMenuRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).UpdateMenuAuthority(ctx, req.(*UpdateMenuAuthorityReq))
+		return srv.(SystemServer).UpdateMenuRole(ctx, req.(*UpdateMenuRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_DeleteMenuAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_DeleteMenuRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IDReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).DeleteMenuAuthority(ctx, in)
+		return srv.(SystemServer).DeleteMenuRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/deleteMenuAuthority",
+		FullMethod: "/system.system/deleteMenuRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).DeleteMenuAuthority(ctx, req.(*IDReq))
+		return srv.(SystemServer).DeleteMenuRole(ctx, req.(*IDReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_GetMenuAuthorityById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_GetMenuRoleById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IDReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).GetMenuAuthorityById(ctx, in)
+		return srv.(SystemServer).GetMenuRoleById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/getMenuAuthorityById",
+		FullMethod: "/system.system/getMenuRoleById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetMenuAuthorityById(ctx, req.(*IDReq))
+		return srv.(SystemServer).GetMenuRoleById(ctx, req.(*IDReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_GetMenuAuthorityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_GetMenuRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PageInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).GetMenuAuthorityList(ctx, in)
+		return srv.(SystemServer).GetMenuRoleList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/getMenuAuthorityList",
+		FullMethod: "/system.system/getMenuRoleList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetMenuAuthorityList(ctx, req.(*PageInfoReq))
+		return srv.(SystemServer).GetMenuRoleList(ctx, req.(*PageInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_CreateAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAuthorityReq)
+func _System_CreateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).CreateAuthority(ctx, in)
+		return srv.(SystemServer).CreateRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/createAuthority",
+		FullMethod: "/system.system/createRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).CreateAuthority(ctx, req.(*CreateAuthorityReq))
+		return srv.(SystemServer).CreateRole(ctx, req.(*CreateRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_UpdateAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAuthorityReq)
+func _System_UpdateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRoleReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).UpdateAuthority(ctx, in)
+		return srv.(SystemServer).UpdateRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/updateAuthority",
+		FullMethod: "/system.system/updateRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).UpdateAuthority(ctx, req.(*CreateAuthorityReq))
+		return srv.(SystemServer).UpdateRole(ctx, req.(*CreateRoleReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_DeleteAuthority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IDReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).DeleteAuthority(ctx, in)
+		return srv.(SystemServer).DeleteRole(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/deleteAuthority",
+		FullMethod: "/system.system/deleteRole",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).DeleteAuthority(ctx, req.(*IDReq))
+		return srv.(SystemServer).DeleteRole(ctx, req.(*IDReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_GetAuthorityById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_GetRoleById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IDReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).GetAuthorityById(ctx, in)
+		return srv.(SystemServer).GetRoleById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/getAuthorityById",
+		FullMethod: "/system.system/getRoleById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetAuthorityById(ctx, req.(*IDReq))
+		return srv.(SystemServer).GetRoleById(ctx, req.(*IDReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_GetAuthorityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_GetRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PageInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).GetAuthorityList(ctx, in)
+		return srv.(SystemServer).GetRoleList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/getAuthorityList",
+		FullMethod: "/system.system/getRoleList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetAuthorityList(ctx, req.(*PageInfoReq))
+		return srv.(SystemServer).GetRoleList(ctx, req.(*PageInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1010,20 +1010,20 @@ func _System_DeletePolicy_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_GetPolicyByAuthorityId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _System_GetPolicyByRoleId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IDReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).GetPolicyByAuthorityId(ctx, in)
+		return srv.(SystemServer).GetPolicyByRoleId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/system.system/getPolicyByAuthorityId",
+		FullMethod: "/system.system/getPolicyByRoleId",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetPolicyByAuthorityId(ctx, req.(*IDReq))
+		return srv.(SystemServer).GetPolicyByRoleId(ctx, req.(*IDReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1100,44 +1100,44 @@ var System_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _System_GeMenuParamListById_Handler,
 		},
 		{
-			MethodName: "createMenuAuthority",
-			Handler:    _System_CreateMenuAuthority_Handler,
+			MethodName: "createMenuRole",
+			Handler:    _System_CreateMenuRole_Handler,
 		},
 		{
-			MethodName: "updateMenuAuthority",
-			Handler:    _System_UpdateMenuAuthority_Handler,
+			MethodName: "updateMenuRole",
+			Handler:    _System_UpdateMenuRole_Handler,
 		},
 		{
-			MethodName: "deleteMenuAuthority",
-			Handler:    _System_DeleteMenuAuthority_Handler,
+			MethodName: "deleteMenuRole",
+			Handler:    _System_DeleteMenuRole_Handler,
 		},
 		{
-			MethodName: "getMenuAuthorityById",
-			Handler:    _System_GetMenuAuthorityById_Handler,
+			MethodName: "getMenuRoleById",
+			Handler:    _System_GetMenuRoleById_Handler,
 		},
 		{
-			MethodName: "getMenuAuthorityList",
-			Handler:    _System_GetMenuAuthorityList_Handler,
+			MethodName: "getMenuRoleList",
+			Handler:    _System_GetMenuRoleList_Handler,
 		},
 		{
-			MethodName: "createAuthority",
-			Handler:    _System_CreateAuthority_Handler,
+			MethodName: "createRole",
+			Handler:    _System_CreateRole_Handler,
 		},
 		{
-			MethodName: "updateAuthority",
-			Handler:    _System_UpdateAuthority_Handler,
+			MethodName: "updateRole",
+			Handler:    _System_UpdateRole_Handler,
 		},
 		{
-			MethodName: "deleteAuthority",
-			Handler:    _System_DeleteAuthority_Handler,
+			MethodName: "deleteRole",
+			Handler:    _System_DeleteRole_Handler,
 		},
 		{
-			MethodName: "getAuthorityById",
-			Handler:    _System_GetAuthorityById_Handler,
+			MethodName: "getRoleById",
+			Handler:    _System_GetRoleById_Handler,
 		},
 		{
-			MethodName: "getAuthorityList",
-			Handler:    _System_GetAuthorityList_Handler,
+			MethodName: "getRoleList",
+			Handler:    _System_GetRoleList_Handler,
 		},
 		{
 			MethodName: "updatePolicy",
@@ -1152,8 +1152,8 @@ var System_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _System_DeletePolicy_Handler,
 		},
 		{
-			MethodName: "getPolicyByAuthorityId",
-			Handler:    _System_GetPolicyByAuthorityId_Handler,
+			MethodName: "getPolicyByRoleId",
+			Handler:    _System_GetPolicyByRoleId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -60,30 +60,30 @@ message MenuInfoList {
   repeated MenuInfo data = 3;
 }
 
-message CreateMenuAuthorityReq {
+message CreateMenuRoleReq {
   uint64 menu_id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
 }
 
-message UpdateMenuAuthorityReq {
+message UpdateMenuRoleReq {
   uint64 menu_id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
   uint64 id = 3;
 }
 
-message MenuAuthorityResp {
+message MenuRoleResp {
   uint64 menu_id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
   uint64 id = 3;
   uint64 create_at = 4;
   uint64 update_at = 5;
   uint64 delete_at = 6;
 }
 
-message MenuAuthorityListResp {
+message MenuRoleListResp {
   uint64 total = 1;
   uint32 code = 2;
-  repeated MenuAuthorityResp data = 3;
+  repeated MenuRoleResp data = 3;
 }
 
 message CreateMenuParamReq {
@@ -132,10 +132,10 @@ service Menu {
   rpc geMenuParamListById (IDReq) returns (MenuParamListResp);
 
 
-  //menu authority management
-  rpc createMenuAuthority (CreateMenuAuthorityReq) returns (BaseResp);
-  rpc updateMenuAuthority (UpdateMenuAuthorityReq) returns (BaseResp);
-  rpc deleteMenuAuthority (IDReq) returns (BaseResp);
-  rpc getMenuAuthorityById (IDReq) returns (MenuAuthorityResp);
-  rpc getMenuAuthorityList (PageInfoReq) returns (MenuAuthorityListResp);
+  //menu role management
+  rpc createMenuRole (CreateMenuRoleReq) returns (BaseResp);
+  rpc updateMenuRole (UpdateMenuRoleReq) returns (BaseResp);
+  rpc deleteMenuRole (IDReq) returns (BaseResp);
+  rpc getMenuRoleById (IDReq) returns (MenuRoleResp);
+  rpc getMenuRoleList (PageInfoReq) returns (MenuRoleListResp);
 }

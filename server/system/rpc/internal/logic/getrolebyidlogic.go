@@ -9,22 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type UpdateAuthorityLogic struct {
+type GetRoleByIdLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewUpdateAuthorityLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateAuthorityLogic {
-	return &UpdateAuthorityLogic{
+func NewGetRoleByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetRoleByIdLogic {
+	return &GetRoleByIdLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *UpdateAuthorityLogic) UpdateAuthority(in *system.CreateAuthorityReq) (*system.BaseResp, error) {
+func (l *GetRoleByIdLogic) GetRoleById(in *system.IDReq) (*system.RoleResp, error) {
 	// todo: add your logic here and delete this line
 
-	return &system.BaseResp{}, nil
+	return &system.RoleResp{}, nil
 }

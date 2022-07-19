@@ -42,7 +42,7 @@ message LoginReq {
 
 message LoginResp {
   int64  id = 1;
-  int32  authority_id = 2;
+  int32  role_id = 2;
   int32  status = 3;
   string username = 4;
   string access_token = 5;

@@ -30,7 +30,7 @@ message LoginReq {
 message LoginResp {
   uint32 code = 1;
   uint64  id = 2;
-  int32  authority_id = 3;
+  int32  role_id = 3;
   int32  status = 4;
   string username = 5;
   string avatar = 6;
@@ -52,7 +52,7 @@ message ChangePasswordReq {
 message UpdateUserInfoReq {
   string nickname = 1;
   string avatar = 2;
-  uint32 authority_id = 3;
+  uint32 role_id = 3;
   string mobile = 4;
   string email = 5;
   int32  status = 6;
@@ -61,7 +61,7 @@ message UpdateUserInfoReq {
 message UserInfoResp {
   string nickname = 1;
   string avatar = 2;
-  uint32 authority_id = 3;
+  uint32 role_id = 3;
   string mobile = 4;
   string email = 5;
   int32  status = 6;
@@ -116,30 +116,30 @@ message MenuInfoList {
   repeated MenuInfo data = 3;
 }
 
-message CreateMenuAuthorityReq {
+message CreateMenuRoleReq {
   uint64 menu_id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
 }
 
-message UpdateMenuAuthorityReq {
+message UpdateMenuRoleReq {
   uint64 menu_id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
   uint64 id = 3;
 }
 
-message MenuAuthorityResp {
+message MenuRoleResp {
   uint64 menu_id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
   uint64 id = 3;
   uint64 create_at = 4;
   uint64 update_at = 5;
   uint64 delete_at = 6;
 }
 
-message MenuAuthorityListResp {
+message MenuRoleListResp {
   uint64 total = 1;
   uint32 code = 2;
-  repeated MenuAuthorityResp data = 3;
+  repeated MenuRoleResp data = 3;
 }
 
 message CreateMenuParamReq {
@@ -174,25 +174,25 @@ message MenuParamListResp {
   repeated MenuParamResp data = 3;
 }
 
-// authority messages
+// role messages
 
 
-message CreateAuthorityReq {
-  uint64 authority_id = 1;
+message CreateRoleReq {
+  uint64 role_id = 1;
   uint64 parent_id = 2;
   string default_router = 3;
 }
 
-message UpdateAuthorityReq {
+message UpdateRoleReq {
   uint64 id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
   uint64 parent_id = 3;
   string default_router = 4;
 }
 
-message AuthorityResp {
+message RoleResp {
   uint64 id = 1;
-  uint64 authority_id = 2;
+  uint64 role_id = 2;
   uint64 parent_id = 3;
   string default_router = 4;
   uint64 create_at = 5;
@@ -200,15 +200,15 @@ message AuthorityResp {
   uint64 delete_at = 7;
 }
 
-message AuthorityListResp {
+message RoleListResp {
   uint64 total = 1;
   uint32 code = 2;
-  repeated AuthorityResp data = 3;
+  repeated RoleResp data = 3;
 }
 
 // casbin
 message UpdatePolicyReq {
-  uint64 authority_id = 1;
+  uint64 role_id = 1;
   repeated PolicyPartInfo rules = 2;
 }
 
@@ -218,7 +218,7 @@ message PolicyPartInfo {
 }
 
 message CreatePolicyReq {
-  uint64 authority_id = 1;
+  uint64 role_id = 1;
   PolicyPartInfo info = 2;
 }
 
@@ -247,23 +247,23 @@ service system {
   rpc geMenuParamListById (IDReq) returns (MenuParamListResp);
 
 
-  //menu authority management
-  rpc createMenuAuthority (CreateMenuAuthorityReq) returns (BaseResp);
-  rpc updateMenuAuthority (UpdateMenuAuthorityReq) returns (BaseResp);
-  rpc deleteMenuAuthority (IDReq) returns (BaseResp);
-  rpc getMenuAuthorityById (IDReq) returns (MenuAuthorityResp);
-  rpc getMenuAuthorityList (PageInfoReq) returns (MenuAuthorityListResp);
+  //menu role management
+  rpc createMenuRole (CreateMenuRoleReq) returns (BaseResp);
+  rpc updateMenuRole (UpdateMenuRoleReq) returns (BaseResp);
+  rpc deleteMenuRole (IDReq) returns (BaseResp);
+  rpc getMenuRoleById (IDReq) returns (MenuRoleResp);
+  rpc getMenuRoleList (PageInfoReq) returns (MenuRoleListResp);
 
-  // authority service
-  rpc createAuthority (CreateAuthorityReq) returns (BaseResp);
-  rpc updateAuthority (CreateAuthorityReq) returns (BaseResp);
-  rpc deleteAuthority (IDReq) returns (BaseResp);
-  rpc getAuthorityById (IDReq) returns (AuthorityResp);
-  rpc getAuthorityList (PageInfoReq) returns (AuthorityListResp);
+  // role service
+  rpc createRole (CreateRoleReq) returns (BaseResp);
+  rpc updateRole (CreateRoleReq) returns (BaseResp);
+  rpc deleteRole (IDReq) returns (BaseResp);
+  rpc getRoleById (IDReq) returns (RoleResp);
+  rpc getRoleList (PageInfoReq) returns (RoleListResp);
 
   // casbin service
   rpc updatePolicy(UpdatePolicyReq) returns (BaseResp);
   rpc createPolicy(CreatePolicyReq) returns (BaseResp);
   rpc deletePolicy(IDReq) returns (BaseResp);
-  rpc getPolicyByAuthorityId(IDReq) returns (UpdatePolicyReq);
+  rpc getPolicyByRoleId(IDReq) returns (UpdatePolicyReq);
 }

@@ -11,11 +11,11 @@ info(
 import "base.api"
 
 type (
-    AuthorityMenu {
+    RoleMenu {
         Menu
         MenuId      string                 `json:"menuId"`
-        AuthorityId uint                   `json:"-"`
-        Children    []AuthorityMenu        `json:"children"`
+        RoleId uint                   `json:"-"`
+        Children    []RoleMenu        `json:"children"`
         Param       []MenuParam            `json:"param"`
         Btns        map[string]uint        `json:"btns"`
     }
@@ -30,7 +30,7 @@ type (
         Component    string      `json:"component"`       // the path of vue file
         Sort         int         `json:"sort"`            // sorting numbers
         MetaData     Meta        `json:"metaData"`        // extra parameters
-        Authorities  []Authority `json:"authorities"`
+        Authorities  []Role `json:"authorities"`
         Children     []Menu      `json:"children"`
         Param        []MenuParam `json:"parameters"`
     }
@@ -50,25 +50,25 @@ type (
         Value  string `json:"value"` // the value of parameters
     }
 
-    Authority {
+    Role {
         BaseInfo
-        AuthorityId   uint32          `json:"authorityId"`
-        AuthorityName string          `json:"authorityName"`
+        RoleId   uint32          `json:"roleId"`
+        RoleName string          `json:"roleName"`
         ParentId      uint32          `json:"parentId"`
-        AuthorityIds  []*Authority    `json:"AuthorityIds"`
-        Children      []Authority     `json:"children"`
-        Menu          []AuthorityMenu `json:"menus" gorm:"many2many:authority_menus;"`
+        RoleIds  []*Role    `json:"RoleIds"`
+        Children      []Role     `json:"children"`
+        Menu          []RoleMenu `json:"menus" gorm:"many2many:role_menus;"`
         DefaultRouter string          `json:"defaultRouter" gorm:"comment:default menu;default:dashboard"` // default menu : dashboard
     }
 
-    AuthorityMenuResp {
+    RoleMenuResp {
         BaseMsg
-        Data AuthorityMenu `json:"data"`
+        Data RoleMenu `json:"data"`
     }
 
-    AuthorityMenuListResp {
+    RoleMenuListResp {
         PageList
-        Data []AuthorityMenu `json:"data"`
+        Data []RoleMenu `json:"data"`
     }
 
     MenuListResp {
@@ -93,8 +93,8 @@ service system {
     @handler createMenuHandler
     post /menu (Menu) returns (BaseMsg)
 
-    @handler addAuthorityMenuHandler
-    post /menu/authority (AuthorityMenu) returns (BaseMsg)
+    @handler addRoleMenuHandler
+    post /menu/role (RoleMenu) returns (BaseMsg)
 
     @handler deleteMenuHandler
     delete /menu/:id (IdReq) returns (BaseMsg)
@@ -111,7 +111,7 @@ service system {
     @handler  getMenuTreeHandler
     get /menu/tree returns (MenuListResp)
 
-    @handler getAuthorityMenuHandler
-    get /menu/authority/:ID (IdReq) returns (AuthorityMenuResp)
+    @handler getRoleMenuHandler
+    get /menu/role/:ID (IdReq) returns (RoleMenuResp)
 
 }

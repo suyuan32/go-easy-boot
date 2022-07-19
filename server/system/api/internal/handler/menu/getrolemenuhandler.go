@@ -1,25 +1,26 @@
-package authority
+package menu
 
 import (
 	"net/http"
 
-	"system/api/internal/logic/authority"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"system/api/internal/logic/menu"
 	"system/api/internal/svc"
 	"system/api/internal/types"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UpdateAuthorityHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func GetRoleMenuHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.Authority
+		var req types.IdReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := authority.NewUpdateAuthorityLogic(r.Context(), svcCtx)
-		resp, err := l.UpdateAuthority(&req)
+		l := menu.NewGetRoleMenuLogic(r.Context(), svcCtx)
+		resp, err := l.GetRoleMenu(&req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -8,7 +8,7 @@ info(
 	version: "v1.0"
 )
 
-import "authority.api"
+import "role.api"
 import "user.api"
 import "menu.api"
 //import "base.api"

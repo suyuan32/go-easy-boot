@@ -9,22 +9,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type CreateMenuAuthorityLogic struct {
+type CreateMenuRoleLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewCreateMenuAuthorityLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateMenuAuthorityLogic {
-	return &CreateMenuAuthorityLogic{
+func NewCreateMenuRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateMenuRoleLogic {
+	return &CreateMenuRoleLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-// menu authority management
-func (l *CreateMenuAuthorityLogic) CreateMenuAuthority(in *system.CreateMenuAuthorityReq) (*system.BaseResp, error) {
+// menu role management
+func (l *CreateMenuRoleLogic) CreateMenuRole(in *system.CreateMenuRoleReq) (*system.BaseResp, error) {
 	// todo: add your logic here and delete this line
 
 	return &system.BaseResp{}, nil
