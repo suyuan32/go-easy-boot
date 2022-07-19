@@ -30,7 +30,7 @@ type (
         Component    string      `json:"component"`       // the path of vue file
         Sort         int         `json:"sort"`            // sorting numbers
         MetaData     Meta        `json:"metaData"`        // extra parameters
-        Authorities  []Role `json:"authorities"`
+        Roles  []Role `json:"roles"`
         Children     []Menu      `json:"children"`
         Param        []MenuParam `json:"parameters"`
     }

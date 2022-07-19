@@ -4,17 +4,17 @@ import "gorm.io/gorm"
 
 type Menu struct {
 	gorm.Model
-	MenuLevel   uint        `json:"-"`
-	ParentId    uint32      `json:"parentId" gorm:"comment:parent menu id"`            // parent menu id
-	Path        string      `json:"path" gorm:"comment:index path"`                    // index path
-	Name        string      `json:"name" gorm:"comment:index name"`                    // index name
-	Hidden      bool        `json:"hidden" gorm:"comment:hide the menu"`               // hide menu
-	Component   string      `json:"component" gorm:"comment:the path of vue file"`     // the path of vue file
-	Sort        int         `json:"sort" gorm:"comment:numbers for sorting"`           // sorting numbers
-	MetaData    Meta        `json:"metaData" gorm:"embedded;comment:extra parameters"` // extra parameters
-	Authorities []Role      `json:"authorities" gorm:"many2many:authority_menus;"`
-	Children    []Menu      `json:"children" gorm:"-"`
-	Param       []MenuParam `json:"parameters"`
+	MenuLevel uint        `json:"-"`
+	ParentId  uint32      `json:"parentId" gorm:"comment:parent menu id"`            // parent menu id
+	Path      string      `json:"path" gorm:"comment:index path"`                    // index path
+	Name      string      `json:"name" gorm:"comment:index name"`                    // index name
+	Hidden    bool        `json:"hidden" gorm:"comment:hide the menu"`               // hide menu
+	Component string      `json:"component" gorm:"comment:the path of vue file"`     // the path of vue file
+	Sort      int         `json:"sort" gorm:"comment:numbers for sorting"`           // sorting numbers
+	MetaData  Meta        `json:"metaData" gorm:"embedded;comment:extra parameters"` // extra parameters
+	Roles     []Role      `json:"roles" gorm:"many2many:role_menus;"`
+	Children  []Menu      `json:"children" gorm:"-"`
+	Param     []MenuParam `json:"parameters"`
 }
 
 type Meta struct {
