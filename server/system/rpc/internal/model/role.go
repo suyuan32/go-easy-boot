@@ -6,7 +6,7 @@ import (
 
 type Role struct {
 	gorm.Model
-	RoleId        uint64 `json:"roleId" gorm:"unique;comment:role id (role id)"`
+	RoleId        uint64 `json:"roleId" gorm:"unique;comment:role id"`
 	Name          string `json:"roleName" gorm:"comment:role name"`
 	ParentId      uint64 `json:"parentId" gorm:"comment:parent id"`
 	Children      []Role `json:"children" gorm:"-"`
