@@ -10,7 +10,7 @@
           :placeholder="t('sys.login.userName')"
         />
       </FormItem>
-      <FormItem name="mobile" class="enter-x">
+      <FormItem name="email" class="enter-x">
         <Input
           size="large"
           v-model:value="formData.email"
@@ -77,14 +77,20 @@
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { Form, Input, Button, Checkbox, notification } from 'ant-design-vue';
+  import { Form, Input, Button, Checkbox, Row } from 'ant-design-vue';
+  import { useMessage } from '/@/hooks/web/useMessage';
   import { StrengthMeter } from '/@/components/StrengthMeter';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
   import { getCaptcha, register } from '/@/api/sys/user';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import httpStatus from 'http-status';
 
+  const ARow = Row;
+  const { prefixCls } = useDesign('register');
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
+  const { notification, createErrorModal } = useMessage();
   const { t } = useI18n();
   const { handleBackLogin, getLoginState } = useLoginState();
 
@@ -105,14 +111,14 @@
   const { getFormRules } = useFormRules(formData);
   const { validForm } = useFormValid(formRef);
 
-  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.REGISTER);
+  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.REGISTER_BY_EMAIL);
 
   async function handleRegister() {
     const data = await validForm();
     if (!data) return;
     try {
       loading.value = true;
-      const userInfo = await register(
+      register(
         {
           password: data.password,
           username: data.account,
@@ -120,15 +126,20 @@
           captchaId: data.captchaId,
           email: data.email,
         },
-        'none',
-      );
-      if (userInfo) {
-        notification.success({
-          message: t('sys.login.loginSuccessTitle'),
-          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
-          duration: 3,
+        'modal',
+      )
+        .then((data) => {
+          if (data.code === httpStatus.OK) {
+            notification.success({
+              message: t('sys.login.signupSuccessTitle'),
+              description: `${t('sys.login.loginSuccessDesc')}`,
+              duration: 3,
+            });
+          }
+        })
+        .catch(() => {
+          getCaptchaData();
         });
-      }
     } catch (error) {
       createErrorModal({
         title: t('sys.api.errorTip'),
@@ -142,8 +153,8 @@
 
   async function getCaptchaData() {
     const captcha = await getCaptcha('none').then();
-    formData.captchaId = captcha.captchaId;
-    formData.imgPath = captcha.imgPath;
+    formData.captchaId = captcha.data.captchaId;
+    formData.imgPath = captcha.data.imgPath;
   }
 
   getCaptchaData();

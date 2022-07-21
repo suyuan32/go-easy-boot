@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="665eb602-8085-477d-b7ba-e5797a0fb68b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/.env" beforeDir="false" afterPath="$PROJECT_DIR$/system/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/src/locales/lang/en/sys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/locales/lang/en/sys.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/src/locales/lang/zh-CN/sys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/locales/lang/zh-CN/sys.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/src/settings/projectSetting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/settings/projectSetting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/src/views/sys/login/LoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/system/src/views/sys/login/LoginForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/doc/user.api" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/doc/user.api" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/etc/system.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/etc/system.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/user/loginlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/user/loginlogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/logic/user/registerlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/logic/user/registerlogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/api/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/api/internal/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/internal/logic/loginlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/internal/logic/loginlogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/parts/authority.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/parts/base.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/parts/casbin.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/parts/menu.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/parts/user.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/proto/system.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/system/rpc/types/system/system.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../server/system/rpc/types/system/system.pb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,27 +46,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/ryan/GolandProjects/gin-vue-admin/web",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "/home/ryan/GolandProjects/go-easy-boot/web/system/node_modules/stylelint",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/home/ryan/GolandProjects/go-easy-boot/web/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/home/ryan/GolandProjects/go-easy-boot/web/system/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ryan/GolandProjects/gin-vue-admin/web&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/system/node_modules/stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/ryan/GolandProjects/go-easy-boot/web/system/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/system/src/views/signin" />
@@ -93,6 +99,7 @@
       <workItem from="1658156514846" duration="3295000" />
       <workItem from="1658192152179" duration="1436000" />
       <workItem from="1658195829815" duration="4979000" />
+      <workItem from="1658291859428" duration="7000" />
     </task>
     <servers />
   </component>

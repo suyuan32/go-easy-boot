@@ -8,7 +8,7 @@ export interface BaseListResp<T> {
   total: number;
 }
 
-export interface BaseInfoResp<T> {
+export interface BaseDataResp<T> {
   code: number;
   msg: string;
   data: T;

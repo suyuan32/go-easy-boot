@@ -2,7 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { LoginReq, LoginResp, GetUserInfoModel, CaptchaResp, RegisterReq } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
-import { BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseResp } from '../model/baseModel';
 
 enum Api {
   Login = '/user/login',
@@ -18,7 +18,7 @@ enum Api {
  * @description: user login api
  */
 export function login(params: LoginReq, mode: ErrorMessageMode = 'modal') {
-  return defHttp.post<LoginResp>(
+  return defHttp.post<BaseDataResp<LoginResp>>(
     {
       url: Api.Login,
       params,
@@ -48,7 +48,7 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'modal') 
  * @description: get captcha api
  */
 export function getCaptcha(mode: ErrorMessageMode = 'modal') {
-  return defHttp.get<CaptchaResp>(
+  return defHttp.get<BaseDataResp<CaptchaResp>>(
     {
       url: Api.GetCaptcha,
     },

@@ -3,10 +3,11 @@ package user
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"system/api/internal/logic/user"
 	"system/api/internal/svc"
 	"system/api/internal/types"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func RegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -19,6 +20,7 @@ func RegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := user.NewRegisterLogic(r.Context(), svcCtx)
 		resp, err := l.Register(&req)
+
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

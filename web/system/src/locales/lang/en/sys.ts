@@ -54,7 +54,7 @@ export default {
     noDataTitle: 'No data on the current page.',
     networkErrorTitle: 'Network Error',
     networkErrorSubTitle:
-      'Sorry，Your network connection has been disconnected, please check your network!',
+      'Sorry, Your network connection has been disconnected, please check your network!',
   },
   lock: {
     unlock: 'Click to unlock',
@@ -68,6 +68,7 @@ export default {
     mobileSignInFormTitle: 'Mobile sign in',
     qrSignInFormTitle: 'Qr code sign in',
     signInFormTitle: 'Sign in',
+    emailSignUpFormTitle: 'Sign up by email',
     signUpFormTitle: 'Sign up',
     forgetFormTitle: 'Reset password',
 
@@ -85,10 +86,14 @@ export default {
     // notify
     loginSuccessTitle: 'Login successful',
     loginSuccessDesc: 'Welcome back',
+    signupSuccessTitle: 'Sign up successful',
+    signupSuccessDesc: 'Welcome',
+    signupUserExist: 'Username or email address had been registered',
 
     // placeholder
     accountPlaceholder: 'Please input username',
     passwordPlaceholder: 'Please input password',
+    emailPlaceholder: 'Please enter your email address',
     smsPlaceholder: 'Please input sms code',
     mobilePlaceholder: 'Please input mobile',
     policyPlaceholder: 'Register after checking',

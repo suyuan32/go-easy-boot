@@ -2,15 +2,15 @@ package user
 
 import (
 	"context"
-	"google.golang.org/grpc/codes"
 	"net/http"
-	"system/api/internal/util"
-	"system/rpc/types/system"
 
 	"system/api/internal/svc"
 	"system/api/internal/types"
+	"system/api/internal/util"
+	"system/rpc/types/system"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/codes"
 )
 
 type RegisterLogic struct {
@@ -29,7 +29,7 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 	}
 }
 
-func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterResp, err error) {
+func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.BaseResp, err error) {
 	if ok := store.Verify(req.CaptchaId, req.Captcha, true); ok {
 		user, err := l.svcCtx.SystemRpc.CreateUser(context.Background(),
 			&system.RegisterReq{
@@ -42,28 +42,28 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 			return nil, err
 		}
 		if user.Code == uint32(codes.OK) {
-			resp = &types.RegisterResp{
-				BaseMsg: types.BaseMsg{Code: http.StatusOK, Msg: "ok"},
-				Data:    types.RegisterRespData{Status: "ok"},
+			resp = &types.BaseResp{
+				Code: http.StatusOK,
+				Msg:  "ok",
 			}
 			return resp, nil
 		} else if user.Code == uint32(codes.AlreadyExists) {
-			resp = &types.RegisterResp{
-				BaseMsg: types.BaseMsg{Code: http.StatusOK, Msg: "exist"},
-				Data:    types.RegisterRespData{Status: "fail"},
+			resp = &types.BaseResp{
+				Code: http.StatusBadRequest,
+				Msg:  "sys.login.signupUserExist",
 			}
 			return resp, nil
 		} else if user.Code == uint32(codes.Internal) {
-			resp = &types.RegisterResp{
-				BaseMsg: types.BaseMsg{Code: http.StatusInternalServerError, Msg: "internal error"},
-				Data:    types.RegisterRespData{Status: "fail"},
+			resp = &types.BaseResp{
+				Code: http.StatusInternalServerError,
+				Msg:  "internal error",
 			}
 			return resp, nil
 		}
 	} else {
-		resp = &types.RegisterResp{
-			BaseMsg: types.BaseMsg{Code: http.StatusBadRequest, Msg: "wrong captcha"},
-			Data:    types.RegisterRespData{Status: "fail"},
+		resp = &types.BaseResp{
+			Code: http.StatusBadRequest,
+			Msg:  "wrong captcha",
 		}
 		return resp, nil
 	}

@@ -3,7 +3,7 @@ Host: 0.0.0.0
 Port: 8500
 Auth:
   AccessSecret: jS6VKDtsJf3z1n2VKDtsJf3z1n2
-  AccessExpire: 100
+  AccessExpire: 259200  # Seconds
 LogConf:
   ServiceName: SystemLogger
   Mode: console

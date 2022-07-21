@@ -33,31 +33,19 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 	if result.Error != nil {
 		l.Logger.Error("login logic: database error ", result.Error)
 		return &system.LoginResp{
-			Code:     uint32(codes.Internal),
-			Id:       0,
-			RoleId:   0,
-			Status:   0,
-			Username: "",
-			Avatar:   "",
+			Code: uint32(codes.Internal),
 		}, result.Error
 	}
 	if result.RowsAffected == 0 {
 		return &system.LoginResp{
-			Code:     uint32(codes.NotFound),
-			Id:       0,
-			RoleId:   0,
-			Status:   0,
-			Username: "",
-			Avatar:   "",
+			Code: uint32(codes.NotFound),
 		}, nil
 	} else {
 		return &system.LoginResp{
 			Code:     uint32(codes.OK),
 			Id:       uint64(u.ID),
-			RoleId:   int32(u.RoleId),
-			Status:   u.Status,
-			Username: u.Username,
-			Avatar:   u.Avatar,
+			RoleId:   u.RoleId,
+			RoleName: u.Role.Name,
 		}, nil
 	}
 }

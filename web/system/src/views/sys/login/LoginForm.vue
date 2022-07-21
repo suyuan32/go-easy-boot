@@ -74,7 +74,7 @@
         </Button>
       </ACol>
       <ACol :md="6" :xs="24">
-        <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
+        <Button block @click="setLoginState(LoginStateEnum.REGISTER_BY_EMAIL)">
           {{ t('sys.login.registerButton') }}
         </Button>
       </ACol>
@@ -111,9 +111,7 @@
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { getCaptcha } from '/@/api/sys/user';
-
-  import console from 'console';
-  //import { onKeyStroke } from '@vueuse/core';
+  import httpStatus from 'http-status';
 
   const ACol = Col;
   const ARow = Row;
@@ -140,8 +138,6 @@
   });
 
   const { validForm } = useFormValid(formRef);
-
-  //onKeyStroke('Enter', handleLogin);
 
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 

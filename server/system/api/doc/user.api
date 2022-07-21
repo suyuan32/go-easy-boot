@@ -27,11 +27,11 @@ type (
         UserId       uint64    `json:"userId"`
         Role         RoleInfo  `json:"role"`
         Token        string    `json:"token"`
-        Expire       int64     `json:"expire"`
+        Expire       uint64     `json:"expire"`
     }
 
     RoleInfo {
-        RoleName   uint32 `json:"roleId"`
+        RoleName   string `json:"roleName"`
         Value      uint32 `json:"value"`
     }
 
@@ -41,11 +41,6 @@ type (
         CaptchaId string `form:"captchaId"`
         Captcha   string `form:"captcha"`
         Email     string `form:"email"`
-    }
-
-    RegisterResp {
-        BaseMsg
-        Data RegisterRespData `json:"data"`
     }
 
     RegisterRespData {
@@ -105,7 +100,7 @@ service system {
     post /user/login (LoginReq) returns (LoginResp)
 
     @handler registerHandler
-    post /user/register (RegisterReq) returns (RegisterResp)
+    post /user/register (RegisterReq) returns (BaseResp)
 }
 
 @server(

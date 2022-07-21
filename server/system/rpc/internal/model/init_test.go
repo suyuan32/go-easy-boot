@@ -1,18 +1,22 @@
 package model
 
 import (
+	"fmt"
 	"testing"
 
+	"system/rpc/internal/util"
+
+	"github.com/google/uuid"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 func TestInit(t *testing.T) {
 	db := GormMysql()
-	err := db.AutoMigrate(&User{})
-	if err != nil {
-		return
-	}
+	// err := db.AutoMigrate(&User{})
+	// if err != nil {
+	// 	return
+	// }
 	//err := db.AutoMigrate(&User{})
 	//if err != nil {
 	//	return
@@ -47,6 +51,18 @@ func TestInit(t *testing.T) {
 	//	Menu:          nil,
 	//	DefaultRouter: "dashboard",
 	//})
+	result := db.Omit("Role").Create(&User{
+		UUID:     uuid.New(),
+		Username: "admin",
+		Nickname: "admin",
+		Password: util.BcryptEncrypt("123456"),
+		Email:    "admin@qq.com",
+		Role: Role{
+			Model: gorm.Model{ID: 2},
+		},
+	})
+
+	fmt.Println(result, result.Error.Error(), result.RowsAffected)
 }
 
 func GormMysql() *gorm.DB {

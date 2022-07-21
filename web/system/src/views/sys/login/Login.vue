@@ -39,6 +39,7 @@
             <RegisterForm />
             <MobileForm />
             <QrCodeForm />
+            <RegisterFormByEmail />
           </div>
         </div>
       </div>
@@ -51,6 +52,7 @@
   import { AppLocalePicker, AppDarkModeToggle } from '/@/components/Application';
   import LoginForm from './LoginForm.vue';
   import ForgetPasswordForm from './ForgetPasswordForm.vue';
+  import RegisterFormByEmail from './RegisterFormByEmail.vue';
   import RegisterForm from './RegisterForm.vue';
   import MobileForm from './MobileForm.vue';
   import QrCodeForm from './QrCodeForm.vue';

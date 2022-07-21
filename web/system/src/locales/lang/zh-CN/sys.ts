@@ -62,6 +62,7 @@ export default {
     signInFormTitle: '登录',
     mobileSignInFormTitle: '手机登录',
     qrSignInFormTitle: '二维码登录',
+    emailSignUpFormTitle: '邮箱注册',
     signUpFormTitle: '注册',
     forgetFormTitle: '重置密码',
 
@@ -79,10 +80,14 @@ export default {
     // notify
     loginSuccessTitle: '登录成功',
     loginSuccessDesc: '欢迎回来',
+    signupSuccessTitle: '注册成功',
+    signupSuccessDesc: '欢迎您的加入',
+    signupUserExist: '用户名或者邮箱已被注册',
 
     // placeholder
     accountPlaceholder: '请输入账号',
     passwordPlaceholder: '请输入密码',
+    emailPlaceholder: '请输入邮箱',
     smsPlaceholder: '请输入验证码',
     mobilePlaceholder: '请输入手机号码',
     policyPlaceholder: '勾选后才能注册',

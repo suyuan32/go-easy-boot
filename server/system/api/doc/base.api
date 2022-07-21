@@ -15,6 +15,11 @@ type BaseMsg {
     Data string `json:"data"`
 }
 
+type BaseResp {
+    Code int32  `json:"code"`
+    Msg  string `json:"msg"`
+}
+
 type PageInfo {
     Page     int    `form:"page"`
     PageSize int    `form:"pageSize"`

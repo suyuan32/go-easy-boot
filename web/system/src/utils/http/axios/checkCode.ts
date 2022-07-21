@@ -1,27 +1,24 @@
-import type { ErrorMessageMode } from '/#/axios';
-import { useMessage } from '/@/hooks/web/useMessage';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import projectSetting from '/@/settings/projectSetting';
 import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
+import { useMessage } from '/@/hooks/web/useMessage';
 import httpStatus from 'http-status';
 
-const { createMessage, createErrorModal } = useMessage();
-const error = createMessage.error!;
+const { createErrorModal } = useMessage();
 const stp = projectSetting.sessionTimeoutProcessing;
 
-export function checkStatus(
-  status: number,
-  msg: string,
-  errorMessageMode: ErrorMessageMode = 'message',
-): void {
+export function checkCode(status: number, msg: string): boolean {
+  if (status === 200) {
+    return false;
+  }
   const { t } = useI18n();
   const userStore = useUserStoreWithOut();
   let errMessage = '';
 
   switch (status) {
-    case httpStatus.BAD_REQUEST:
-      errMessage = `$(msg)`;
+    case 400:
+      errMessage = t(msg);
       break;
     // 401: Not logged in
     // Jump to the login page if not logged in, and carry the path of the current page
@@ -68,12 +65,6 @@ export function checkStatus(
       break;
     default:
   }
-
-  if (errMessage) {
-    if (errorMessageMode === 'modal') {
-      createErrorModal({ title: t('sys.api.errorTip'), content: errMessage });
-    } else if (errorMessageMode === 'message') {
-      error({ content: errMessage, key: `global_error_message_status_${status}` });
-    }
-  }
+  createErrorModal({ title: t('sys.api.errorTip'), content: errMessage });
+  return true;
 }

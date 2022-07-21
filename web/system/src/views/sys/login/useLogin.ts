@@ -1,4 +1,4 @@
-import type { ValidationRule } from 'ant-design-vue/lib/form/Form';
+import type { Rule } from 'ant-design-vue/es/form';
 import type { RuleObject } from 'ant-design-vue/lib/form/interface';
 import { ref, computed, unref, Ref } from 'vue';
 import { useI18n } from '/@/hooks/web/useI18n';
@@ -9,6 +9,7 @@ export enum LoginStateEnum {
   RESET_PASSWORD,
   MOBILE,
   QR_CODE,
+  REGISTER_BY_EMAIL,
 }
 
 const currentState = ref(LoginStateEnum.LOGIN);
@@ -62,7 +63,11 @@ export function useFormRules(formData?: Recordable) {
     };
   };
 
-  const getFormRules = computed((): { [k: string]: ValidationRule | ValidationRule[] } => {
+  // const validateEmail = async (_: RuleObject, value: boolean) => {
+  //   return !value ? Promise.reject(t('sys.login.policyPlaceholder')) : Promise.resolve();
+  // };
+
+  const getFormRules = computed((): { [k: string]: Rule | Rule[] } => {
     const accountFormRule = unref(getAccountFormRule);
     const passwordFormRule = unref(getPasswordFormRule);
     const smsFormRule = unref(getSmsFormRule);
@@ -78,11 +83,24 @@ export function useFormRules(formData?: Recordable) {
         return {
           account: accountFormRule,
           password: passwordFormRule,
+          captcha: smsFormRule,
           confirmPassword: [
             { validator: validateConfirmPassword(formData?.password), trigger: 'change' },
           ],
           policy: [{ validator: validatePolicy, trigger: 'change' }],
           ...mobileRule,
+        };
+
+      case LoginStateEnum.REGISTER_BY_EMAIL:
+        return {
+          email: [{ type: 'email', required: true, trigger: 'change' }],
+          account: accountFormRule,
+          password: passwordFormRule,
+          captcha: smsFormRule,
+          confirmPassword: [
+            { validator: validateConfirmPassword(formData?.password), trigger: 'change' },
+          ],
+          policy: [{ validator: validatePolicy, trigger: 'change' }],
         };
 
       // reset password form rules
@@ -101,17 +119,18 @@ export function useFormRules(formData?: Recordable) {
         return {
           account: accountFormRule,
           password: passwordFormRule,
+          captcha: smsFormRule,
         };
     }
   });
   return { getFormRules };
 }
 
-function createRule(message: string) {
-  return [
+function createRule(message: string): RuleObject {
+  return <RuleObject>[
     {
       required: true,
-      message,
+      message: message,
       trigger: 'change',
     },
   ];

@@ -12,17 +12,17 @@ type RoleMenu struct {
 
 type Menu struct {
 	BaseInfo
-	MenuLevel   uint        `json:"-"`
-	ParentId    string      `json:"parentId"`  // parent menu id
-	Path        string      `json:"path"`      // index path
-	Name        string      `json:"name"`      // index name
-	Hidden      bool        `json:"hidden"`    // hide menu
-	Component   string      `json:"component"` // the path of vue file
-	Sort        int         `json:"sort"`      // sorting numbers
-	MetaData    Meta        `json:"metaData"`  // extra parameters
-	Authorities []Role      `json:"authorities"`
-	Children    []Menu      `json:"children"`
-	Param       []MenuParam `json:"parameters"`
+	MenuLevel uint        `json:"-"`
+	ParentId  string      `json:"parentId"`  // parent menu id
+	Path      string      `json:"path"`      // index path
+	Name      string      `json:"name"`      // index name
+	Hidden    bool        `json:"hidden"`    // hide menu
+	Component string      `json:"component"` // the path of vue file
+	Sort      int         `json:"sort"`      // sorting numbers
+	MetaData  Meta        `json:"metaData"`  // extra parameters
+	Roles     []Role      `json:"roles"`
+	Children  []Menu      `json:"children"`
+	Param     []MenuParam `json:"parameters"`
 }
 
 type Meta struct {
@@ -77,6 +77,11 @@ type BaseMsg struct {
 	Data string `json:"data"`
 }
 
+type BaseResp struct {
+	Code int32  `json:"code"`
+	Msg  string `json:"msg"`
+}
+
 type PageInfo struct {
 	Page     int    `form:"page"`
 	PageSize int    `form:"pageSize"`
@@ -118,11 +123,11 @@ type LoginRespData struct {
 	UserId uint64   `json:"userId"`
 	Role   RoleInfo `json:"role"`
 	Token  string   `json:"token"`
-	Expire int64    `json:"expire"`
+	Expire uint64   `json:"expire"`
 }
 
 type RoleInfo struct {
-	RoleName uint32 `json:"roleId"`
+	RoleName string `json:"roleName"`
 	Value    uint32 `json:"value"`
 }
 
@@ -132,11 +137,6 @@ type RegisterReq struct {
 	CaptchaId string `form:"captchaId"`
 	Captcha   string `form:"captcha"`
 	Email     string `form:"email"`
-}
-
-type RegisterResp struct {
-	BaseMsg
-	Data RegisterRespData `json:"data"`
 }
 
 type RegisterRespData struct {

@@ -2,17 +2,16 @@ package logic
 
 import (
 	"context"
+
 	"system/rpc/internal/model"
-	"system/rpc/internal/util"
-
-	"github.com/google/uuid"
-	"google.golang.org/grpc/codes"
-	"gorm.io/gorm"
-
 	"system/rpc/internal/svc"
+	"system/rpc/internal/util"
 	"system/rpc/types/system"
 
+	"github.com/google/uuid"
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/codes"
+	"gorm.io/gorm"
 )
 
 type CreateUserLogic struct {
@@ -43,9 +42,9 @@ func (l *CreateUserLogic) CreateUser(in *system.RegisterReq) (*system.BaseResp, 
 
 	if result.Error != nil {
 		return &system.BaseResp{
-			Code: uint32(codes.Internal),
+			Code: uint32(codes.AlreadyExists),
 			Msg:  result.Error.Error(),
-		}, result.Error
+		}, nil
 	}
 
 	return &system.BaseResp{

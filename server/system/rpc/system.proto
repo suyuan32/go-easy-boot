@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package menu;
+package system;
 
-option go_package = "./menu";
+option go_package = "./system";
 
 // base message
 
@@ -20,7 +20,61 @@ message PageInfoReq {
   uint64 page_size = 2;
 }
 
-// custom message
+// user message
+
+message LoginReq {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  uint32 code = 1;
+  uint64 id = 2;
+  uint32 role_id = 3;
+  string role_name = 4;
+}
+
+message RegisterReq {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+}
+
+
+message ChangePasswordReq {
+  uint64 user_id = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
+
+message UpdateUserInfoReq {
+  string nickname = 1;
+  string avatar = 2;
+  uint32 role_id = 3;
+  string mobile = 4;
+  string email = 5;
+  int32  status = 6;
+}
+
+message UserInfoResp {
+  string nickname = 1;
+  string avatar = 2;
+  uint32 role_id = 3;
+  string mobile = 4;
+  string email = 5;
+  int32  status = 6;
+  uint64 user_id = 7;
+  string username = 8;
+}
+
+message UserInfoListResp {
+  uint32 total = 1;
+  uint32 code = 2;
+  repeated UserInfoResp data = 3;
+}
+
+
+// menu messages
 
 message CreateMenuReq {
   uint32 parent_id = 1;
@@ -118,7 +172,66 @@ message MenuParamListResp {
   repeated MenuParamResp data = 3;
 }
 
-service Menu {
+// role messages
+
+
+message CreateRoleReq {
+  uint64 role_id = 1;
+  uint64 parent_id = 2;
+  string default_router = 3;
+}
+
+message UpdateRoleReq {
+  uint64 id = 1;
+  uint64 role_id = 2;
+  uint64 parent_id = 3;
+  string default_router = 4;
+}
+
+message RoleResp {
+  uint64 id = 1;
+  uint64 role_id = 2;
+  uint64 parent_id = 3;
+  string default_router = 4;
+  uint64 create_at = 5;
+  uint64 update_at = 6;
+  uint64 delete_at = 7;
+}
+
+message RoleListResp {
+  uint64 total = 1;
+  uint32 code = 2;
+  repeated RoleResp data = 3;
+}
+
+// casbin
+message UpdatePolicyReq {
+  uint64 role_id = 1;
+  repeated PolicyPartInfo rules = 2;
+}
+
+message PolicyPartInfo {
+  string path = 1;
+  string method = 2;
+}
+
+message CreatePolicyReq {
+  uint64 role_id = 1;
+  PolicyPartInfo info = 2;
+}
+
+// service
+
+service system {
+  // user service
+  rpc login(LoginReq) returns (LoginResp);
+  rpc changePassword (ChangePasswordReq) returns (BaseResp);
+  rpc createUser (RegisterReq) returns (BaseResp);
+  rpc updateUser (UpdateUserInfoReq) returns (BaseResp);
+  rpc getUserById (IDReq) returns (UserInfoResp);
+  rpc getUserList (PageInfoReq) returns (UserInfoListResp);
+
+  // menu service
   //menu management
   rpc createMenu (CreateMenuReq) returns (BaseResp);
   rpc updateMenu (UpdateMenuReq) returns (BaseResp);
@@ -138,4 +251,17 @@ service Menu {
   rpc deleteMenuRole (IDReq) returns (BaseResp);
   rpc getMenuRoleById (IDReq) returns (MenuRoleResp);
   rpc getMenuRoleList (PageInfoReq) returns (MenuRoleListResp);
+
+  // role service
+  rpc createRole (CreateRoleReq) returns (BaseResp);
+  rpc updateRole (CreateRoleReq) returns (BaseResp);
+  rpc deleteRole (IDReq) returns (BaseResp);
+  rpc getRoleById (IDReq) returns (RoleResp);
+  rpc getRoleList (PageInfoReq) returns (RoleListResp);
+
+  // casbin service
+  rpc updatePolicy(UpdatePolicyReq) returns (BaseResp);
+  rpc createPolicy(CreatePolicyReq) returns (BaseResp);
+  rpc deletePolicy(IDReq) returns (BaseResp);
+  rpc getPolicyByRoleId(IDReq) returns (UpdatePolicyReq);
 }
