@@ -4,22 +4,24 @@ import (
 	"context"
 	"net/http"
 
-	"system/api/internal/global"
+	"system/api/internal/config"
 	"system/api/internal/svc"
 	"system/api/internal/types"
 	"system/api/internal/util"
 
 	"github.com/mojocn/base64Captcha"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 )
+
+var Store *util.RedisStore
+var driver *base64Captcha.DriverDigit
 
 type GetCaptchaLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
-
-var store = util.NewRedisStore()
 
 func NewGetCaptchaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCaptchaLogic {
 	return &GetCaptchaLogic{
@@ -30,9 +32,10 @@ func NewGetCaptchaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetCap
 }
 
 func (l *GetCaptchaLogic) GetCaptcha() (resp *types.CaptchaInfoResp, err error) {
-	driver := base64Captcha.NewDriverDigit(global.GVA_CONFIG.Captcha.ImgHeight, global.GVA_CONFIG.Captcha.ImgWidth,
-		global.GVA_CONFIG.Captcha.KeyLong, 0.7, 80)
-	gen := base64Captcha.NewCaptcha(driver, store)
+	if driver == nil || Store == nil {
+		initStoreAndDriver(l.svcCtx.Config, l.svcCtx.Redis)
+	}
+	gen := base64Captcha.NewCaptcha(driver, Store)
 	if id, b64s, err := gen.Generate(); err != nil {
 		logx.Error("getcaptchalogic: fail to generate captcha!", err)
 		return nil, err
@@ -50,4 +53,10 @@ func (l *GetCaptchaLogic) GetCaptcha() (resp *types.CaptchaInfoResp, err error) 
 		}
 		return resp, nil
 	}
+}
+
+func initStoreAndDriver(c config.Config, r *redis.Redis) {
+	driver = base64Captcha.NewDriverDigit(c.Captcha.ImgHeight, c.Captcha.ImgWidth,
+		c.Captcha.KeyLong, 0.7, 80)
+	Store = util.NewRedisStore(r)
 }

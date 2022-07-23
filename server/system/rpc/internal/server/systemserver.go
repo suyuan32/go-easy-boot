@@ -43,7 +43,7 @@ func (s *SystemServer) UpdateUser(ctx context.Context, in *system.UpdateUserInfo
 	return l.UpdateUser(in)
 }
 
-func (s *SystemServer) GetUserById(ctx context.Context, in *system.IDReq) (*system.UserInfoResp, error) {
+func (s *SystemServer) GetUserById(ctx context.Context, in *system.UUIDReq) (*system.UserInfoResp, error) {
 	l := logic.NewGetUserByIdLogic(ctx, s.svcCtx)
 	return l.GetUserById(in)
 }

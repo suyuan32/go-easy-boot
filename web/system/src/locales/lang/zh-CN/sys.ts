@@ -83,6 +83,8 @@ export default {
     signupSuccessTitle: '注册成功',
     signupSuccessDesc: '欢迎您的加入',
     signupUserExist: '用户名或者邮箱已被注册',
+    userNotExist: '用户不存在',
+    wrongCaptcha: '验证码错误',
 
     // placeholder
     accountPlaceholder: '请输入账号',

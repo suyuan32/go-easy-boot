@@ -34,6 +34,7 @@ type (
 	RegisterReq        = system.RegisterReq
 	RoleListResp       = system.RoleListResp
 	RoleResp           = system.RoleResp
+	UUIDReq            = system.UUIDReq
 	UpdateMenuParamReq = system.UpdateMenuParamReq
 	UpdateMenuReq      = system.UpdateMenuReq
 	UpdateMenuRoleReq  = system.UpdateMenuRoleReq
@@ -49,7 +50,7 @@ type (
 		ChangePassword(ctx context.Context, in *ChangePasswordReq, opts ...grpc.CallOption) (*BaseResp, error)
 		CreateUser(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*BaseResp, error)
 		UpdateUser(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*BaseResp, error)
-		GetUserById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UserInfoResp, error)
+		GetUserById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 		GetUserList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*UserInfoListResp, error)
 		//  menu service
 		CreateMenu(ctx context.Context, in *CreateMenuReq, opts ...grpc.CallOption) (*BaseResp, error)
@@ -113,7 +114,7 @@ func (m *defaultSystem) UpdateUser(ctx context.Context, in *UpdateUserInfoReq, o
 	return client.UpdateUser(ctx, in, opts...)
 }
 
-func (m *defaultSystem) GetUserById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
+func (m *defaultSystem) GetUserById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
 	client := system.NewSystemClient(m.cli.Conn())
 	return client.GetUserById(ctx, in, opts...)
 }

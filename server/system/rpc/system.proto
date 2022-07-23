@@ -10,6 +10,10 @@ message IDReq {
   uint64 ID = 1;
 }
 
+message UUIDReq {
+  string UUID = 1;
+}
+
 message BaseResp {
   uint32 code = 1;
   string msg = 2;
@@ -29,7 +33,7 @@ message LoginReq {
 
 message LoginResp {
   uint32 code = 1;
-  uint64 id = 2;
+  string id = 2;
   uint32 role_id = 3;
   string role_name = 4;
 }
@@ -57,7 +61,7 @@ message UpdateUserInfoReq {
 }
 
 message UserInfoResp {
-  string nickname = 1;
+  uint32 code = 1;
   string avatar = 2;
   uint32 role_id = 3;
   string mobile = 4;
@@ -65,6 +69,12 @@ message UserInfoResp {
   int32  status = 6;
   uint64 user_id = 7;
   string username = 8;
+  string UUID = 9;
+  string nickname = 10;
+  string roleName = 11;
+  int64 create_at = 12;
+  int64 update_at = 13;
+  int64 delete_at = 14;
 }
 
 message UserInfoListResp {
@@ -228,7 +238,7 @@ service system {
   rpc changePassword (ChangePasswordReq) returns (BaseResp);
   rpc createUser (RegisterReq) returns (BaseResp);
   rpc updateUser (UpdateUserInfoReq) returns (BaseResp);
-  rpc getUserById (IDReq) returns (UserInfoResp);
+  rpc getUserById (UUIDReq) returns (UserInfoResp);
   rpc getUserList (PageInfoReq) returns (UserInfoListResp);
 
   // menu service

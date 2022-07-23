@@ -4,16 +4,16 @@ import (
 	"context"
 	"time"
 
-	. "system/api/internal/global"
-
 	"github.com/mojocn/base64Captcha"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 )
 
-func NewRedisStore() *RedisStore {
+func NewRedisStore(r *redis.Redis) *RedisStore {
 	return &RedisStore{
 		Expiration: time.Minute * 5,
 		PreKey:     "CAPTCHA_",
+		Redis:      r,
 	}
 }
 
@@ -21,6 +21,7 @@ type RedisStore struct {
 	Expiration time.Duration
 	PreKey     string
 	Context    context.Context
+	Redis      *redis.Redis
 }
 
 func (r *RedisStore) UseWithCtx(ctx context.Context) base64Captcha.Store {
@@ -29,7 +30,7 @@ func (r *RedisStore) UseWithCtx(ctx context.Context) base64Captcha.Store {
 }
 
 func (r *RedisStore) Set(id string, value string) error {
-	err := GVA_REDIS.Setex(r.PreKey+id, value, int(r.Expiration.Seconds()))
+	err := r.Redis.Setex(r.PreKey+id, value, int(r.Expiration.Seconds()))
 	if err != nil {
 		logx.Error("util: RedisStoreSet Error!", err)
 		return err
@@ -38,13 +39,13 @@ func (r *RedisStore) Set(id string, value string) error {
 }
 
 func (r *RedisStore) Get(key string, clear bool) string {
-	val, err := GVA_REDIS.Get(key)
+	val, err := r.Redis.Get(key)
 	if err != nil {
 		logx.Error("util: RedisStoreGet Error!", err)
 		return ""
 	}
 	if clear {
-		_, err := GVA_REDIS.Del(key)
+		_, err := r.Redis.Del(key)
 		if err != nil {
 			logx.Error("util: RedisStoreClear Error!", err)
 			return ""

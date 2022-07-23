@@ -1,11 +1,12 @@
 package svc
 
 import (
+	"system/rpc/internal/config"
+	"system/rpc/internal/initialize"
+
 	"github.com/casbin/casbin/v2"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
-	"system/rpc/internal/config"
-	"system/rpc/internal/initialize"
 )
 
 type ServiceContext struct {
@@ -17,11 +18,12 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	db := initialize.InitGORM(c)
+	redis := initialize.InitRedis(c)
 	//casbin := initialize.InitCasbin(db)
 	return &ServiceContext{
 		Config: c,
 		DB:     db,
-		Redis:  nil,
+		Redis:  redis,
 		Role:   nil,
 	}
 }

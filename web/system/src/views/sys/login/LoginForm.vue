@@ -111,14 +111,13 @@
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { getCaptcha } from '/@/api/sys/user';
-  import httpStatus from 'http-status';
 
   const ACol = Col;
   const ARow = Row;
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
   const { t } = useI18n();
-  const { notification, createErrorModal } = useMessage();
+  const { notification } = useMessage();
   const { prefixCls } = useDesign('login');
   const userStore = useUserStore();
 
@@ -146,26 +145,31 @@
     if (!data) return;
     try {
       loading.value = true;
-      const userInfo = await userStore.login({
-        password: data.password,
-        username: data.account,
-        captcha: data.captcha,
-        captchaId: data.captchaId,
-        mode: 'none',
-      });
-      if (userInfo) {
-        notification.success({
-          message: t('sys.login.loginSuccessTitle'),
-          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
-          duration: 3,
+      userStore
+        .login({
+          password: data.password,
+          username: data.account,
+          captcha: data.captcha,
+          captchaId: data.captchaId,
+          mode: 'none',
+        })
+        .then((data) => {
+          notification.success({
+            message: t('sys.login.loginSuccessTitle'),
+            description: `${t('sys.login.loginSuccessDesc')}: ${data}`,
+            duration: 3,
+          });
+        })
+        .catch(() => {
+          getCaptchaData();
         });
-      }
     } catch (error) {
-      createErrorModal({
-        title: t('sys.api.errorTip'),
-        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
-      });
+      console.log(error);
+      // createErrorModal({
+      //   title: t('sys.api.errorTip'),
+      //   content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
+      //   getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+      // });
     } finally {
       loading.value = false;
     }
@@ -174,8 +178,8 @@
   // get captcha
   async function getCaptchaData() {
     const captcha = await getCaptcha('none').then();
-    formData.captchaId = captcha.captchaId;
-    formData.imgPath = captcha.imgPath;
+    formData.captchaId = captcha.data.captchaId;
+    formData.imgPath = captcha.data.imgPath;
   }
 
   getCaptchaData();

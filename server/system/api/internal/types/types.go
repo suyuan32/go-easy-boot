@@ -107,6 +107,10 @@ type IdReq struct {
 	ID uint `json:"ID"`
 }
 
+type UUIDReq struct {
+	UUID string `json:"uuid"`
+}
+
 type LoginReq struct {
 	Username  string `form:"username"`
 	Password  string `form:"password"`
@@ -120,7 +124,7 @@ type LoginResp struct {
 }
 
 type LoginRespData struct {
-	UserId uint64   `json:"userId"`
+	UserId string   `json:"userId"`
 	Role   RoleInfo `json:"role"`
 	Token  string   `json:"token"`
 	Expire uint64   `json:"expire"`
@@ -157,7 +161,7 @@ type ModifyInfoReq struct {
 	UserId   int64  `form:"userId"`
 	Nickname string `form:"nickname"`
 	Mobile   string `form:"mobile"`
-	RoleId   string `form:"roleId"`
+	RoleId   uint32 `form:"roleId"`
 	Email    string `form:"email"`
 	Avatar   string `form:"avatar"`
 	SideMode string `form:"sideMode"`
@@ -166,18 +170,31 @@ type ModifyInfoReq struct {
 
 type UserInfoResp struct {
 	UserId   int64  `json:"userId"`
-	UUID     int64  `json:"uuid"`
-	Username int64  `json:"username"`
+	UUID     string `json:"uuid"`
+	Username string `json:"username"`
 	Nickname string `json:"nickname"`
 	Mobile   string `json:"mobile"`
-	RoleId   string `json:"roleId"`
+	RoleId   uint32 `json:"roleId"`
 	Email    string `json:"email"`
 	Avatar   string `json:"avatar"`
 	SideMode string `json:"sideMode"`
 	Status   int32  `json:"status"`
-	CreateAt uint64 `json:"createAt"`
-	UpdateAt uint64 `json:"updateAt"`
-	DeleteAt uint64 `json:"deleteAt"`
+	CreateAt int64  `json:"createAt"`
+	UpdateAt int64  `json:"updateAt"`
+	DeleteAt int64  `json:"deleteAt"`
+}
+
+type GetUserInfoResp struct {
+	UserId   string          `json:"userId"`
+	Username string          `json:"username"`
+	Nickname string          `json:"nickname"`
+	Avatar   string          `json:"avatar"`
+	Roles    GetUserRoleInfo `json:"roles"`
+}
+
+type GetUserRoleInfo struct {
+	RoleName string `json:"roleName"`
+	Value    uint32 `json:"value"`
 }
 
 type UserInfoListResp struct {

@@ -2,13 +2,16 @@ package config
 
 import (
 	"fmt"
+
+	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type Config struct {
 	zrpc.RpcServerConf
-	DB      DBConfig `json:"DBConfig" yaml:"DBConfig"`
-	LogConf LogConf  `json:"LogConf" yaml:"LogConf"`
+	DB        DBConfig        `json:"DBConfig" yaml:"DBConfig"`
+	LogConf   LogConf         `json:"LogConf" yaml:"LogConf"`
+	RedisConf redis.RedisConf `json:"RedisConf" yaml:"RedisConf"`
 }
 
 type DBConfig struct {

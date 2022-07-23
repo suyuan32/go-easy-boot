@@ -89,6 +89,8 @@ export default {
     signupSuccessTitle: 'Sign up successful',
     signupSuccessDesc: 'Welcome',
     signupUserExist: 'Username or email address had been registered',
+    userNotExist: 'User is not registered',
+    wrongCaptcha: 'Wrong captcha',
 
     // placeholder
     accountPlaceholder: 'Please input username',

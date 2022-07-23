@@ -44,3 +44,7 @@ type BaseInfo {
 type IdReq {
     ID  uint `json:"ID"`
 }
+
+type UUIDReq {
+    UUID string `json:"uuid"`
+}

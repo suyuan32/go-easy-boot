@@ -2,9 +2,12 @@ package user
 
 import (
 	"context"
+	"errors"
+	"fmt"
 
 	"system/api/internal/svc"
 	"system/api/internal/types"
+	"system/rpc/system"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +26,24 @@ func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 	}
 }
 
-func (l *GetUserInfoLogic) GetUserInfo(req *types.IdReq) (resp *types.UserInfoResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+func (l *GetUserInfoLogic) GetUserInfo() (resp *types.GetUserInfoResp, err error) {
+	if l.ctx.Value("userId").(string) == "" {
+		return nil, errors.New("not log in yet")
+	}
+	user, err := l.svcCtx.SystemRpc.GetUserById(context.Background(),
+		&system.UUIDReq{UUID: l.ctx.Value("userId").(string)})
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println(l.ctx.Value("userId").(string))
+	return &types.GetUserInfoResp{
+		UserId:   user.UUID,
+		Username: user.Username,
+		Nickname: user.Nickname,
+		Avatar:   user.Avatar,
+		Roles: types.GetUserRoleInfo{
+			RoleName: user.RoleName,
+			Value:    user.RoleId,
+		},
+	}, nil
 }

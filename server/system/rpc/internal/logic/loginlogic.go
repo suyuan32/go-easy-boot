@@ -2,14 +2,14 @@ package logic
 
 import (
 	"context"
+	"fmt"
+
 	"system/rpc/internal/model"
-
-	"google.golang.org/grpc/codes"
-
 	"system/rpc/internal/svc"
 	"system/rpc/types/system"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/codes"
 )
 
 type LoginLogic struct {
@@ -34,18 +34,45 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 		l.Logger.Error("login logic: database error ", result.Error)
 		return &system.LoginResp{
 			Code: uint32(codes.Internal),
-		}, result.Error
+		}, nil
 	}
+
 	if result.RowsAffected == 0 {
 		return &system.LoginResp{
 			Code: uint32(codes.NotFound),
 		}, nil
-	} else {
-		return &system.LoginResp{
-			Code:     uint32(codes.OK),
-			Id:       uint64(u.ID),
-			RoleId:   u.RoleId,
-			RoleName: u.Role.Name,
-		}, nil
 	}
+
+	// get role data from redis
+	var roleName string
+	if s, err := l.svcCtx.Redis.Hget("roleData", fmt.Sprintf("%d", u.RoleId)); err != nil {
+		var roleData []model.Role
+		res := l.svcCtx.DB.Find(&roleData)
+		if res.RowsAffected == 0 {
+			return &system.LoginResp{
+				Code: uint32(codes.Internal),
+			}, nil
+		}
+		for _, v := range roleData {
+			err = l.svcCtx.Redis.Hset("roleData", fmt.Sprintf("%d", u.RoleId), v.Name)
+			if err != nil {
+				return &system.LoginResp{
+					Code: uint32(codes.Internal),
+				}, nil
+			}
+			if v.RoleId == uint64(u.RoleId) {
+				roleName = v.Name
+			}
+		}
+	} else {
+		roleName = s
+	}
+
+	return &system.LoginResp{
+		Code:     uint32(codes.OK),
+		Id:       u.UUID,
+		RoleId:   u.RoleId,
+		RoleName: roleName,
+	}, nil
+
 }

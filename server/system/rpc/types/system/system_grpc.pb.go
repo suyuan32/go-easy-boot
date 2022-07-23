@@ -27,7 +27,7 @@ type SystemClient interface {
 	ChangePassword(ctx context.Context, in *ChangePasswordReq, opts ...grpc.CallOption) (*BaseResp, error)
 	CreateUser(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*BaseResp, error)
 	UpdateUser(ctx context.Context, in *UpdateUserInfoReq, opts ...grpc.CallOption) (*BaseResp, error)
-	GetUserById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UserInfoResp, error)
+	GetUserById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*UserInfoResp, error)
 	GetUserList(ctx context.Context, in *PageInfoReq, opts ...grpc.CallOption) (*UserInfoListResp, error)
 	// menu service
 	//menu management
@@ -104,7 +104,7 @@ func (c *systemClient) UpdateUser(ctx context.Context, in *UpdateUserInfoReq, op
 	return out, nil
 }
 
-func (c *systemClient) GetUserById(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
+func (c *systemClient) GetUserById(ctx context.Context, in *UUIDReq, opts ...grpc.CallOption) (*UserInfoResp, error) {
 	out := new(UserInfoResp)
 	err := c.cc.Invoke(ctx, "/system.system/getUserById", in, out, opts...)
 	if err != nil {
@@ -347,7 +347,7 @@ type SystemServer interface {
 	ChangePassword(context.Context, *ChangePasswordReq) (*BaseResp, error)
 	CreateUser(context.Context, *RegisterReq) (*BaseResp, error)
 	UpdateUser(context.Context, *UpdateUserInfoReq) (*BaseResp, error)
-	GetUserById(context.Context, *IDReq) (*UserInfoResp, error)
+	GetUserById(context.Context, *UUIDReq) (*UserInfoResp, error)
 	GetUserList(context.Context, *PageInfoReq) (*UserInfoListResp, error)
 	// menu service
 	//menu management
@@ -397,7 +397,7 @@ func (UnimplementedSystemServer) CreateUser(context.Context, *RegisterReq) (*Bas
 func (UnimplementedSystemServer) UpdateUser(context.Context, *UpdateUserInfoReq) (*BaseResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
-func (UnimplementedSystemServer) GetUserById(context.Context, *IDReq) (*UserInfoResp, error) {
+func (UnimplementedSystemServer) GetUserById(context.Context, *UUIDReq) (*UserInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
 }
 func (UnimplementedSystemServer) GetUserList(context.Context, *PageInfoReq) (*UserInfoListResp, error) {
@@ -561,7 +561,7 @@ func _System_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _System_GetUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IDReq)
+	in := new(UUIDReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -573,7 +573,7 @@ func _System_GetUserById_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/system.system/getUserById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetUserById(ctx, req.(*IDReq))
+		return srv.(SystemServer).GetUserById(ctx, req.(*UUIDReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }

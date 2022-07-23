@@ -1,7 +1,7 @@
 package initialize
 
 import (
-	"system/api/internal/config"
+	"system/rpc/internal/config"
 
 	"github.com/zeromicro/go-zero/core/stores/redis"
 )

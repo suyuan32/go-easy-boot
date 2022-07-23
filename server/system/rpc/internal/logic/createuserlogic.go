@@ -11,7 +11,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/zeromicro/go-zero/core/logx"
 	"google.golang.org/grpc/codes"
-	"gorm.io/gorm"
 )
 
 type CreateUserLogic struct {
@@ -29,15 +28,13 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 }
 
 func (l *CreateUserLogic) CreateUser(in *system.RegisterReq) (*system.BaseResp, error) {
-	result := l.svcCtx.DB.Omit("Role").Create(&model.User{
-		UUID:     uuid.New(),
+	result := l.svcCtx.DB.Create(&model.User{
+		UUID:     uuid.NewString(),
 		Username: in.Username,
 		Nickname: in.Username,
 		Password: util.BcryptEncrypt(in.Password),
 		Email:    in.Email,
-		Role: model.Role{
-			Model: gorm.Model{ID: 2},
-		},
+		RoleId:   2,
 	})
 
 	if result.Error != nil {
