@@ -25,3 +25,14 @@ service system{
 	@handler healthCheckHandler
 	get /system/health
 }
+
+@server(
+	group: system
+	middleware: Cros
+)
+
+service system{
+	@doc "system"
+	@handler testErrorHandler
+	get /system/error
+}

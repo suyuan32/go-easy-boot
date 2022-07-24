@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"system/rpc/internal/model"
 	"system/rpc/internal/svc"
@@ -10,7 +12,6 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/zeromicro/go-zero/core/logx"
-	"google.golang.org/grpc/codes"
 )
 
 type CreateUserLogic struct {
@@ -38,14 +39,10 @@ func (l *CreateUserLogic) CreateUser(in *system.RegisterReq) (*system.BaseResp, 
 	})
 
 	if result.Error != nil {
-		return &system.BaseResp{
-			Code: uint32(codes.AlreadyExists),
-			Msg:  result.Error.Error(),
-		}, nil
+		return nil, status.Error(codes.Internal, result.Error.Error())
 	}
 
 	return &system.BaseResp{
-		Code: uint32(codes.OK),
-		Msg:  "successful",
+		Msg: "successful",
 	}, nil
 }

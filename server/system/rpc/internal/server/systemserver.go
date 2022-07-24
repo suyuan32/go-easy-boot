@@ -176,3 +176,8 @@ func (s *SystemServer) GetPolicyByRoleId(ctx context.Context, in *system.IDReq) 
 	l := logic.NewGetPolicyByRoleIdLogic(ctx, s.svcCtx)
 	return l.GetPolicyByRoleId(in)
 }
+
+func (s *SystemServer) TestError(ctx context.Context, in *system.IDReq) (*system.BaseResp, error) {
+	l := logic.NewTestErrorLogic(ctx, s.svcCtx)
+	return l.TestError(in)
+}

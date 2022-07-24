@@ -58,6 +58,7 @@ type SystemClient interface {
 	CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
 	DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 	GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
+	TestError(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 }
 
 type systemClient struct {
@@ -338,6 +339,15 @@ func (c *systemClient) GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ..
 	return out, nil
 }
 
+func (c *systemClient) TestError(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	out := new(BaseResp)
+	err := c.cc.Invoke(ctx, "/system.system/testError", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility
@@ -378,6 +388,7 @@ type SystemServer interface {
 	CreatePolicy(context.Context, *CreatePolicyReq) (*BaseResp, error)
 	DeletePolicy(context.Context, *IDReq) (*BaseResp, error)
 	GetPolicyByRoleId(context.Context, *IDReq) (*UpdatePolicyReq, error)
+	TestError(context.Context, *IDReq) (*BaseResp, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -474,6 +485,9 @@ func (UnimplementedSystemServer) DeletePolicy(context.Context, *IDReq) (*BaseRes
 }
 func (UnimplementedSystemServer) GetPolicyByRoleId(context.Context, *IDReq) (*UpdatePolicyReq, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPolicyByRoleId not implemented")
+}
+func (UnimplementedSystemServer) TestError(context.Context, *IDReq) (*BaseResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TestError not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 
@@ -1028,6 +1042,24 @@ func _System_GetPolicyByRoleId_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_TestError_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IDReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).TestError(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.system/testError",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).TestError(ctx, req.(*IDReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1154,6 +1186,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getPolicyByRoleId",
 			Handler:    _System_GetPolicyByRoleId_Handler,
+		},
+		{
+			MethodName: "testError",
+			Handler:    _System_TestError_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

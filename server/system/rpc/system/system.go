@@ -80,6 +80,7 @@ type (
 		CreatePolicy(ctx context.Context, in *CreatePolicyReq, opts ...grpc.CallOption) (*BaseResp, error)
 		DeletePolicy(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 		GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error)
+		TestError(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error)
 	}
 
 	defaultSystem struct {
@@ -246,4 +247,9 @@ func (m *defaultSystem) DeletePolicy(ctx context.Context, in *IDReq, opts ...grp
 func (m *defaultSystem) GetPolicyByRoleId(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*UpdatePolicyReq, error) {
 	client := system.NewSystemClient(m.cli.Conn())
 	return client.GetPolicyByRoleId(ctx, in, opts...)
+}
+
+func (m *defaultSystem) TestError(ctx context.Context, in *IDReq, opts ...grpc.CallOption) (*BaseResp, error) {
+	client := system.NewSystemClient(m.cli.Conn())
+	return client.TestError(ctx, in, opts...)
 }

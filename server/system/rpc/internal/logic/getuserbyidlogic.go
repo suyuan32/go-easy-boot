@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/status"
 
 	"system/rpc/internal/model"
 	"system/rpc/internal/svc"
@@ -32,14 +33,13 @@ func (l *GetUserByIdLogic) GetUserById(in *system.UUIDReq) (*system.UserInfoResp
 	if result.Error != nil {
 		return nil, result.Error
 	} else if result.RowsAffected == 0 {
-		return &system.UserInfoResp{Code: uint32(codes.NotFound)}, nil
+		return nil, status.Error(codes.NotFound, "user not found")
 	}
 	roleName, err := l.svcCtx.Redis.Hget("roleData", fmt.Sprintf("%d", u.RoleId))
 	if err != nil {
 		return nil, err
 	}
 	return &system.UserInfoResp{
-		Code:     uint32(codes.OK),
 		Nickname: u.Nickname,
 		Avatar:   u.Avatar,
 		RoleId:   u.RoleId,

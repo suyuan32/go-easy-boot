@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"system/api/common/errorx"
 	"system/api/internal/config"
 	"system/api/internal/svc"
 	"system/api/internal/types"
@@ -37,8 +38,8 @@ func (l *GetCaptchaLogic) GetCaptcha() (resp *types.CaptchaInfoResp, err error) 
 	}
 	gen := base64Captcha.NewCaptcha(driver, Store)
 	if id, b64s, err := gen.Generate(); err != nil {
-		logx.Error("getcaptchalogic: fail to generate captcha!", err)
-		return nil, err
+		l.Logger.Error("getcaptchalogic: fail to generate captcha!", err)
+		return nil, errorx.NewApiError(http.StatusInternalServerError, "内部错误")
 	} else {
 		resp = &types.CaptchaInfoResp{
 			BaseMsg: types.BaseMsg{

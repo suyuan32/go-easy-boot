@@ -34,6 +34,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.Cros},
 			[]rest.Route{
 				{
+					Method:  http.MethodGet,
+					Path:    "/system/error",
+					Handler: system.TestErrorHandler(serverCtx),
+				},
+			}...,
+		),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Route{
+				{
 					Method:  http.MethodPost,
 					Path:    "/user/role",
 					Handler: role.CreateRoleHandler(serverCtx),

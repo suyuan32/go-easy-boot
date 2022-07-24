@@ -25,6 +25,5 @@ func NewDeleteRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delete
 
 func (l *DeleteRoleLogic) DeleteRole(in *system.IDReq) (*system.BaseResp, error) {
 	// todo: add your logic here and delete this line
-
 	return &system.BaseResp{}, nil
 }

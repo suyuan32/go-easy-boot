@@ -24,10 +24,10 @@ type (
     }
     
     LoginRespData {
-        UserId       uint64    `json:"userId"`
+        UserId       string    `json:"userId"`
         Role         RoleInfo  `json:"role"`
         Token        string    `json:"token"`
-        Expire       uint64     `json:"expire"`
+        Expire       uint64    `json:"expire"`
     }
 
     RoleInfo {

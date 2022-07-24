@@ -3,9 +3,12 @@ package logic
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/status"
 
+	"system/api/common/errorx"
 	"system/rpc/internal/model"
 	"system/rpc/internal/svc"
+	"system/rpc/internal/util"
 	"system/rpc/types/system"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -32,15 +35,15 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 	result := l.svcCtx.DB.Where(&model.User{Username: in.Username}).First(&u)
 	if result.Error != nil {
 		l.Logger.Error("login logic: database error ", result.Error)
-		return &system.LoginResp{
-			Code: uint32(codes.Internal),
-		}, nil
+		return nil, status.Error(codes.Internal, "database err")
 	}
 
 	if result.RowsAffected == 0 {
-		return &system.LoginResp{
-			Code: uint32(codes.NotFound),
-		}, nil
+		return nil, status.Error(codes.NotFound, "user not exist")
+	}
+
+	if ok := util.BcryptCheck(in.Password, u.Password); !ok {
+		return nil, status.Error(codes.InvalidArgument, "account or password incorrect")
 	}
 
 	// get role data from redis
@@ -49,16 +52,12 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 		var roleData []model.Role
 		res := l.svcCtx.DB.Find(&roleData)
 		if res.RowsAffected == 0 {
-			return &system.LoginResp{
-				Code: uint32(codes.Internal),
-			}, nil
+			return nil, errorx.NewRpcError(codes.NotFound, "role not exist")
 		}
 		for _, v := range roleData {
 			err = l.svcCtx.Redis.Hset("roleData", fmt.Sprintf("%d", u.RoleId), v.Name)
 			if err != nil {
-				return &system.LoginResp{
-					Code: uint32(codes.Internal),
-				}, nil
+				return nil, errorx.NewRpcError(codes.Internal, "redis error")
 			}
 			if v.RoleId == uint64(u.RoleId) {
 				roleName = v.Name
@@ -69,7 +68,6 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 	}
 
 	return &system.LoginResp{
-		Code:     uint32(codes.OK),
 		Id:       u.UUID,
 		RoleId:   u.RoleId,
 		RoleName: roleName,

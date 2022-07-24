@@ -15,8 +15,7 @@ message UUIDReq {
 }
 
 message BaseResp {
-  uint32 code = 1;
-  string msg = 2;
+  string msg = 1;
 }
 
 message PageInfoReq {
@@ -32,7 +31,6 @@ message LoginReq {
 }
 
 message LoginResp {
-  uint32 code = 1;
   string id = 2;
   uint32 role_id = 3;
   string role_name = 4;
@@ -61,26 +59,24 @@ message UpdateUserInfoReq {
 }
 
 message UserInfoResp {
-  uint32 code = 1;
-  string avatar = 2;
-  uint32 role_id = 3;
-  string mobile = 4;
-  string email = 5;
-  int32  status = 6;
-  uint64 user_id = 7;
-  string username = 8;
-  string UUID = 9;
-  string nickname = 10;
-  string roleName = 11;
-  int64 create_at = 12;
-  int64 update_at = 13;
-  int64 delete_at = 14;
+  string avatar = 1;
+  uint32 role_id = 2;
+  string mobile = 3;
+  string email = 4;
+  int32  status = 5;
+  uint64 user_id = 6;
+  string username = 7;
+  string UUID = 8;
+  string nickname = 9;
+  string roleName = 10;
+  int64 create_at = 11;
+  int64 update_at = 12;
+  int64 delete_at = 13;
 }
 
 message UserInfoListResp {
   uint32 total = 1;
-  uint32 code = 2;
-  repeated UserInfoResp data = 3;
+  repeated UserInfoResp data = 2;
 }
 
 
@@ -120,8 +116,7 @@ message MenuInfo {
 
 message MenuInfoList {
   uint64 total = 1;
-  uint32 code = 2;
-  repeated MenuInfo data = 3;
+  repeated MenuInfo data = 2;
 }
 
 message CreateMenuRoleReq {
@@ -146,8 +141,7 @@ message MenuRoleResp {
 
 message MenuRoleListResp {
   uint64 total = 1;
-  uint32 code = 2;
-  repeated MenuRoleResp data = 3;
+  repeated MenuRoleResp data = 2;
 }
 
 message CreateMenuParamReq {
@@ -178,8 +172,7 @@ message MenuParamResp {
 
 message MenuParamListResp {
   uint64 total = 1;
-  uint32 code = 2;
-  repeated MenuParamResp data = 3;
+  repeated MenuParamResp data = 2;
 }
 
 // role messages
@@ -210,8 +203,7 @@ message RoleResp {
 
 message RoleListResp {
   uint64 total = 1;
-  uint32 code = 2;
-  repeated RoleResp data = 3;
+  repeated RoleResp data = 2;
 }
 
 // casbin
@@ -274,4 +266,6 @@ service system {
   rpc createPolicy(CreatePolicyReq) returns (BaseResp);
   rpc deletePolicy(IDReq) returns (BaseResp);
   rpc getPolicyByRoleId(IDReq) returns (UpdatePolicyReq);
+
+  rpc testError(IDReq) returns (BaseResp);
 }
