@@ -20,6 +20,10 @@ type BaseResp {
     Msg  string `json:"msg"`
 }
 
+type SimpleMsg {
+    Msg string `json:"msg"`
+}
+
 type PageInfo {
     Page     int    `form:"page"`
     PageSize int    `form:"pageSize"`

@@ -86,7 +86,7 @@ type (
 @server(
     jwt: Auth
     group: menu
-    middleware: Cros
+    middleware: Cros, Role
 )
 
 service system {

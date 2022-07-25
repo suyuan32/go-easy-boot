@@ -82,6 +82,10 @@ type BaseResp struct {
 	Msg  string `json:"msg"`
 }
 
+type SimpleMsg struct {
+	Msg string `json:"msg"`
+}
+
 type PageInfo struct {
 	Page     int    `form:"page"`
 	PageSize int    `form:"pageSize"`
@@ -132,7 +136,7 @@ type LoginRespData struct {
 
 type RoleInfo struct {
 	RoleName string `json:"roleName"`
-	Value    uint32 `json:"value"`
+	Value    string `json:"value"`
 }
 
 type RegisterReq struct {
@@ -194,12 +198,16 @@ type GetUserInfoResp struct {
 
 type GetUserRoleInfo struct {
 	RoleName string `json:"roleName"`
-	Value    uint32 `json:"value"`
+	Value    string `json:"value"`
 }
 
 type UserInfoListResp struct {
 	PageList
 	Data []UserInfoResp `json:"data"`
+}
+
+type PermCodeResp struct {
+	Data []string `json:"data"`
 }
 
 type CaptchaInfoResp struct {

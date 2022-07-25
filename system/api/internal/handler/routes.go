@@ -44,7 +44,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Middleware{serverCtx.Cros, serverCtx.Role},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
@@ -73,7 +73,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Middleware{serverCtx.Cros, serverCtx.Role},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
@@ -140,7 +140,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.Cros},
+			[]rest.Middleware{serverCtx.Cros, serverCtx.Role},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
@@ -166,6 +166,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodDelete,
 					Path:    "/user/:id",
 					Handler: user.DeleteUserInfoHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/user/perm",
+					Handler: user.GetUserPermCodeHandler(serverCtx),
 				},
 			}...,
 		),

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc/status"
 	"net/http"
+	"system/api/internal/types"
 
 	"system/api/common/errorx"
 	"system/api/internal/config"
@@ -43,12 +44,18 @@ func initErrorHandler() {
 		case *errorx.ApiError:
 			switch e.Code {
 			case 0:
-				return http.StatusOK, e.Error()
+				return http.StatusOK, &types.SimpleMsg{
+					Msg: status.Convert(err).Message(),
+				}
 			default:
-				return e.Code, e.Error()
+				return e.Code, &types.SimpleMsg{
+					Msg: status.Convert(err).Message(),
+				}
 			}
 		default:
-			return errorx.CodeFromGrpcError(e), status.Convert(err).Message()
+			return errorx.CodeFromGrpcError(e), &types.SimpleMsg{
+				Msg: status.Convert(err).Message(),
+			}
 		}
 	})
 }

@@ -3,8 +3,6 @@ package user
 import (
 	"context"
 	"errors"
-	"fmt"
-
 	"system/api/internal/svc"
 	"system/api/internal/types"
 	"system/rpc/system"
@@ -35,7 +33,7 @@ func (l *GetUserInfoLogic) GetUserInfo() (resp *types.GetUserInfoResp, err error
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(l.ctx.Value("userId").(string))
+
 	return &types.GetUserInfoResp{
 		UserId:   user.UUID,
 		Username: user.Username,
@@ -43,7 +41,7 @@ func (l *GetUserInfoLogic) GetUserInfo() (resp *types.GetUserInfoResp, err error
 		Avatar:   user.Avatar,
 		Roles: types.GetUserRoleInfo{
 			RoleName: user.RoleName,
-			Value:    user.RoleId,
+			Value:    user.RoleValue,
 		},
 	}, nil
 }

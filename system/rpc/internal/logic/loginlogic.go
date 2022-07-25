@@ -39,15 +39,15 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 	}
 
 	if result.RowsAffected == 0 {
-		return nil, status.Error(codes.NotFound, "user not exist")
+		return nil, status.Error(codes.InvalidArgument, "sys.login.userNotExist")
 	}
 
 	if ok := util.BcryptCheck(in.Password, u.Password); !ok {
-		return nil, status.Error(codes.InvalidArgument, "account or password incorrect")
+		return nil, status.Error(codes.InvalidArgument, "sys.login.wrongUsernameOrPassword")
 	}
 
 	// get role data from redis
-	var roleName string
+	var roleName, value string
 	if s, err := l.svcCtx.Redis.Hget("roleData", fmt.Sprintf("%d", u.RoleId)); err != nil {
 		var roleData []model.Role
 		res := l.svcCtx.DB.Find(&roleData)
@@ -56,21 +56,28 @@ func (l *LoginLogic) Login(in *system.LoginReq) (*system.LoginResp, error) {
 		}
 		for _, v := range roleData {
 			err = l.svcCtx.Redis.Hset("roleData", fmt.Sprintf("%d", u.RoleId), v.Name)
+			err = l.svcCtx.Redis.Hset("roleData", v.Name, v.Value)
 			if err != nil {
 				return nil, errorx.NewRpcError(codes.Internal, "redis error")
 			}
 			if v.RoleId == uint64(u.RoleId) {
 				roleName = v.Name
+				value = v.Value
 			}
 		}
 	} else {
 		roleName = s
+		value, err = l.svcCtx.Redis.Hget("roleData", s)
+		if err != nil {
+			return nil, errorx.NewRpcError(codes.NotFound, "role not exist")
+		}
 	}
 
 	return &system.LoginResp{
-		Id:       u.UUID,
-		RoleId:   u.RoleId,
-		RoleName: roleName,
+		Id:        u.UUID,
+		RoleValue: value,
+		RoleName:  roleName,
+		RoleId:    u.RoleId,
 	}, nil
 
 }

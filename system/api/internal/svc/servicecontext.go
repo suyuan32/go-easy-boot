@@ -14,6 +14,7 @@ import (
 type ServiceContext struct {
 	Config    config.Config
 	Cros      rest.Middleware
+	Role      rest.Middleware
 	SystemRpc system.System
 	Redis     *redis.Redis
 }

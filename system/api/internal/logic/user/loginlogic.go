@@ -31,14 +31,12 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
-	// return nil, errorx.NewRpcError(codes.InvalidArgument, "login request")
 	if ok := captcha.Store.Verify(req.CaptchaId, req.Captcha, true); ok {
 		user, err := l.svcCtx.SystemRpc.Login(context.Background(),
 			&system.LoginReq{
 				Username: req.Username,
 				Password: req.Password,
 			})
-		// fmt.Println(err.Error())
 		if err != nil {
 			fmt.Println(err.Error())
 			return nil, err
@@ -56,7 +54,7 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 				Token:  token,
 				Expire: uint64(time.Now().Add(time.Second * 259200).Unix()),
 				Role: types.RoleInfo{
-					Value:    user.RoleId,
+					Value:    user.RoleValue,
 					RoleName: user.RoleName,
 				},
 			},

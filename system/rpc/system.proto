@@ -31,9 +31,10 @@ message LoginReq {
 }
 
 message LoginResp {
-  string id = 2;
-  uint32 role_id = 3;
-  string role_name = 4;
+  string id = 1;
+  string role_name = 2;
+  string role_value = 3;
+  uint32 role_id = 4;
 }
 
 message RegisterReq {
@@ -72,6 +73,7 @@ message UserInfoResp {
   int64 create_at = 11;
   int64 update_at = 12;
   int64 delete_at = 13;
+  string roleValue = 14;
 }
 
 message UserInfoListResp {
